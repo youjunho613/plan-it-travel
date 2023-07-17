@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Plan-It-Travel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 휴양지 검색 사이트
 
-## Available Scripts
+당신의 여행 계획 리스트업에 도움이 되는 사이트 (지구의 모든 휴양지를 찾아주게따!)
+바닐라 자바스크립트를 통한 영화검색 사이트 구현
 
-In the project directory, you can run:
+## 팀구성
 
-### `yarn start`
+|  양지원   |           |           |           |           |
+| :-------: | :-------: | :-------: | :-------: | :-------: |
+|   팀장    |   팀원    |   팀원    |   팀원    |   팀원    |
+| Front-end | Front-end | Front-end | Front-end | Front-end |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 커밋 컨벤션
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- feat : 새로운 기능 추가
+- fix : 버그 수정
+- docs : 문서 변경
+- style : 코드 포맷팅 등 스타일 관련 변경
+- refactor : 코드 리팩토링
+- chore : 설정 변경 등의 기타 변경사항
 
-### `yarn test`
+## 코드 컨벤션
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 함수
 
-### `yarn build`
+함수명은 카멜 케이스(camelCase)를 원칙으로 한다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```javascript
+function nameOfFunction() {
+  // ...some logic
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 변수명
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+상수는 모두 대문자로 쓰며 띄어쓰기는 \_로 처리하며, 객체타입의 경우 카멜 케이스를 적용한다.
 
-### `yarn eject`
+```javascript
+const SOME_VALUE = 1;
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+const people = {
+  name: "김자바",
+  age: "26"
+};
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 스타일 코드 순서
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+스타일 코드의 순서는 아래와 같이 작성한다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```css
+.sample {
+  /* position 관련 */
+  position: absolute;
+  top: 0;
+  left: 0;
 
-## Learn More
+  /* display 관련 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  /* size 관련 */
+  width: auto;
+  height: auto;
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  /* margin, padding */
+  margin: 0 auto;
+  padding: 12px;
 
-### Code Splitting
+  /* background 관련 */
+  background-color: #ffffff;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  /* border 관련 */
+  border: 1px solid #ffffff;
+  border-radius: 12px;
 
-### Analyzing the Bundle Size
+  /* font 관련 */
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  /* animation 관련 */
+  transform: translate(10px, 100%);
+  transition: 300ms;
+}
+```
