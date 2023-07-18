@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { Input } from "components/common";
 
 const { kakao } = window;
-
+//3000번으로 서버 열어야해요
 // TODO 축소시 끊기는 렌더링
 export const Map = () => {
   useEffect(() => {
@@ -18,6 +19,7 @@ export const Map = () => {
     var map = new kakao.maps.Map(mapContainer, mapOption);
   }, []);
 
+  // TODO 반응형
   return (
     <Container>
       <SideBar>
@@ -50,12 +52,11 @@ export const Map = () => {
         </div>
       </SideBar>
       <MapContainer id="map">
-        <input type="search" placeholder="Search" />
+        <Input size={"large"} type="search" placeholder="Search" />
       </MapContainer>
     </Container>
   );
 };
-
 const Container = styled.div`
   display: flex;
   width: 100%;
@@ -65,7 +66,7 @@ const SideBar = styled.div`
   width: 15vw;
   min-width: 200px;
   height: 100vh;
-  background-color: #040404;
+  background-color: #1f1f22;
   color: white;
   padding: 20px;
   position: relative;
@@ -101,10 +102,13 @@ const MapContainer = styled.div`
 
   & > input {
     width: 300px;
-    height: 35px;
+    height: 40px;
     border-radius: 5px;
+    /* width: 438px;
+    height: 56px;
+    border-radius: 16px; */
     border: none;
-    background-color: black;
+    background-color: #1f1f22;
     z-index: 999;
     position: fixed;
     top: 20px;

@@ -1,31 +1,28 @@
 export const SIZE = {
+  // 댓글 작성자 로그인되면 작성자 있음
   small: {
-    width: "100px",
-    height: "30px",
-    fontSize: "20px",
-    borderRadius: "10px"
+    width: "200px",
+    borderRadius: "5px"
   },
+  // 로그인, 회원가입 모달
   medium: {
     width: "200px",
-    height: "40px",
-    fontSize: "30px",
-    borderRadius: "15px"
+    borderRadius: "5px"
   },
+  // 모두보기 서치바, 댓글 내용
   large: {
-    width: "300px",
-    height: "50px",
-    fontSize: "40px",
-    borderRadius: "20px"
+    width: "450px",
+    borderRadius: "16px"
   }
 };
 
 export const THEME = {
   white: {
     backgroundColor: "white",
-    color: "black"
+    color: "#1F1F22"
   },
   black: {
-    backgroundColor: "black",
+    backgroundColor: "#1F1F22",
     color: "white"
   }
 };

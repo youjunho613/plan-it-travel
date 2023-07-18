@@ -102,4 +102,5 @@ const Btn = styled.button`
     color: white;
   }
 `;
+
 export { NavContainer, Logospan, Searchspan, SearchForm, Btn };

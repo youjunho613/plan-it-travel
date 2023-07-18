@@ -5,9 +5,8 @@ import { SIZE, THEME } from "./Input.constants";
 export const Input = styled.input`
   ${props => css`
     width: ${SIZE[props.size]?.width};
-    height: ${SIZE[props.size]?.height};
 
-    padding: 5px;
+    padding: 7px 10px;
 
     background-color: ${THEME[props.$bgcolor]?.backgroundColor};
     border: none;
@@ -15,7 +14,7 @@ export const Input = styled.input`
     outline: none;
 
     color: ${THEME[props.$bgcolor]?.color};
-    font-size: ${SIZE[props.size]?.fontSize};
+    font-size: 1.5rem;
 
     &[type="radio"] {
       width: 20px;
