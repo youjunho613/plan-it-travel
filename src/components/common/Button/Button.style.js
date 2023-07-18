@@ -1,11 +1,23 @@
-import { styled } from "styled-components";
-import * as constants from "./Button.const";
+import { css, styled } from "styled-components";
+import { SIZE } from "./Button.constants";
+
+// TODO 버튼 스타일 선택
+// way 1
 
 export const Button = styled.button`
-  ${props => `
-    width: ${constants.BUTTON_WIDTH_MAP[props.size]}}px;
-    height: ${constants.BUTTON_HEIGHT_MAP[props.size]}px;
-  background-color: ${constants.BUTTON_COLOR_MAP[props.size]};
-  border-radius: ${constants.BUTTON_BORDER_MAP[props.size]}px;
+  ${props => css`
+    width: ${SIZE[props.size]?.width};
+    height: ${SIZE[props.size]?.height};
+    background-color: ${props.theme.colors[props.$bgcolor]};
+    background-color: ${SIZE[props.size]?.backgroundColor};
+    border-radius: ${SIZE[props.size]?.borderRadius};
+
+    margin: 5px;
+    padding: 5px;
+
+    color: ${props.theme.colors[props.color]};
+    font-size: ${SIZE[props.size]?.fontSize};
+    font-weight: ${props?.fontWeight};
+    /* transition: 500ms; */
   `}
 `;

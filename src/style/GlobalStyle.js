@@ -14,8 +14,10 @@ const GlobalStyle = styled.createGlobalStyle`
   }
 
   * {
+    font-family: "EF_watermelonSalad";
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+    color: #ffffff;
   }
 
   a {
@@ -31,8 +33,10 @@ const GlobalStyle = styled.createGlobalStyle`
 
   body {
     font-family: "EF_watermelonSalad";
-    /* background: #ffffff; */
-    /* background-attachment: fixed; */
+    background-image: url("https://github.com/judygab/web-dev-projects/blob/main/personal-portfolio/src/assets/img/banner-bg.png?raw=true");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
   }
 
   button {

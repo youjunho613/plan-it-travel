@@ -1,9 +1,9 @@
-import * as Styled from "components/Common/Modal/Modal.style";
+import * as Styled from "./Modal.styled";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
-import { closeModal } from "redux/modules/modalSlice";
+import { closeModal } from "redux/modules/modal";
 
-const Modal = ({ children, closeTarget }) => {
+export const Modal = ({ children, closeTarget }) => {
   const dispatch = useDispatch();
   const modalCloseHandler = event => {
     if (event.target === event.currentTarget) {
@@ -12,10 +12,9 @@ const Modal = ({ children, closeTarget }) => {
   };
   return createPortal(
     <Styled.Outer onClick={event => modalCloseHandler(event)}>
-      <Styled.Inner $bgcolor={"sand"}>{children}</Styled.Inner>
+      {/* TODO 이너 오파시티 프롭스*/}
+      <Styled.Inner $bgcolor={"white"}>{children}</Styled.Inner>
     </Styled.Outer>,
     document.getElementById("modal-root")
   );
 };
-
-export default Modal;
