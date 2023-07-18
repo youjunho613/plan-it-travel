@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { Home, Map, Detail, Survey, Layout } from "pages";
+import { Home, Main, Detail, Survey, Layout } from "pages";
 import Header from "components/Header/Header";
 
 const Router = () => {
@@ -19,8 +19,7 @@ const Router = () => {
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/survey" element={<Survey />} />
         </Route>
-
-        <Route path="/map" element={<Map />} />
+        <Route path="/map" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );
