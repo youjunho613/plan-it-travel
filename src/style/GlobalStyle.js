@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import backgroundImg from "../assets/background.png";
 
 const styled = { createGlobalStyle };
 const GlobalStyle = styled.createGlobalStyle`
@@ -33,7 +34,7 @@ const GlobalStyle = styled.createGlobalStyle`
 
   body {
     font-family: "EF_watermelonSalad";
-    background-image: url("https://github.com/judygab/web-dev-projects/blob/main/personal-portfolio/src/assets/img/banner-bg.png?raw=true");
+    background-image: url(${backgroundImg});
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
