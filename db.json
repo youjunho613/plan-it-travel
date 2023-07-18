@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "kimjinsu0210@naver.com",
+      "nickname": "kimjinsu",
+      "profileImg": "defaultImg.png",
+      "regData": "2023-07-18 12:08"
+    }
+  ],
+  "maps": [
+    {
+      "id": 1,
+      "coordinates": "33.450705, 126.570677",
+      "title": "카카오",
+      "bigCategory": [
+        {
+          "kinds": "바다",
+          "smallCategory": [
+            { "category1": "바다1" },
+            { "category2": "바다2" },
+            { "category3": "바다3" }
+          ]
+        }
+      ]
+    }
+  ]
+}

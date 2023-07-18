@@ -1,24 +1,76 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { Input } from "components/common";
+import { useNavigate } from "react-router";
 
 const { kakao } = window;
 //3000번으로 서버 열어야해요
 // TODO 축소시 끊기는 렌더링
 export const Map = () => {
+  const [map, setMap] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
-    var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-      mapOption = {
-        // TODO 렌더링화면 좌표 수정
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-      };
-    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-    var map = new kakao.maps.Map(mapContainer, mapOption);
-  }, []);
+    const positions = [
+      {
+        content: "<div>카카오</div>",
+        latlng: new kakao.maps.LatLng(33.450705, 126.570677)
+      },
+      {
+        content: "<div>생태연못</div>",
+        latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+      },
+      {
+        content: "<div>텃밭</div>",
+        latlng: new kakao.maps.LatLng(33.450879, 126.56994)
+      },
+      {
+        content: "<div>근린공원</div>",
+        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+      }
+    ];
 
+    const mapOption = {
+      center: new kakao.maps.LatLng(33.450701, 126.570667),
+      level: 3
+    };
+
+    // Create the map
+    const map = new kakao.maps.Map(document.getElementById("map"), mapOption);
+    setMap(map);
+
+    positions.map((item)=>{
+      const marker = new kakao.maps.Marker({
+        map,
+        position: item.latlng
+      });
+
+      const infowindow = new kakao.maps.InfoWindow({
+        content: item.content
+      });
+      kakao.maps.event.addListener(marker, "mouseover", makeOverListener(map, marker, infowindow));
+      kakao.maps.event.addListener(marker, "mouseout", makeOutListener(infowindow));
+
+      kakao.maps.event.addListener(marker, "click", () =>
+        clickMarkerListener(map, marker, infowindow, item)
+      );
+      });
+  }, []); // Empty dependency array ensures this effect runs only once after initial render
+
+  // Functions to handle mouseover and mouseout events for the markers
+  const makeOverListener = (map, marker, infowindow) => () => {
+    infowindow.open(map, marker);
+  };
+
+  const makeOutListener = infowindow => () => {
+    infowindow.close();
+  };
+  
+  const clickMarkerListener = (map, marker, infowindow, item) => {
+    const coordinates = item.latlng.Ma+","+item.latlng.La
+    navigate(`/detail/${coordinates}`);
+  };
   // TODO 반응형
   return (
     <Container>
