@@ -29,12 +29,12 @@ const NavContainer = styled.div`
 const Logospan = styled.span`
   & > h1 {
     margin: 0 10px;
-    color: #7fd1ae;
+    color: white;
     cursor: pointer;
     font-weight: 800;
   }
   & > p {
-    color: #6a9582;
+    color: white;
     margin-left: 8px;
     font-size: 15px;
     font-family: sans-serif;
@@ -102,4 +102,5 @@ const Btn = styled.button`
     color: white;
   }
 `;
+
 export { NavContainer, Logospan, Searchspan, SearchForm, Btn };

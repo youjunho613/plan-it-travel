@@ -3,7 +3,7 @@ import useDispatch from "react-redux";
 import { closeModal } from "./redux/module/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import styled
+import { styled } from "styled-components";
 
 const LoginModal = () => {
   const dispatch = useDispatch();

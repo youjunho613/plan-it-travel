@@ -22,6 +22,7 @@ export const Inner = styled.div`
 
   padding: 50px;
 
+  // FIXME white 고정?
   background-color: ${props => props.theme.colors[props.$bgcolor]};
-  border-radius: 70px;
+  /* border-radius: 70px; */
 `;

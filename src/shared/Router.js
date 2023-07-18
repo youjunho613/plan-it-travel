@@ -7,6 +7,8 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/map" element={<Map />} />
+        {/* TODO detail 페이지 UI 구성 후 삭제 */}
+        <Route path="/detail/" element={<Detail />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/survey" element={<Survey />} />
       </Routes>
