@@ -1,7 +1,4 @@
-import { Button, Input, Modal, Text } from "components/common";
-import { Input2 } from "components/common/Input/Input.style";
-import { useDispatch, useSelector } from "react-redux";
-import { closeModal, openModal } from "redux/modules/modal";
+import { Button } from "components/common";
 import Header from "components/Header/Header";
 import { styled } from "styled-components";
 
