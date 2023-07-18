@@ -12,8 +12,7 @@ export const Modal = ({ children, closeTarget }) => {
   };
   return createPortal(
     <Styled.Outer onClick={event => modalCloseHandler(event)}>
-      {/* TODO 이너 오파시티 프롭스*/}
-      <Styled.Inner $bgcolor={"white"}>{children}</Styled.Inner>
+      <Styled.Inner $bgcolor={"modal"}>{children}</Styled.Inner>
     </Styled.Outer>,
     document.getElementById("modal-root")
   );

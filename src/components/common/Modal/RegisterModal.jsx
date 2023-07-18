@@ -5,27 +5,21 @@ import { useDispatch } from "react-redux";
 import { closeModal } from "redux/modules/modal";
 import { Input } from "../Input";
 
-const LoginModal = () => {
+const RegisterModal = () => {
   const dispatch = useDispatch();
-  const modalCloseHandler = () => dispatch(closeModal("LoginIsOpen"));
+  const modalCloseHandler = () => dispatch(closeModal("SignupIsOpen"));
 
   return (
     <Form>
-      <H1>Log In</H1>
+      <H1>Sign Up</H1>
       <Input type="text" size={"medium"} theme={"white"} placeholder="email" />
       <Input type="password" size={"medium"} theme={"white"} placeholder="password" />
       <section>
-        <Button
-          type="button"
-          size={"medium"}
-          $bgcolor={"white"}
-          color={"black"}
-          onClick={modalCloseHandler}
-        >
+        <Button size={"medium"} $bgcolor={"white"} color={"black"} onClick={modalCloseHandler}>
           닫기
         </Button>
         <Button size={"medium"} $bgcolor={"theme1"} color={"black"}>
-          로그인
+          회원가입
         </Button>
       </section>
     </Form>
@@ -43,4 +37,4 @@ const H1 = styled.h1`
   line-height: 80px;
 `;
 
-export default LoginModal;
+export default RegisterModal;

@@ -13,6 +13,10 @@ export const SIZE = {
   large: {
     width: "450px",
     borderRadius: "16px"
+  },
+  // 모달용 인풋
+  modal: {
+    width: "100%"
   }
 };
 

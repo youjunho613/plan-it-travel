@@ -1,30 +1,55 @@
 import { Button } from "components/common";
-import Header from "components/Header/Header";
+// FIXME pages 폴더 스타일 컴포넌트 나누는지 협의
 import { styled } from "styled-components";
 
 export const Home = () => {
-  // modal
-  /* const { formIsOpen } = useSelector(state => state.modal);
-  const dispatch = useDispatch();
-  const modalOpenHandler = () => dispatch(openModal("formIsOpen"));
-  const modalCloseHandler = () => dispatch(closeModal("formIsOpen"));
-  <Button size={"medium"} $bgcolor={"green"} textColor={"white"} onClick={modalOpenHandler}>
-    모달 오픈
-  </Button>
-  {formIsOpen && <Modal closeTarget={"formIsOpen"}></Modal>} */
-
+  // TODO 링크 걸어주기
   return (
-    <div>
-      <Header />
-      <DivBox>
-        <Button $bgcolor={"theme3"} size={"large"} fontSize={"10px"}>
-          작성하기
-        </Button>
-      </DivBox>
-    </div>
+    <ButtonBox>
+      <Button $bgcolor={"theme1"} size={"large"} fontSize={"10px"}>
+        추천보기
+      </Button>
+      <Button $bgcolor={"theme1"} size={"large"} fontSize={"10px"}>
+        모두보기
+      </Button>
+      {/* <Button $bgcolor={"theme1"} size={"large"} fontSize={"10px"} onClick={OpenHandler}>
+        임시 글작성
+      </Button>
+      {createPostIsOpen && (
+        <Modal closeTarget={"createPostIsOpen"}>
+          <CreatePost />
+        </Modal>
+      )} */}
+    </ButtonBox>
   );
 };
 
-const DivBox = styled.div`
-  margin-top: 60px;
+const ButtonBox = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 50px;
+
+  transform: translate(-50%, -50%);
 `;
+
+/* 글 작성 모달 로직 start
+import { Modal } from "components/common";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal, openModal } from "redux/modules/modal";
+import CreatePost from "components/CreatePost";
+글 작성 모달 로직 end */
+
+/* 글 작성 모달 로직 start
+글 작성 모달 여는 트리거 버튼은 어디에 구현 되는지?
+const { createPostIsOpen } = useSelector(state => state.modal);
+const dispatch = useDispatch();
+const OpenHandler = () => dispatch(openModal("createPostIsOpen"));
+const closeHandler = () => dispatch(closeModal("createPostIsOpen"));
+글 작성 모달 로직 end */
