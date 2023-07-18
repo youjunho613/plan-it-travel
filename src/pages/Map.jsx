@@ -6,17 +6,18 @@ import { Input } from "components/common";
 
 const { kakao } = window;
 //3000번으로 서버 열어야해요
-// TODO 축소시 끊기는 렌더링
+
 export const Map = () => {
   useEffect(() => {
     var mapContainer = document.getElementById("map"), // 지도를 표시할 div
       mapOption = {
-        // TODO 렌더링화면 좌표 수정
+        // FIXME 렌더링 될 좌표 수정
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
       };
     // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-    var map = new kakao.maps.Map(mapContainer, mapOption);
+    new kakao.maps.Map(mapContainer, mapOption);
+    // var map = new kakao.maps.Map(mapContainer, mapOption);
   }, []);
 
   // TODO 반응형

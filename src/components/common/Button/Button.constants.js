@@ -1,14 +1,20 @@
 export const SIZE = {
-  // 헤더, 사이드바
-  small: {
+  auth: {
     fontSize: "inherit",
     backgroundColor: "transparent"
+  },
+  // 헤더, 사이드바
+  small: {
+    width: "70px",
+    height: "35px",
+    fontSize: "13px",
+    borderRadius: "16px"
   },
   // 모달 댓글
   medium: {
     width: "180px",
     height: "45px",
-    fontSize: "1rem",
+    fontSize: "16px",
     borderRadius: "10px"
   },
   // 모두보기
