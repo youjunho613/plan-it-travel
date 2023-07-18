@@ -12,7 +12,7 @@ export const SIZE = {
   // 모두보기 서치바, 댓글 내용
   large: {
     width: "450px",
-    borderRadius: "16px"
+    borderRadius: "5px"
   },
   // 모달용 인풋
   modal: {
