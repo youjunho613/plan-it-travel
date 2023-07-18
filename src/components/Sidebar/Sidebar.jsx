@@ -11,7 +11,7 @@ const Sidebar = () => {
     style: { color: "#bf94ff", marginRight: "10px" }
   });
 
-  const [isOpen, setIsOpen] = useState({ mountain: false, sea: false, hotel: false });
+  const [isOpen, setIsOpen] = useState({ mountain: false, sea: false, hotel: false, Store: false });
   const openHandler = target =>
     isOpen[target]
       ? setIsOpen({ ...isOpen, [target]: false })
@@ -70,6 +70,35 @@ const Sidebar = () => {
           </>
         )}
       </Ul>
+      <Ul onClick={() => openHandler("Store")}>
+        <FontAwesomeIcon {...iconAttr("faShop")} />
+        편의시설
+        {isOpen.Store && (
+          <>
+            <Li onClick={() => SearchHandler()}>
+              <FontAwesomeIcon {...iconAttr("faSpoon")} />
+              음식점
+            </Li>
+            <Li onClick={() => SearchHandler()}>
+              <FontAwesomeIcon {...iconAttr("faMugSaucer")} />
+              카페
+            </Li>
+            <Li onClick={() => SearchHandler()}>
+              <FontAwesomeIcon {...iconAttr("faBasketShopping")} />
+              <FontAwesomeIcon size="lg" {...iconAttr("faBarcode")} />
+              편의점
+            </Li>
+            <Li onClick={() => SearchHandler()}>
+              <FontAwesomeIcon {...iconAttr("faCartShopping")} />
+              마트
+            </Li>
+            <Li onClick={() => SearchHandler()}>
+              <FontAwesomeIcon {...iconAttr("faSquareParking")} />
+              주차장
+            </Li>
+          </>
+        )}
+      </Ul>
 
       <AuthBox>
         <FontAwesomeIcon {...iconAttr("faArrowRightFromBracket")} />
@@ -86,6 +115,7 @@ const SideBar = styled.div`
 
   display: flex;
   flex-direction: column;
+  gap: 20px;
 
   width: 15vw;
   min-width: 200px;
@@ -96,6 +126,8 @@ const SideBar = styled.div`
   background-color: ${props => props.theme.colors.black};
 
   color: ${props => props.theme.colors.white};
+
+  transition: 300ms;
 `;
 
 const Img = styled.img`
@@ -108,12 +140,11 @@ const Img = styled.img`
 `;
 
 const Ul = styled.ul`
-  margin: 40px 0;
   cursor: pointer;
 `;
 
 const Li = styled.li`
-  margin: 20px 10px;
+  margin: 10px 10px;
   cursor: pointer;
 `;
 
