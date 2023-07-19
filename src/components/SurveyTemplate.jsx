@@ -46,7 +46,7 @@ function SurveyTemplate() {
             );
           })}
         </Form>
-        ​
+
         <ButtonBox>
           {step >= 1 && (
             <Button {...buttonAttr("theme2")} color={"black"} onClick={() => moveStep(-1)}>
