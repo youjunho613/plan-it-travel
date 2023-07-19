@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { addComment, getComments } from "../api/comments";
+import { addComment, deleteComment, getComments, modifyComment } from "../api/comments";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { useEffect, useState } from "react";
@@ -7,6 +7,9 @@ import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { Button, Input } from "components/common";
 import { getUsers } from "api/users";
 import uuid from "react-uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export const Detail = () => {
   const params = useParams();
@@ -14,7 +17,10 @@ export const Detail = () => {
   const [draggable, setDraggable] = useState(true);
   const [zoomable, setZoomable] = useState(true);
   const [comment, setComment] = useState("");
-  const commentsData = useQuery("comments", getComments).data?.filter(e => e.postId === id);
+  const commentsData = useQuery("comments", getComments)
+    .data?.filter(e => e.postId === id)
+    .reverse();
+  console.log("commentsData", commentsData);
   const usersData = useQuery("users", getUsers).data;
   const loginUserData = usersData?.filter(e => e.email === "kimjinsu0210@naver.com")[0];
   const position = {
@@ -28,10 +34,10 @@ export const Detail = () => {
       queryClient.invalidateQueries("comments");
     }
   });
-    useEffect(() => {
-      setZoomable(false);
-      setDraggable(false);
-    }, []);
+  useEffect(() => {
+    setZoomable(false);
+    setDraggable(false);
+  }, []);
 
   const leaveCommentHandler = event => {
     event.preventDefault();
@@ -45,6 +51,7 @@ export const Detail = () => {
       postId: id,
       comment,
       nickname: loginUserData.nickname,
+      email: loginUserData.email,
       profileImg: loginUserData.profileImg,
       date: nowTime
     };
@@ -54,6 +61,33 @@ export const Detail = () => {
 
   const commentChangeHandler = e => {
     setComment(e.target.value);
+  };
+
+  const modifyMutation = useMutation(modifyComment, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("comments");
+      return alert("수정이 완료되었습니다.");
+    }
+  });
+  const deleteMutation = useMutation(deleteComment, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("posts");
+    }
+  });
+  const modifyCommentHandler = id => {
+    const changeComment = prompt("수정할 댓글 내용을 입력해 주세요", comment);
+    if (changeComment !== null) {
+      if (changeComment === "") return alert("댓글 내용은 1자리 이상 입력하셔야 합니다.");
+      const newComment = {
+        comment: changeComment
+      };
+      modifyMutation.mutate({ id, newComment });
+    }
+  };
+  const deleteCommentHandler = id => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      deleteMutation.mutate(id);
+    }
   };
 
   return (
@@ -71,20 +105,6 @@ export const Detail = () => {
         >
           <MapMarker position={position} />
         </Map>
-        <CommentsWrap>
-          {commentsData?.map(item => {
-            return (
-              <Flex key={item.id}>
-                <ProfileImg src={item.profileImg} />
-                <div>
-                  <NicknameBox>{item.nickname}</NicknameBox>
-                  <CommentBox>{item.comment}</CommentBox>
-                </div>
-                <div>{item.date}</div>
-              </Flex>
-            );
-          })}
-        </CommentsWrap>
       </Wrap>
       <CommentsLeaveWrap>
         <form onSubmit={leaveCommentHandler}>
@@ -109,6 +129,34 @@ export const Detail = () => {
           </Button>
         </form>
       </CommentsLeaveWrap>
+      <CommentsWrap>
+        {commentsData?.map(item => {
+          return (
+            <Flex key={item.id}>
+              <ProfileImg src={item.profileImg} />
+              <div>
+                <NicknameBox>{item.nickname}</NicknameBox>
+                <CommentBox>{item.comment}</CommentBox>
+              </div>
+              <DateBox>{item.date}</DateBox>
+              {loginUserData?.email === item.email && (
+                <div style={{ position: "absolute", right: "450px" }}>
+                  <FontAwesomeIcon
+                    icon={faPenToSquare}
+                    style={{ margin: "0 10px 0 10px", cursor: "pointer" }}
+                    onClick={() => modifyCommentHandler(item.id)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => deleteCommentHandler(item.id)}
+                  />
+                </div>
+              )}
+            </Flex>
+          );
+        })}
+      </CommentsWrap>
     </Container>
   );
 };
@@ -125,16 +173,17 @@ const Wrap = styled.div`
 const Flex = styled.div`
   display: flex;
   align-items: center;
+  justify-content: left;
 `;
 const CommentsWrap = styled.div`
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 const CommentsLeaveWrap = styled.div`
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
-  position: absolute;
-  right: 260px;
   height: 150px;
 `;
 const ProfileImg = styled.div`
@@ -149,7 +198,11 @@ const ProfileImg = styled.div`
 const NicknameBox = styled.div`
   padding-bottom: 5px;
   font-weight: 700;
+  width: 600px;
 `;
 const CommentBox = styled.div`
   width: 600px;
+`;
+const DateBox = styled.div`
+  width: 200px;
 `;

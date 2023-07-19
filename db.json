@@ -26,19 +26,12 @@
   ],
   "comments": [
     {
-      "id": "1",
-      "postId": "1",
-      "comment": "여기 진짜 좋습니다!",
-      "nickname": "김진수",
-      "date": "2023-07-18 17:23",
-      "profileImg": "defaultImg.png"
-    },
-    {
       "id": "2",
       "postId": "1",
       "comment": "도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배",
       "nickname": "홍길동홍길동홍길동홍길동홍길동홍길동홍길동홍길동홍길동",
-      "date": "2023-07-18 16:23",
+      "email": "test@naver.com",
+      "date": "2023. 7. 19. 오전 12:55:20",
       "profileImg": "defaultImg.png"
     },
     {
@@ -46,7 +39,8 @@
       "postId": "1",
       "comment": "전 별로던데요..",
       "nickname": "사오정",
-      "date": "2023-07-18 15:23",
+      "email": "test2@naver.com",
+      "date": "2023. 7. 19. 오전 12:55:20",
       "profileImg": "defaultImg.png"
     },
     {
@@ -54,7 +48,8 @@
       "postId": "2",
       "comment": "다른 글입니다.",
       "nickname": "테스트",
-      "date": "2023-07-18 15:23",
+      "email": "test3@naver.com",
+      "date": "2023. 7. 19. 오전 12:55:20",
       "profileImg": "defaultImg.png"
     },
     {
@@ -62,6 +57,7 @@
       "postId": "1",
       "comment": "전 좋았습니다.",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
       "date": "2023. 7. 19. 오전 12:55:20"
     },
@@ -70,14 +66,16 @@
       "postId": "1",
       "comment": "저도 아주 좋았습니다~",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
       "date": "2023. 7. 19. 오전 12:56:15"
     },
     {
       "id": "916ede8c-274e-cd0c-1650-df5db4f2ecb6",
       "postId": "1",
-      "comment": "1",
+      "comment": "도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
       "date": "2023. 7. 19. 오전 1:42:57"
     },
@@ -86,6 +84,7 @@
       "postId": "1",
       "comment": "2",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
       "date": "2023. 7. 19. 오전 1:42:58"
     },
@@ -94,6 +93,7 @@
       "postId": "1",
       "comment": "3",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
       "date": "2023. 7. 19. 오전 1:42:59"
     },
@@ -102,6 +102,7 @@
       "postId": "1",
       "comment": "4",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
       "date": "2023. 7. 19. 오전 1:43:00"
     },
@@ -110,6 +111,7 @@
       "postId": "1",
       "comment": "5",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
       "date": "2023. 7. 19. 오전 1:43:01"
     },
@@ -118,6 +120,7 @@
       "postId": "1",
       "comment": "6",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
       "date": "2023. 7. 19. 오전 1:43:03"
     },
@@ -126,6 +129,7 @@
       "postId": "1",
       "comment": "7",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
       "date": "2023. 7. 19. 오전 1:43:07"
     },
@@ -134,32 +138,54 @@
       "postId": "1",
       "comment": "8",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
       "date": "2023. 7. 19. 오전 1:43:09"
     },
     {
-      "id": "7b3461c4-cc2a-9037-7852-4caec9972c76",
+      "id": "f7051e0d-f59b-6c85-a57f-19546d83510d",
       "postId": "1",
-      "comment": "9",
+      "comment": "123",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
-      "date": "2023. 7. 19. 오전 1:43:10"
+      "date": "2023. 7. 19. 오전 11:49:17"
     },
     {
-      "id": "b46bbadd-be54-0395-f9a4-be20ca52c7db",
+      "id": "294d3154-9745-a7a9-107d-43903052fe52",
       "postId": "1",
-      "comment": "10",
+      "comment": "55",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
-      "date": "2023. 7. 19. 오전 1:43:13"
+      "date": "2023. 7. 19. 오후 12:14:57"
     },
     {
-      "id": "6a877117-b592-2b16-b7ab-c1fd56d7ee8e",
+      "id": "b96e09c0-9741-f565-a71e-b220e3aef44c",
       "postId": "1",
-      "comment": "11",
+      "comment": "123",
       "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
       "profileImg": "defaultImg.png",
-      "date": "2023. 7. 19. 오전 1:57:12"
+      "date": "2023. 7. 19. 오후 12:20:33"
+    },
+    {
+      "id": "c82c697d-6f78-c551-5a16-0277b8812172",
+      "postId": "1",
+      "comment": "테스트",
+      "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오후 12:21:51"
+    },
+    {
+      "id": "d110835d-9109-ddaf-73de-cdd107e80a1a",
+      "postId": "1",
+      "comment": "555",
+      "nickname": "김진수",
+      "email": "kimjinsu0210@naver.com",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오후 12:30:41"
     }
   ]
 }
