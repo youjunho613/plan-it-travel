@@ -3,9 +3,9 @@ import _ from "lodash";
 
 // TODO useForm 설명
 const useForm = (initialState, validation, submitAction) => {
-  console.log("initialState",initialState)
-  console.log("validation",validation)
-  console.log("submitAction",submitAction)
+  console.log("initialState", initialState);
+  console.log("validation", validation);
+  console.log("submitAction", submitAction);
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState({});
 
@@ -17,10 +17,10 @@ const useForm = (initialState, validation, submitAction) => {
   const onSubmit = useCallback(
     event => {
       event.preventDefault();
-      setErrors(validation(values)); // 유효성 검사
-      if (_.isEmpty(validation(values))) { // 유효성 검사를 통과했는지?
-        submitAction(values); // 개발자가 원하는 행동
-        setValues(initialState); // 인풋값 초기화
+      setErrors(validation(values));
+      if (_.isEmpty(validation(values))) {
+        submitAction(values);
+        setValues(initialState);
       }
     },
     [initialState, submitAction, validation, values]

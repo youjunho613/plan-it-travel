@@ -28,10 +28,10 @@ export const Detail = () => {
       queryClient.invalidateQueries("comments");
     }
   });
-    useEffect(() => {
-      setZoomable(false);
-      setDraggable(false);
-    }, []);
+  useEffect(() => {
+    setZoomable(false);
+    setDraggable(false);
+  }, []);
 
   const leaveCommentHandler = event => {
     event.preventDefault();
