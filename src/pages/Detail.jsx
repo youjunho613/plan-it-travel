@@ -13,11 +13,14 @@ export const Detail = () => {
   const id = params.id;
   const [draggable, setDraggable] = useState(true);
   const [zoomable, setZoomable] = useState(true);
-  const [position, setPosition] = useState("");
   const [comment, setComment] = useState("");
   const commentsData = useQuery("comments", getComments).data?.filter(e => e.postId === id);
   const usersData = useQuery("users", getUsers).data;
   const loginUserData = usersData?.filter(e => e.email === "kimjinsu0210@naver.com")[0];
+  const position = {
+    lat: 33.450701,
+    lng: 126.570667
+  };
 
   const queryClient = useQueryClient();
   const commentMutation = useMutation(addComment, {
@@ -25,13 +28,7 @@ export const Detail = () => {
       queryClient.invalidateQueries("comments");
     }
   });
-
     useEffect(() => {
-      const position = {
-        lat: 33.450701,
-        lng: 126.570667
-      };
-      setPosition(position);
       setZoomable(false);
       setDraggable(false);
     }, []);
