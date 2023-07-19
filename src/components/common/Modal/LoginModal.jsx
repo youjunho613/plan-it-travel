@@ -1,20 +1,42 @@
-import React from "react";
 import styled from "styled-components";
-import { Button } from "../Button";
 import { useDispatch } from "react-redux";
 import { closeModal } from "redux/modules/modal";
-import { Input } from "../Input";
+import useForm from "hooks/useForm";
+import { Button, Input, Text } from "components/common";
+import { signIn } from "components/auth";
 
 const LoginModal = () => {
   const dispatch = useDispatch();
   const modalCloseHandler = () => dispatch(closeModal("LoginIsOpen"));
 
+  const initialState = { email: "", password: "" };
+  const validation = () => {};
+  const submitAction = () => {
+    signIn(values);
+    closeModal();
+  };
+  const { values, errors, onSubmit, resister } = useForm(initialState, validation, submitAction);
+
   return (
-    <Form>
-      <H1>Log In</H1>
-      <Input type="text" size={"medium"} theme={"white"} placeholder="email" />
-      <Input type="password" size={"medium"} theme={"white"} placeholder="password" />
-      <section>
+    <Form onSubmit={onSubmit}>
+      <Text fontSize={"48px"}>Log In</Text>
+      <Input
+        {...resister("email")}
+        type="email"
+        placeholder="email"
+        size={"modal"}
+        $bgcolor={"white"}
+      />
+      {errors.email && <Text>{errors.email}</Text>}
+      <Input
+        {...resister("password")}
+        type="password"
+        placeholder="password"
+        size={"modal"}
+        $bgcolor={"white"}
+      />
+      {errors.password && <Text>{errors.password}</Text>}
+      <div>
         <Button
           type="button"
           size={"medium"}
@@ -27,7 +49,7 @@ const LoginModal = () => {
         <Button size={"medium"} $bgcolor={"theme1"} color={"black"}>
           로그인
         </Button>
-      </section>
+      </div>
     </Form>
   );
 };
@@ -36,11 +58,8 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-`;
-const H1 = styled.h1`
-  font-size: 3rem;
-  line-height: 80px;
+
+  gap: 35px;
 `;
 
 export default LoginModal;
