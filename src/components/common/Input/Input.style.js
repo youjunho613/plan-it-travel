@@ -19,7 +19,6 @@ export const Input = styled.input.attrs(props => ({
     font-size: 16px;
 
     &[type="radio"] {
-      width: 20px;
     }
     &[type="file"] {
       width: 100%;
