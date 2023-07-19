@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { closeModal } from "redux/modules/modal";
 
-export const Modal = ({ children, closeTarget }) => {
+export const Modal = ({ children, closeTarget, type }) => {
   const dispatch = useDispatch();
   const modalCloseHandler = event => {
     if (event.target === event.currentTarget) {
@@ -11,8 +11,10 @@ export const Modal = ({ children, closeTarget }) => {
     }
   };
   return createPortal(
-    <Styled.Outer onClick={event => modalCloseHandler(event)}>
-      <Styled.Inner $bgcolor={"modal"}>{children}</Styled.Inner>
+    <Styled.Outer type={type} onClick={event => modalCloseHandler(event)}>
+      <Styled.Inner type={type} $bgcolor={"modal"}>
+        {children}
+      </Styled.Inner>
     </Styled.Outer>,
     document.getElementById("modal-root")
   );

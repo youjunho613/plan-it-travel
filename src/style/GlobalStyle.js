@@ -43,6 +43,7 @@ const GlobalStyle = styled.createGlobalStyle`
     border: 0;
     background: transparent;
     cursor: pointer;
+    padding: 0;
   }
 `;
 
