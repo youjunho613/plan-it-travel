@@ -7,7 +7,6 @@ function SurveyTemplate() {
   const [step, setStep] = useState(0);
   const [inputValues, setInputValues] = useState(); // 스테이트 배열 / 넥 = 푸쉬 프리브 = 팝
   const [isCheck, setIsCheck] = useState(false);
-  console.log("inputValues :", inputValues);
 
   const moveStep = num => {
     setStep(step + num);
