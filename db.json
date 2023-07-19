@@ -3,26 +3,163 @@
     {
       "id": 1,
       "email": "kimjinsu0210@naver.com",
-      "nickname": "kimjinsu",
+      "nickname": "김진수",
       "profileImg": "defaultImg.png",
       "regData": "2023-07-18 12:08"
+    },
+    {
+      "id": "a870570d-faf1-b071-c6d6-07a5ef34a4ec",
+      "email": "kimjinsu0210@naver.com",
+      "nickname": "김진수",
+      "profileImg": "data:image/png;base64,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",
+      "date": "2023. 7. 19. 오전 2:03:12"
     }
   ],
   "maps": [
     {
       "id": 1,
-      "coordinates": "33.450705, 126.570677",
+      "position": "33.450705, 126.570677",
       "title": "카카오",
-      "bigCategory": [
-        {
-          "kinds": "바다",
-          "smallCategory": [
-            { "category1": "바다1" },
-            { "category2": "바다2" },
-            { "category3": "바다3" }
-          ]
-        }
-      ]
+      "address": "제주특별자치도 제주시 아라동 첨단로 242",
+      "phoneNumber": "1899-1326"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "postId": "1",
+      "comment": "여기 진짜 좋습니다!",
+      "nickname": "김진수",
+      "date": "2023-07-18 17:23",
+      "profileImg": "defaultImg.png"
+    },
+    {
+      "id": "2",
+      "postId": "1",
+      "comment": "도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배도배",
+      "nickname": "홍길동홍길동홍길동홍길동홍길동홍길동홍길동홍길동홍길동",
+      "date": "2023-07-18 16:23",
+      "profileImg": "defaultImg.png"
+    },
+    {
+      "id": "3",
+      "postId": "1",
+      "comment": "전 별로던데요..",
+      "nickname": "사오정",
+      "date": "2023-07-18 15:23",
+      "profileImg": "defaultImg.png"
+    },
+    {
+      "id": "4",
+      "postId": "2",
+      "comment": "다른 글입니다.",
+      "nickname": "테스트",
+      "date": "2023-07-18 15:23",
+      "profileImg": "defaultImg.png"
+    },
+    {
+      "id": "2288088d-daef-5c91-e5d7-3075cef0d6a3",
+      "postId": "1",
+      "comment": "전 좋았습니다.",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 12:55:20"
+    },
+    {
+      "id": "b0cf577b-3572-1947-4fd5-561ffc714c3c",
+      "postId": "1",
+      "comment": "저도 아주 좋았습니다~",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 12:56:15"
+    },
+    {
+      "id": "916ede8c-274e-cd0c-1650-df5db4f2ecb6",
+      "postId": "1",
+      "comment": "1",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 1:42:57"
+    },
+    {
+      "id": "4c4af582-5016-ccb8-fa44-3704184f42e2",
+      "postId": "1",
+      "comment": "2",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 1:42:58"
+    },
+    {
+      "id": "f8818bac-2667-5374-06cb-a550fcafa559",
+      "postId": "1",
+      "comment": "3",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 1:42:59"
+    },
+    {
+      "id": "94bdc4cb-3337-b54a-b113-1a29953a22c5",
+      "postId": "1",
+      "comment": "4",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 1:43:00"
+    },
+    {
+      "id": "761f1eaa-5a93-4581-3830-71485fa8e3b1",
+      "postId": "1",
+      "comment": "5",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 1:43:01"
+    },
+    {
+      "id": "f03e7344-dc89-8c25-9118-e4fa11268c72",
+      "postId": "1",
+      "comment": "6",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 1:43:03"
+    },
+    {
+      "id": "8d3e9aa1-3736-1174-7aa9-fe06e8a0aae5",
+      "postId": "1",
+      "comment": "7",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 1:43:07"
+    },
+    {
+      "id": "ad57afb3-5674-d473-6fa4-381eaf83b10a",
+      "postId": "1",
+      "comment": "8",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 1:43:09"
+    },
+    {
+      "id": "7b3461c4-cc2a-9037-7852-4caec9972c76",
+      "postId": "1",
+      "comment": "9",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 1:43:10"
+    },
+    {
+      "id": "b46bbadd-be54-0395-f9a4-be20ca52c7db",
+      "postId": "1",
+      "comment": "10",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 1:43:13"
+    },
+    {
+      "id": "6a877117-b592-2b16-b7ab-c1fd56d7ee8e",
+      "postId": "1",
+      "comment": "11",
+      "nickname": "김진수",
+      "profileImg": "defaultImg.png",
+      "date": "2023. 7. 19. 오전 1:57:12"
     }
   ]
 }
