@@ -10,6 +10,7 @@ import uuid from "react-uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { youtubeApi } from "../api/youtube";
 
 export const Detail = () => {
   const params = useParams();
@@ -90,6 +91,29 @@ export const Detail = () => {
     }
   };
 
+  // const [youtubeParams, setYoutubeParams] = useState({
+  //   part: "snippet",
+  //   q: `${keyword}노래모음`,
+  //   maxResults: 20,
+  //   type: "video",
+  //   videoDuration: "long"
+  // });
+
+  const onSearch = async () => {
+    console.log("response");
+    const response = await youtubeApi.get("/search", {
+      params: {
+        q: "소녀시대"
+      }
+    });
+
+    console.log(response, "response");
+  };
+  //유튜브
+  useEffect(() => {
+    onSearch();
+  }, []);
+
   return (
     <Container>
       <Wrap>
@@ -140,7 +164,7 @@ export const Detail = () => {
               </div>
               <DateBox>{item.date}</DateBox>
               {loginUserData?.email === item.email && (
-                <div style={{ position: "absolute", right: "450px" }}>
+                <div>
                   <FontAwesomeIcon
                     icon={faPenToSquare}
                     style={{ margin: "0 10px 0 10px", cursor: "pointer" }}
