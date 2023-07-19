@@ -13,7 +13,7 @@ function SurveyTemplate() {
   };
 
   // FIXME
-  //n
+  // test 주석
   const onNextHandler = event => {
     push();
     setInputValues({ ...inputValues, [event.target.name]: event.target.value });
