@@ -20,6 +20,7 @@ const Header = () => {
         <p>Mypage</p>
       </Styled.Logospan>
       <Styled.Searchspan>
+        {/* TODO 로그인 or 로그아웃 둘 중 하나 나오게 하기 */}
         <Button
           $bgcolor={"theme1"}
           size={"small"}

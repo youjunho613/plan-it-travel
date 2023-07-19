@@ -146,11 +146,7 @@ export const Main = () => {
         <Map
           center={position.center}
           isPanto={position.isPanto}
-          style={{
-            width: "100%",
-            height: "100%",
-            zIndex: "1"
-          }}
+          style={{ width: "100%", height: "100%", zIndex: "1" }}
           level={3}
           onCreate={setMap}
         >
@@ -260,8 +256,10 @@ const MoveBtnBox = styled.div`
 
 const OverlayDiv = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+
   min-width: 150px;
   height: 100px;
   padding: 10px;

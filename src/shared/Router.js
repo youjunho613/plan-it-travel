@@ -18,6 +18,7 @@ const Router = () => {
           <Route index element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/survey" element={<Survey />} />
+          {/* TODO 마이페이지 라우터 추가 */}
         </Route>
         <Route path="/main" element={<Main />} />
       </Routes>

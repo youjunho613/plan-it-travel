@@ -18,12 +18,14 @@ export const onAuthState = () => {
   });
 };
 
+// TODO 쿠키
 export const signIn = async values => {
   try {
     await signInWithEmailAndPassword(auth, values.email, values.password);
   } catch (error) {}
 };
 
+// TODO 프로필 디폴트 이미지
 export const createUser = async (values, imgFile) => {
   try {
     await createUserWithEmailAndPassword(auth, values.email, values.password);
