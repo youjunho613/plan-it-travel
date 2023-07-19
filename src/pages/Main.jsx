@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { Input, Modal } from "components/common";
 import Sidebar from "components/Sidebar/Sidebar";
-import { CustomOverlayMap, Map, MapMarker } from "react-kakao-maps-sdk";
+import { CustomOverlayMap, Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, openModal } from "redux/modules/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import logo from "assets/logo.png";
+import { useNavigate } from "react-router";
 
 const { kakao } = window;
 
@@ -15,6 +16,7 @@ export const Main = () => {
   const { ListIsOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
+  const navigate = useNavigate();
   const [test, setTest] = useState("");
   const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
@@ -32,11 +34,6 @@ export const Main = () => {
   const testSubmit = e => {
     e.preventDefault();
     const ps = new kakao.maps.services.Places();
-
-    if (!test.replace(/^\s+|\s+$/g, "")) {
-      alert("키워드를 입력해주세요!");
-      return;
-    }
 
     ps.keywordSearch(test, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
@@ -56,7 +53,6 @@ export const Main = () => {
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
         setMarkers(markers);
-
         map.setBounds(bounds);
         modalOpenHandler("ListIsOpen");
       }
@@ -93,7 +89,13 @@ export const Main = () => {
       isPanto: true
     });
   };
+  // 클러스터 로직
+  const clusterOption = { averageCenter: true, minLevel: 10 };
 
+  const markerClickHandler = () => {
+    const id = 1;
+    navigate(`/detail/${id}`);
+  };
   // TODO 반응형
   return (
     <Container>
@@ -141,12 +143,7 @@ export const Main = () => {
             onChange={e => setTest(e.target.value)}
           />
         </form>
-        {/* <Map center={{ lat: 33.5563, lng: 126.79581 }} style={{ width: "100%", height: "100%" }}>
-          <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
-          <div style={{ color: "#000" }}>Hello World!</div>
-          </MapMarker>
-        </Map> */}
-        <Map // 로드뷰를 표시할 Container
+        <Map
           center={position.center}
           isPanto={position.isPanto}
           style={{
@@ -157,24 +154,29 @@ export const Main = () => {
           level={3}
           onCreate={setMap}
         >
-          {markers.map(marker => (
-            <MapMarker
-              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-              position={marker.position}
-              onClick={() => setInfo(marker)}
-            >
-              {info && info.content === marker.content && (
-                <CustomOverlayMap
-                  position={marker.position}
-                  xAnchor={0.5}
-                  yAnchor={1.45}
-                  zIndex={3}
-                >
-                  <OverlayDiv>{marker.content}</OverlayDiv>
-                </CustomOverlayMap>
-              )}
-            </MapMarker>
-          ))}
+          <MarkerClusterer {...clusterOption}>
+            {markers.map(marker => (
+              <MapMarker
+                key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+                position={marker.position}
+                onClick={() => setInfo(marker)}
+              >
+                {info && info.content === marker.content && (
+                  <CustomOverlayMap
+                    position={marker.position}
+                    xAnchor={0.5}
+                    yAnchor={1.45}
+                    zIndex={3}
+                  >
+                    <OverlayDiv>
+                      {marker.content}
+                      <button onClick={markerClickHandler}>상세보기</button>
+                    </OverlayDiv>
+                  </CustomOverlayMap>
+                )}
+              </MapMarker>
+            ))}
+          </MarkerClusterer>
         </Map>
       </MapContainer>
     </Container>
