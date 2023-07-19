@@ -13,8 +13,8 @@ function SurveyTemplate() {
   };
 
   // FIXME
-  const onNextHandler = event => {
-    push();
+  const onChange = event => {
+    // push();
     setInputValues({ ...inputValues, [event.target.name]: event.target.value });
     // event.target.checked = false;
   };

@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "redux/modules/modal";
 import * as Styled from "./Header.style";
 import { Button } from "components/common";
+import { logOut } from "components/auth";
 
 const Header = () => {
   const { LoginIsOpen, SignupIsOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
+
   return (
     <Styled.NavContainer>
       <Styled.Logospan>
@@ -31,6 +33,9 @@ const Header = () => {
             <LoginModal />
           </Modal>
         )}
+        <Button $bgcolor={"theme1"} size={"small"} fontSize={"5px"} onClick={logOut}>
+          Log Out
+        </Button>
         <Button
           $bgcolor={"theme1"}
           size={"small"}

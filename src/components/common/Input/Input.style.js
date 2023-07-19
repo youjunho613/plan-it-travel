@@ -20,6 +20,26 @@ export const Input = styled.input.attrs(props => ({
 
     &[type="radio"] {
     }
+    &[type="file"] {
+      width: 100%;
+      &:hover {
+        background-color: ${props => props.theme.colors.theme1};
+      }
+      &::-webkit-file-upload-button {
+        width: 100px;
+        height: 35px;
+
+        margin-right: 20px;
+
+        background-color: ${props => props.theme.colors.theme1};
+        border-radius: 5px;
+
+        font-size: 16px;
+        color: white;
+        border: none;
+        outline: none;
+      }
+    }
 
     ${props.as === "textarea" &&
     css`
