@@ -30,7 +30,7 @@ export const Main = () => {
     },
     isPanto: false
   });
-
+  console.log("sdfsf");
   const testSubmit = e => {
     e.preventDefault();
     const ps = new kakao.maps.services.Places();
@@ -38,6 +38,7 @@ export const Main = () => {
     ps.keywordSearch(test, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
         setPagination(_pagination);
+        // console.log(_pagination);
         const bounds = new kakao.maps.LatLngBounds();
         let markers = [];
 
@@ -60,10 +61,12 @@ export const Main = () => {
   };
 
   const prevPage = () => {
+    console.log(pagination);
     if (pagination === null) return;
     if (pagination.hasPrevPage) pagination.prevPage();
   };
   const NextPage = () => {
+    console.log(pagination);
     if (pagination === null) return;
     if (pagination.hasNextPage) pagination.nextPage();
   };
@@ -81,7 +84,6 @@ export const Main = () => {
       isPanto: false
     });
   };
-
   const showInfoHandler = data => {
     setInfo({ content: data.place_name });
     setPosition({

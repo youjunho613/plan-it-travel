@@ -7,7 +7,10 @@ const youtubeApi = axios.create({
   params: {
     part: "snippet",
     maxResults: 5,
-    key: KEY
+    key: KEY,
+    category: "news"
+    // id: 25
+    // videoCategoryId: 25
   },
   headers: {}
 });
