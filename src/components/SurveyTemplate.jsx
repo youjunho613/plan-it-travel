@@ -14,8 +14,7 @@ function SurveyTemplate() {
 
   // FIXME
   // test 주석
-  const onNextHandler = event => {
-    push();
+  const onChange = event => {
     setInputValues({ ...inputValues, [event.target.name]: event.target.value });
     // event.target.checked = false;
   };

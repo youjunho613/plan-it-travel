@@ -9,27 +9,30 @@ import { getUsers } from "api/users";
 import uuid from "react-uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
+import { useSelector } from "react-redux";
 
 export const Detail = () => {
   const params = useParams();
-  const id = params.id;
+  const paramsId = params.id;
   const [draggable, setDraggable] = useState(true);
   const [zoomable, setZoomable] = useState(true);
   const [comment, setComment] = useState("");
   const queryClient = useQueryClient();
+  const { id, x, y, address_name, place_name, phone } = useSelector(
+    state => state.detailData
+  ).dataList.find(e => e.id === paramsId);
 
   const commentsData = useQuery("comments", getComments)
-    .data?.filter(e => e.postId === id)
+    .data?.filter(e => e.postId === paramsId)
     .reverse();
   const usersData = useQuery("users", getUsers).data;
   const loginUserData = usersData?.filter(e => e.email === "kimjinsu0210@naver.com")[0];
   const position = {
-    lat: 33.450701,
-    lng: 126.570667
+    lat: y,
+    lng: x
   };
-
   useEffect(() => {
     setZoomable(false);
     setDraggable(false);
@@ -44,7 +47,7 @@ export const Detail = () => {
     }
     const newComment = {
       id: uuid(),
-      postId: id,
+      postId: paramsId,
       comment,
       nickname: loginUserData.nickname,
       email: loginUserData.email,
@@ -53,7 +56,9 @@ export const Detail = () => {
     };
     commentMutation.mutate(newComment);
     setComment("");
+    window.scrollTo({ top: 800, behavior: "smooth" });
   };
+
   const commentMutation = useMutation(addComment, {
     onSuccess: () => {
       queryClient.invalidateQueries("comments");
@@ -110,7 +115,8 @@ export const Detail = () => {
       setLoading(true);
       setVisibleComments(newVisibleComments);
     }
-  }, 500);
+  }, 100);
+
   useEffect(() => {
     // 스크롤 이벤트 리스너를 추가합니다.
     window.addEventListener("scroll", handleScroll);
@@ -124,7 +130,18 @@ export const Detail = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
+  // 몇분,몇시간,몇일 전
+  const displayWatch = item => {
+    const date = Date.now();
+    const nowDate = new Date(date);
+    const commentDate = new Date(item.date);
+    const milliDate = Math.abs(nowDate - commentDate);
+    const diffDays = Math.ceil(milliDate / (1000 * 60 * 60 * 24)); //
+    const timeDiff = nowDate - commentDate;
+    const hours = Math.floor(timeDiff / (1000 * 60 * 60)); //
+    const minutes = Math.floor((timeDiff / (1000 * 60)) % 60); //
+    return { hours, diffDays, minutes };
+  };
   return (
     <Container>
       <Wrap>
@@ -147,7 +164,7 @@ export const Detail = () => {
             size={"small"}
             $bgcolor={"white"}
             type={"text"}
-            value={loginUserData?.nickname}
+            value={loginUserData?.nickname || ""}
             disabled={true}
           />
           <Input
@@ -160,20 +177,13 @@ export const Detail = () => {
             placeholder={"내용을 입력하세요."}
           />
           <Button size={"small"} $bgcolor={"theme1"}>
-            댓글 작성
+            <FontAwesomeIcon icon={faComment} size="2xl" />
           </Button>
         </form>
       </CommentsLeaveWrap>
       <CommentsWrap>
         {commentsData?.slice(0, visibleComments).map(item => {
-          const date = Date.now();
-          const nowDate = new Date(date);
-          const commentDate = new Date(item.date);
-          const milliDate = Math.abs(nowDate - commentDate);
-          const diffDays = Math.ceil(milliDate / (1000 * 60 * 60 * 24));
-          const timeDiff = nowDate - commentDate;
-          const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-          const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+          const { hours, diffDays, minutes } = displayWatch(item);
           return (
             <Flex key={item.id}>
               <ProfileImg src={item.profileImg} />
@@ -240,12 +250,15 @@ const Container = styled.div`
 const Wrap = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 60px;
+  padding-top: 30px;
 `;
 const Flex = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 30px;
+  background-color: #4d4d4d13;
+  border-radius: 20px;
+  padding: 10px;
 `;
 const CommentsWrap = styled.div`
   display: flex;
@@ -265,7 +278,7 @@ const ProfileImg = styled.div`
   background-image: url("/defaultImg.png");
   background-position: center;
   background-size: cover;
-  margin: 10px 10px 10px 50px;
+  margin: 10px;
 `;
 const NicknameBox = styled.div`
   padding-bottom: 5px;
@@ -276,5 +289,6 @@ const CommentBox = styled.div`
   width: 600px;
 `;
 const DateBox = styled.div`
+  margin-left: 30px;
   width: 80px;
 `;
