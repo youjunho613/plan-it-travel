@@ -46,9 +46,7 @@ export const Inner = styled.div`
         justify-content: center;
         align-items: center;
         padding: 50px;
-        // FIXME white 고정?
         background-color: ${props => props.theme.colors[props.$bgcolor]};
-        /* border-radius: 70px; */
       `;
     }
   }}

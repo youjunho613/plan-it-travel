@@ -1,7 +1,6 @@
 import { css, styled } from "styled-components";
 import { SIZE, THEME } from "./Input.constants";
 
-// TODO background 프롭스받기
 export const Input = styled.input.attrs(props => ({
   as: props.as || "input"
 }))`

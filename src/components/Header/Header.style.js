@@ -1,48 +1,50 @@
 import styled from "styled-components";
 
-const NavContainer = styled.div`
-  width: 100%;
-  height: 60px;
-  background-color: transparent;
+export const Container = styled.div`
   position: sticky;
   top: 0;
   left: 0;
-  right: 0;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  width: 100%;
+  height: 70px;
+
+  background-color: transparent;
+
   z-index: 999;
-  & > div {
-    display: flex;
-    align-items: center;
-  }
-
-  & > span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 5px;
-  }
 `;
 
-const Logospan = styled.span`
-  & > h1 {
-    margin: 0 10px;
-    color: white;
-    cursor: pointer;
-    font-weight: 800;
-  }
-  & > p {
-    color: white;
-    margin-left: 8px;
-    font-size: 15px;
-    font-family: sans-serif;
-    cursor: pointer;
-  }
+export const Nav = styled.nav`
+  display: inherit;
+  flex-direction: row;
+  align-items: center;
 `;
 
-const Searchspan = styled.span`
-  padding-right: 10px;
+export const Ul = styled.ul`
+  display: inherit;
 `;
 
-export { NavContainer, Logospan, Searchspan };
+export const Li = styled.li`
+  margin: 0 10px;
+`;
+
+export const ButtonBox = styled.div`
+  display: inherit;
+  align-items: center;
+  margin: 0 20px;
+  gap: 20px;
+`;
+
+export const Img = styled.img`
+  width: 60px;
+
+  margin: 20px;
+`;
+
+export const ProfileImg = styled.img`
+  width: 45px;
+  border-radius: 100%;
+`;
