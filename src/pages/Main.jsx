@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Input, Modal } from "components/common";
 import Sidebar from "components/Sidebar/Sidebar";
 import { CustomOverlayMap, Map, MapMarker, ZoomControl } from "react-kakao-maps-sdk";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "redux/modules/modal";
 import { getDataList, getPagination } from "redux/modules/detailData";
@@ -26,6 +26,10 @@ export const Main = () => {
   });
   const navigate = useNavigate();
   const [map, setMap] = useState();
+
+  useEffect(() => {
+    localStorage.removeItem("detailData");
+  }, []);
 
   const submitSearchValue = e => {
     e.preventDefault();
@@ -67,7 +71,7 @@ export const Main = () => {
           <MainListModal setState={setState} state={state} />
         </Modal>
       )}
-      <Sidebar />
+      <Sidebar state={state} setState={setState} map={map} />
       <MapContainer>
         <form onSubmit={submitSearchValue}>
           <Input
@@ -98,16 +102,21 @@ export const Main = () => {
               position={marker.position}
               image={{
                 src: markerImg,
-                size: { width: 80, height: 70 },
-                options: { offset: { x: 37, y: 60 } }
+                size: { width: 60, height: 50 },
+                options: { offset: { x: 30, y: 50 } }
               }}
               onClick={() => setState({ ...state, info: marker })}
             >
               {state.info && state.info.content === marker.content && (
-                <CustomOverlayMap position={marker.position} xAnchor={0.5} yAnchor={1.6} zIndex={3}>
+                <CustomOverlayMap
+                  position={marker.position}
+                  xAnchor={0.5}
+                  yAnchor={1.56}
+                  zIndex={3}
+                >
                   <OverlayDiv>
                     <XButton onClick={() => setState({ ...state, info: "" })}>
-                      <FontAwesomeIcon icon={faXmark} size="large" style={{ color: "#ffffff" }} />
+                      <FontAwesomeIcon icon={faXmark} size="lg" style={{ color: "#ffffff" }} />
                     </XButton>
                     {marker.content}
                     <button onClick={() => markerClickHandler(marker.id)}>상세보기</button>

@@ -3,7 +3,11 @@ import modal from "../modules/modal";
 import detailData from "../modules/detailData";
 
 const store = configureStore({
-  reducer: { modal, detailData }
+  reducer: { modal, detailData },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    })
 });
 
 export default store;
