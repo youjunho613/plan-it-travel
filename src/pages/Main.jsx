@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import { Input, Modal } from "components/common";
 import Sidebar from "components/Sidebar/Sidebar";
-import { CustomOverlayMap, Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
-import { useState } from "react";
+import { CustomOverlayMap, Map, MapMarker, ZoomControl } from "react-kakao-maps-sdk";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal, openModal } from "redux/modules/modal";
+import { openModal } from "redux/modules/modal";
+import { getDataList, getPagination } from "redux/modules/detailData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import logo from "assets/logo.png";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import markerImg from "assets/marker.png";
 import { useNavigate } from "react-router";
+import MainListModal from "components/common/Modal/MainListModal";
 
 const { kakao } = window;
 
@@ -16,86 +18,48 @@ export const Main = () => {
   const { ListIsOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
-  const navigate = useNavigate();
-  const [test, setTest] = useState("");
-  const [info, setInfo] = useState();
-  const [markers, setMarkers] = useState([]);
-  const [map, setMap] = useState();
-  const [dataList, setDataList] = useState([]);
-  const [pagination, setPagination] = useState(null);
-  const [position, setPosition] = useState({
-    center: {
-      lat: 37.566826,
-      lng: 126.9786567
-    },
-    isPanto: false
+  const [state, setState] = useState({
+    searchValue: "",
+    position: { center: { lat: 37.566826, lng: 126.9786567 }, isPanto: false },
+    markers: [],
+    info: ""
   });
-  console.log("sdfsf");
-  const testSubmit = e => {
+  useEffect(() => {
+    localStorage.removeItem("detailData");
+  }, []);
+  const navigate = useNavigate();
+  const [map, setMap] = useState();
+
+  const submitSearchValue = e => {
     e.preventDefault();
     const ps = new kakao.maps.services.Places();
 
-    ps.keywordSearch(test, (data, status, _pagination) => {
+    ps.keywordSearch(state.searchValue, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
-        setPagination(_pagination);
-        // console.log(_pagination);
+        dispatch(getPagination(_pagination));
         const bounds = new kakao.maps.LatLngBounds();
         let markers = [];
 
         for (let i = 0; i < data.length; i++) {
-          setDataList(data);
+          dispatch(getDataList(data));
           markers.push({
             position: {
               lat: data[i].y,
               lng: data[i].x
             },
-            content: data[i].place_name
+            content: data[i].place_name,
+            id: data[i].id
           });
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
-        setMarkers(markers);
+        setState({ ...state, markers: markers });
         map.setBounds(bounds);
         modalOpenHandler("ListIsOpen");
       }
     });
   };
 
-  const prevPage = () => {
-    console.log(pagination);
-    if (pagination === null) return;
-    if (pagination.hasPrevPage) pagination.prevPage();
-  };
-  const NextPage = () => {
-    console.log(pagination);
-    if (pagination === null) return;
-    if (pagination.hasNextPage) pagination.nextPage();
-  };
-
-  const modalCloseHandler = () => {
-    dispatch(closeModal("ListIsOpen"));
-    setTest("");
-    setMarkers([]);
-    setDataList([]);
-    setPosition({
-      center: {
-        lat: 37.566826,
-        lng: 126.9786567
-      },
-      isPanto: false
-    });
-  };
-  const showInfoHandler = data => {
-    setInfo({ content: data.place_name });
-    setPosition({
-      center: { lat: data.y, lng: data.x },
-      isPanto: true
-    });
-  };
-  // 클러스터 로직
-  const clusterOption = { averageCenter: true, minLevel: 10 };
-
-  const markerClickHandler = () => {
-    const id = 1;
+  const markerClickHandler = id => {
     navigate(`/detail/${id}`);
   };
   // TODO 반응형
@@ -103,51 +67,24 @@ export const Main = () => {
     <Container>
       {ListIsOpen && (
         <Modal type={"main"}>
-          <Modaldiv>
-            <ImgBox>
-              <Img src={logo} alt={"plan-it-travel"} />
-              <XButton onClick={modalCloseHandler}>
-                <FontAwesomeIcon icon={faXmark} size="2xl" style={{ color: "#ffffff" }} />
-              </XButton>
-            </ImgBox>
-            <ModalUl>
-              검색 결과:{pagination?.totalCount}건
-              {dataList?.map(e => (
-                <ModalLi key={e.id} onClick={() => showInfoHandler(e)}>
-                  {e.place_name}
-                </ModalLi>
-              ))}
-            </ModalUl>
-            <MoveBtnBox>
-              <button onClick={prevPage}>
-                <FontAwesomeIcon icon={faChevronLeft} size="lg" style={{ color: "#ffffff" }} />
-              </button>
-              <span>
-                {pagination?.current}...
-                {pagination?.last}
-              </span>
-              <button onClick={NextPage}>
-                <FontAwesomeIcon icon={faChevronRight} size="lg" style={{ color: "#ffffff" }} />
-              </button>
-            </MoveBtnBox>
-          </Modaldiv>
+          <MainListModal setState={setState} state={state} />
         </Modal>
       )}
       <Sidebar />
       <MapContainer>
-        <form onSubmit={testSubmit}>
+        <form onSubmit={submitSearchValue}>
           <Input
             size={"large"}
             $bgcolor={"black"}
             type="search"
             placeholder="Search"
-            value={test}
-            onChange={e => setTest(e.target.value)}
+            value={state.searchValue}
+            onChange={e => setState({ ...state, searchValue: e.target.value })}
           />
         </form>
         <Map
-          center={position.center}
-          isPanto={position.isPanto}
+          center={state.position.center}
+          isPanto={state.position.isPanto}
           style={{
             width: "100%",
             height: "100%",
@@ -155,30 +92,33 @@ export const Main = () => {
           }}
           level={3}
           onCreate={setMap}
+          onZoomChanged={map => map.getLevel()}
         >
-          <MarkerClusterer {...clusterOption}>
-            {markers.map(marker => (
-              <MapMarker
-                key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-                position={marker.position}
-                onClick={() => setInfo(marker)}
-              >
-                {info && info.content === marker.content && (
-                  <CustomOverlayMap
-                    position={marker.position}
-                    xAnchor={0.5}
-                    yAnchor={1.45}
-                    zIndex={3}
-                  >
-                    <OverlayDiv>
-                      {marker.content}
-                      <button onClick={markerClickHandler}>상세보기</button>
-                    </OverlayDiv>
-                  </CustomOverlayMap>
-                )}
-              </MapMarker>
-            ))}
-          </MarkerClusterer>
+          <ZoomControl />
+          {state.markers.map(marker => (
+            <MapMarker
+              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+              position={marker.position}
+              image={{
+                src: markerImg,
+                size: { width: 80, height: 70 },
+                options: { offset: { x: 37, y: 60 } }
+              }}
+              onClick={() => setState({ ...state, info: marker })}
+            >
+              {state.info && state.info.content === marker.content && (
+                <CustomOverlayMap position={marker.position} xAnchor={0.5} yAnchor={1.6} zIndex={3}>
+                  <OverlayDiv>
+                    <XButton onClick={() => setState({ ...state, info: "" })}>
+                      <FontAwesomeIcon icon={faXmark} size="lg" style={{ color: "#ffffff" }} />
+                    </XButton>
+                    {marker.content}
+                    <button onClick={() => markerClickHandler(marker.id)}>상세보기</button>
+                  </OverlayDiv>
+                </CustomOverlayMap>
+              )}
+            </MapMarker>
+          ))}
         </Map>
       </MapContainer>
     </Container>
@@ -203,71 +143,33 @@ const MapContainer = styled.div`
   }
 `;
 
-const Modaldiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-`;
-
-const ImgBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 60px;
-`;
-
-const XButton = styled.button`
-  position: absolute;
-  top: 1%;
-  left: 15%;
-  background-color: #1f1f22;
-  width: 30px;
-  height: 50px;
-  padding-right: 5px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-`;
-
-const Img = styled.img`
-  display: inherit;
-  align-self: center;
-  width: 150px;
-  margin: 20px;
-`;
-
-const ModalUl = styled.ul`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: baseline;
-  gap: 10px;
-`;
-
-const ModalLi = styled.li`
-  padding: 5px 3px;
-  width: 100%;
-  &:hover {
-    cursor: pointer;
-    background-color: #a290e6;
-    border-radius: 5px;
-  }
-`;
-
-const MoveBtnBox = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: auto;
-`;
-
 const OverlayDiv = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-width: 150px;
+  gap: 10px;
   height: 100px;
   padding: 10px;
   border: 1px solid #1f1f22;
   background-color: #1f1f22;
   border-radius: 5px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 10px 0 10px;
+    border-color: #1f1f22 transparent transparent transparent;
+  }
+`;
+
+const XButton = styled.button`
+  margin-left: auto;
 `;
