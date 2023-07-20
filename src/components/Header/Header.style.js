@@ -4,7 +4,7 @@ const NavContainer = styled.div`
   width: 100%;
   height: 60px;
   background-color: transparent;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
@@ -12,7 +12,6 @@ const NavContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   z-index: 999;
-
   & > div {
     display: flex;
     align-items: center;

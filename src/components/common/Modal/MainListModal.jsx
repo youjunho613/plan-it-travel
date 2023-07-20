@@ -10,7 +10,6 @@ import { closeModal } from "redux/modules/modal";
 function MainListModal({ setState, state }) {
   const { dataList, pagination } = useSelector(state => state.detailData);
   const dispatch = useDispatch();
-
   const prevPage = () => {
     if (pagination === null) return;
     if (pagination.hasPrevPage) pagination.prevPage();

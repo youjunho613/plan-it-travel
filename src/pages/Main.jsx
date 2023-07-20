@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Input, Modal } from "components/common";
 import Sidebar from "components/Sidebar/Sidebar";
 import { CustomOverlayMap, Map, MapMarker, ZoomControl } from "react-kakao-maps-sdk";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "redux/modules/modal";
 import { getDataList, getPagination } from "redux/modules/detailData";
@@ -24,6 +24,9 @@ export const Main = () => {
     markers: [],
     info: ""
   });
+  useEffect(()=>{
+    localStorage.removeItem("detailData")
+  },[])
   const navigate = useNavigate();
   const [map, setMap] = useState();
 
@@ -107,7 +110,7 @@ export const Main = () => {
                 <CustomOverlayMap position={marker.position} xAnchor={0.5} yAnchor={1.6} zIndex={3}>
                   <OverlayDiv>
                     <XButton onClick={() => setState({ ...state, info: "" })}>
-                      <FontAwesomeIcon icon={faXmark} size="large" style={{ color: "#ffffff" }} />
+                      <FontAwesomeIcon icon={faXmark} size="lg" style={{ color: "#ffffff" }} />
                     </XButton>
                     {marker.content}
                     <button onClick={() => markerClickHandler(marker.id)}>상세보기</button>
