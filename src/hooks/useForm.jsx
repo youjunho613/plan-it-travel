@@ -10,6 +10,8 @@ const useForm = (initialState, validation, submitAction) => {
     [values]
   );
 
+  const resister = name => ({ name, value: values[name], onChange });
+
   const onSubmit = useCallback(
     event => {
       event.preventDefault();
@@ -21,9 +23,6 @@ const useForm = (initialState, validation, submitAction) => {
     },
     [initialState, submitAction, validation, values]
   );
-
-  const resister = name => ({ name, value: values[name], onChange });
-
   return { values, errors, onSubmit, resister };
 };
 

@@ -7,13 +7,13 @@ import logo from "assets/logo.png";
 import { useDispatch } from "react-redux";
 import { getDataList, getPagination } from "redux/modules/detailData";
 import { openModal } from "redux/modules/modal";
+import { useAuth } from "components/auth";
 
 const { kakao } = window;
 
 const Sidebar = ({ state, setState, map }) => {
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
-
   const iconAttr = icon => ({
     icon: icons[icon],
     style: { color: "#bf94ff", marginRight: "10px" }
@@ -24,6 +24,8 @@ const Sidebar = ({ state, setState, map }) => {
     isOpen[target]
       ? setIsOpen({ ...isOpen, [target]: false })
       : setIsOpen({ ...isOpen, [target]: true });
+
+  const { currentUser, logOut } = useAuth();
 
   // 키워드 검색
   const SearchHandler = keyword => {
@@ -126,11 +128,12 @@ const Sidebar = ({ state, setState, map }) => {
           </>
         )}
       </Ul>
-
-      <AuthBox>
-        <FontAwesomeIcon {...iconAttr("faArrowRightFromBracket")} />
-        Logout
-      </AuthBox>
+      {currentUser?.uid === null || currentUser?.uid === undefined ? null : (
+        <AuthBox onClick={logOut}>
+          <FontAwesomeIcon {...iconAttr("faArrowRightFromBracket")} />
+          Logout
+        </AuthBox>
+      )}
     </SideBar>
   );
 };

@@ -13,8 +13,8 @@ function SurveyTemplate() {
   };
 
   // FIXME
+  // test 주석
   const onChange = event => {
-    // push();
     setInputValues({ ...inputValues, [event.target.name]: event.target.value });
     // event.target.checked = false;
   };
@@ -61,27 +61,6 @@ function SurveyTemplate() {
 
           {step >= 4 && <Button {...buttonAttr("theme3")}>Submit</Button>}
         </ButtonBox>
-
-        {/* <Text
-          fontSize={"20px"}
-        >{`저는 첫번째 질문에 대한 ${inputValues.question0}답변입니다`}</Text>
-        <br />
-        <Text
-          fontSize={"20px"}
-        >{`저는 두번째 질문에 대한 ${inputValues.question1}답변입니다`}</Text>
-        <br />
-        <Text
-          fontSize={"20px"}
-        >{`저는 세번째 질문에 대한 ${inputValues.question2}답변입니다`}</Text>
-        <br />
-        <Text
-          fontSize={"20px"}
-        >{`저는 네번째 질문에 대한 ${inputValues.question3}답변입니다`}</Text>
-        <br />
-        <Text
-          fontSize={"20px"}
-        >{`저는 다섯번째 질문에 대한 ${inputValues.question4}답변입니다`}</Text>
-        <br /> */}
       </SurveyContainer>
     </Container>
   );

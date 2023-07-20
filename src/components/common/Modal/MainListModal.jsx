@@ -7,10 +7,9 @@ import logo from "assets/logo.png";
 import { getDataList } from "redux/modules/detailData";
 import { closeModal } from "redux/modules/modal";
 
-function MainListModal({ setState, state }) {
+export const MainListModal = ({ setState, state }) => {
   const { dataList, pagination } = useSelector(state => state.detailData);
   const dispatch = useDispatch();
-
   const prevPage = () => {
     if (pagination === null) return;
     if (pagination.hasPrevPage) pagination.prevPage();
@@ -75,7 +74,7 @@ function MainListModal({ setState, state }) {
       </MoveBtnBox>
     </Modaldiv>
   );
-}
+};
 
 const Modaldiv = styled.div`
   display: flex;
@@ -133,5 +132,3 @@ const MoveBtnBox = styled.div`
   gap: 10px;
   margin-top: auto;
 `;
-
-export default MainListModal;

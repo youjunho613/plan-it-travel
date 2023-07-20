@@ -5,16 +5,10 @@ import { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
 import store from "redux/config/store";
 import Router from "shared/Router";
-import { useEffect } from "react";
-import { onAuthState } from "components/auth";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  useEffect(() => {
-    onAuthState();
-  }, []);
-
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
