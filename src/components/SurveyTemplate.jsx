@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
 import { Button, Text, Input } from "components/common";
 import { SURVEY_TEXT, SURVEY_RESULT } from "../surveyData/surveyData";
@@ -77,7 +77,6 @@ function SurveyTemplate() {
           })}
 
           <ButtonBox>
-         
             {step <= 2 && (
               <Button
                 type={"reset"}
@@ -94,7 +93,6 @@ function SurveyTemplate() {
             )}
           </ButtonBox>
         </Form>
-
       </SurveyContainer>
     </Container>
   );
@@ -150,11 +148,6 @@ const Progress = styled.progress`
   bottom: 0px;
 
   width: 100%;
-`;
-
-const Questions = styled.p`
-  font-size: 25px;
-  padding-bottom: 30px;
 `;
 
 const ButtonBox = styled.div``;

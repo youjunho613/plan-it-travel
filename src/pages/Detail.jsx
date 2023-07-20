@@ -5,7 +5,6 @@ import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { Button, Input } from "components/common";
-import { getUsers } from "api/users";
 import uuid from "react-uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
@@ -15,6 +14,7 @@ import { useSelector } from "react-redux";
 import { youtubeApi } from "../api/youtube";
 import YouTube from "react-youtube";
 import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
+import { useAuth } from "components/auth";
 
 export const Detail = () => {
   const params = useParams();
@@ -28,21 +28,19 @@ export const Detail = () => {
     state => state.detailData
   ).dataList.find(e => e.id === paramsId);
 
+  // 로그인한 현재 유저 정보 GET
+  const { currentUser } = useAuth();
+
   const commentsData = useQuery("comments", getComments)
     .data?.filter(e => e.postId === paramsId)
     .reverse();
 
-  const loginUserData = useQuery("users", getUsers).data?.find(
-    e => e.email === "kimjinsu0210@naver.com"
+  const bookmarksData = useQuery("bookmarks", getBookmarks).data?.find(
+    e => e.userEmail === currentUser.email && e.kakaoId === paramsId
   );
 
-  const bookmarksData = useQuery("bookmarks", getBookmarks).data?.find(
-    e => e.userEmail === loginUserData.email && e.kakaoId === paramsId
-  );
-  const position = {
-    lat: y,
-    lng: x
-  };
+  const position = { lat: y, lng: x };
+
   useEffect(() => {
     setZoomable(false);
     setDraggable(false);
@@ -51,28 +49,27 @@ export const Detail = () => {
   // 댓글 작성
   const leaveCommentHandler = event => {
     event.preventDefault();
+    if (!currentUser?.email) return alert("로그인 부탁드립니다.");
     const date = new Date();
-    if (comment.length > 300 || comment.length < 1) {
+    if (comment.length > 300 || comment.length < 1)
       return alert("내용은 1자 이상 300자 이하로 작성해 주세요.");
-    }
     const newComment = {
       id: uuid(),
       postId: paramsId,
       comment,
-      nickname: loginUserData.nickname,
-      email: loginUserData.email,
-      profileImg: loginUserData.profileImg,
-      date
+      date,
+      email: currentUser?.email,
+      displayName: currentUser?.displayName,
+      photoURL: currentUser?.photoURL
     };
+
     commentMutation.mutate(newComment);
     setComment("");
     window.scrollTo({ top: 800, behavior: "smooth" });
   };
 
   const commentMutation = useMutation(addComment, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("comments");
-    }
+    onSuccess: () => queryClient.invalidateQueries("comments")
   });
 
   // 댓글 수정
@@ -80,9 +77,7 @@ export const Detail = () => {
     const changeComment = prompt("수정할 댓글 내용을 입력해 주세요", comment);
     if (changeComment !== null) {
       if (changeComment === "") return alert("댓글 내용은 1자리 이상 입력하셔야 합니다.");
-      const newComment = {
-        comment: changeComment
-      };
+      const newComment = { comment: changeComment };
       modifyMutation.mutate({ id, newComment });
     }
   };
@@ -92,20 +87,16 @@ export const Detail = () => {
       return alert("수정이 완료되었습니다.");
     }
   });
-  const commentChangeHandler = e => {
-    setComment(e.target.value);
-  };
+
+  // 댓글 작성 인풋 채인지 함수
+  const commentChangeHandler = e => setComment(e.target.value);
 
   // 댓글 삭제
   const deleteCommentHandler = id => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deleteMutation.mutate(id);
-    }
+    if (window.confirm("정말 삭제하시겠습니까?")) deleteMutation.mutate(id);
   };
   const deleteMutation = useMutation(deleteComment, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("posts");
-    }
+    onSuccess: () => queryClient.invalidateQueries("posts")
   });
 
   // 무한스크롤
@@ -129,15 +120,13 @@ export const Detail = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    // 컴포넌트가 unmount될 때 스크롤 이벤트 리스너를 제거합니다.
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [visibleComments]);
 
   // Top 사이드바
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   // 몇분,몇시간,몇일 전
   const displayWatch = item => {
     const date = Date.now();
@@ -178,10 +167,6 @@ export const Detail = () => {
   //   onYoutube();
   // }, []);
 
-  // const bookmarksData = useQuery("bookmarks", getBookmarks).data?.find(
-  //   e => e.userEmail === loginUserData.email && e.kakaoId === paramsId
-  // );
-
   // 북마크 관련 로직
   const bookmarkClickHandler = () => {
     const date = Date.now();
@@ -192,7 +177,7 @@ export const Detail = () => {
       const bookmark = {
         id: uuid(),
         kakaoId: paramsId,
-        userEmail: loginUserData.email,
+        userEmail: currentUser.email,
         date: nowDate,
         place_name,
         address_name,
@@ -245,60 +230,60 @@ export const Detail = () => {
           <div>{phone}</div>
         </MapWrap>
       </Wrap>
-      <CommentsLeaveWrap>
-        <form onSubmit={leaveCommentHandler}>
-          <Input
-            size={"small"}
-            $bgcolor={"white"}
-            type={"text"}
-            value={loginUserData?.nickname || ""}
-            disabled={true}
-          />
-          <Input
-            size={"large"}
-            $bgcolor={"white"}
-            type={"text"}
-            style={{ margin: "0 20px 0 20px" }}
-            value={comment}
-            onChange={commentChangeHandler}
-            placeholder={"내용을 입력하세요."}
-          />
-          <Button size={"small"} $bgcolor={"theme1"}>
-            <FontAwesomeIcon icon={faComment} size="2xl" />
-          </Button>
-        </form>
-      </CommentsLeaveWrap>
+      <CommentsForm onSubmit={leaveCommentHandler}>
+        <Input
+          size={"small"}
+          $bgcolor={"white"}
+          type={"text"}
+          value={currentUser?.displayName || "로그인 해주세요"}
+          disabled={true}
+        />
+        <Input
+          size={"large"}
+          $bgcolor={"white"}
+          type={"text"}
+          style={{ margin: "0 20px 0 20px" }}
+          value={comment}
+          onChange={commentChangeHandler}
+          placeholder={"내용을 입력하세요."}
+        />
+        <Button size={"small"} $bgcolor={"theme1"}>
+          <FontAwesomeIcon icon={faComment} size="2xl" />
+        </Button>
+      </CommentsForm>
       <CommentsWrap>
         {commentsData?.slice(0, visibleComments).map(item => {
           const { hours, diffDays, minutes } = displayWatch(item);
           return (
             <Flex key={item.id}>
-              <ProfileImg src={item.profileImg} />
-              <div>
-                <NicknameBox>{item.nickname}</NicknameBox>
-                <CommentBox>{item.comment}</CommentBox>
-              </div>
-              <DateBox>
-                {hours >= 24
-                  ? diffDays + "일전"
-                  : hours === 0
-                  ? minutes + "분전"
-                  : hours + "시간전"}
-              </DateBox>
-              {loginUserData?.email === item.email ? (
+              <DivBox>
+                <ProfileImg src={item.photoURL} />
                 <div>
-                  <CustomFontAwesomeIcon
-                    icon={faPenToSquare}
-                    onClick={() => modifyCommentHandler(item.id)}
-                  />
-                  <CustomFontAwesomeIcon
-                    icon={faTrash}
-                    onClick={() => deleteCommentHandler(item.id)}
-                  />
+                  <NicknameBox>{item.displayName}</NicknameBox>
+                  <CommentBox>{item.comment}</CommentBox>
                 </div>
-              ) : (
-                <div style={{ width: "50px" }}></div>
-              )}
+              </DivBox>
+              <SideBox>
+                {currentUser?.email === item.email ? (
+                  <IconBox>
+                    <CustomFontAwesomeIcon
+                      icon={faPenToSquare}
+                      onClick={() => modifyCommentHandler(item.id)}
+                    />
+                    <CustomFontAwesomeIcon
+                      icon={faTrash}
+                      onClick={() => deleteCommentHandler(item.id)}
+                    />
+                  </IconBox>
+                ) : null}
+                <DateBox>
+                  {hours >= 24
+                    ? diffDays + "일전"
+                    : hours === 0
+                    ? minutes + "분전"
+                    : hours + "시간전"}
+                </DateBox>
+              </SideBox>
             </Flex>
           );
         })}
@@ -328,24 +313,12 @@ const LargeFont = styled.div`
   width: 450px;
   text-align: center;
 `;
-const CustomFontAwesomeIcon = styled(FontAwesomeIcon)`
-  cursor: pointer;
-  margin: 0 10px 0 10px;
-  font-size: 25px;
-`;
-const SideBar = styled.div`
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
+
 const MapWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -360,45 +333,84 @@ const MapWrap = styled.div`
 const Wrap = styled.div`
   display: flex;
   justify-content: center;
-`;
-const Flex = styled.div`
-  display: flex;
   align-items: center;
-  margin-bottom: 30px;
-  background-color: #50505037;
-  border-radius: 20px;
-  padding: 10px;
-  line-break: anywhere;
+  padding-top: 30px;
 `;
-const CommentsWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const CommentsLeaveWrap = styled.div`
+
+const CommentsForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 180px;
 `;
-const ProfileImg = styled.div`
+
+const CommentsWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Flex = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+
+  width: 46%;
+  min-width: 700px;
+
+  margin: 15px 0;
+  padding: 10px;
+
+  background-color: #4d4d4d13;
+  border-radius: 20px;
+`;
+
+const DivBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ProfileImg = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-image: url("/defaultImg.png");
-  background-position: center;
-  background-size: cover;
   margin: 10px;
 `;
+
 const NicknameBox = styled.div`
+  width: 100%;
   padding-bottom: 5px;
   font-weight: 700;
-  width: 600px;
 `;
+
 const CommentBox = styled.div`
-  width: 600px;
+  width: 100%;
+  line-break: anywhere;
 `;
+
+const SideBox = styled.div`
+  display: flex;
+`;
+
+const IconBox = styled.div`
+  display: inherit;
+`;
+
+const CustomFontAwesomeIcon = styled(FontAwesomeIcon)`
+  cursor: pointer;
+  margin: 0 10px;
+  font-size: 25px;
+`;
+
 const DateBox = styled.div`
-  margin-left: 30px;
+  margin-left: 20px;
   width: 80px;
+`;
+
+const SideBar = styled(CommentsWrap)`
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
 `;

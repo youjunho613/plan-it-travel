@@ -8,6 +8,43 @@
       "regData": "2023-07-18 12:08"
     }
   ],
-  "comments": [],
+  "comments": [
+    {
+      "id": "d9583bcb-9d8e-bbd9-866a-c05a99b19c5c",
+      "postId": "27548967",
+      "comment": "123",
+      "date": "2023-07-20T13:19:32.534Z",
+      "email": "123@naver.com",
+      "displayName": "유준호",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
+    },
+    {
+      "id": "8b536529-4ae0-7b2f-2020-4204d56a3606",
+      "postId": "27548967",
+      "comment": "123",
+      "date": "2023-07-20T13:19:34.083Z",
+      "email": "123@naver.com",
+      "displayName": "유준호",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
+    },
+    {
+      "id": "1afd596f-6c16-dab4-f31c-26247d94dc78",
+      "postId": "27548967",
+      "comment": "123",
+      "date": "2023-07-20T13:19:35.531Z",
+      "email": "123@naver.com",
+      "displayName": "유준호",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
+    },
+    {
+      "id": "34bcaf39-b104-7a97-959c-49d6ef67a175",
+      "postId": "27548967",
+      "comment": "123",
+      "date": "2023-07-20T13:19:36.319Z",
+      "email": "123@naver.com",
+      "displayName": "유준호",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
+    }
+  ],
   "bookmarks": []
 }

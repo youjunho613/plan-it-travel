@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Input, Modal } from "components/common";
+import { Input, MainListModal, Modal } from "components/common";
 import Sidebar from "components/Sidebar/Sidebar";
 import { CustomOverlayMap, Map, MapMarker, ZoomControl } from "react-kakao-maps-sdk";
 import { useEffect, useState } from "react";
@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import markerImg from "assets/marker.png";
 import { useNavigate } from "react-router";
-import MainListModal from "components/common/Modal/MainListModal";
 
 const { kakao } = window;
 
@@ -154,6 +153,7 @@ const OverlayDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   min-width: 150px;
   gap: 10px;
   height: 100px;

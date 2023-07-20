@@ -4,11 +4,12 @@ import { useDispatch } from "react-redux";
 import { closeModal } from "redux/modules/modal";
 import useForm from "hooks/useForm";
 import { Button, Input, Text } from "components/common";
-import { createUser } from "components/auth";
+import { useAuth } from "components/auth";
 
-const RegisterModal = () => {
+export const RegisterModal = () => {
   const dispatch = useDispatch();
-  const modalCloseHandler = () => dispatch(closeModal("SignupIsOpen"));
+  const modalCloseHandler = () => dispatch(closeModal("signUpIsOpen"));
+  const { createUser } = useAuth();
 
   const initialState = { email: "", password: "", passwordConfirm: "", displayName: "" };
   const validation = () => {
@@ -26,7 +27,6 @@ const RegisterModal = () => {
   };
 
   const { values, errors, onSubmit, resister } = useForm(initialState, validation, submitAction);
-  console.log("values :", values);
 
   return (
     <Form onSubmit={onSubmit}>
@@ -97,5 +97,3 @@ const Form = styled.form`
   align-items: center;
   gap: 30px;
 `;
-
-export default RegisterModal;

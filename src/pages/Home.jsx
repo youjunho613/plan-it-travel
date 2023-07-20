@@ -4,7 +4,6 @@ import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
-  // TODO 링크 걸어주기
   return (
     <ButtonBox>
       <Link to={"/survey"}>
