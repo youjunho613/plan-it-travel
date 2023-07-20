@@ -12,6 +12,7 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
 import { useSelector } from "react-redux";
+import YouTube from "react-youtube";
 
 export const Detail = () => {
   const params = useParams();
@@ -142,6 +143,35 @@ export const Detail = () => {
     const minutes = Math.floor((timeDiff / (1000 * 60)) % 60); //
     return { hours, diffDays, minutes };
   };
+
+  //유튜브
+  const [youtubeRes, setYoutubeRes] = useState("");
+
+  const onYoutube = async () => {
+    try {
+      const response = await youtubeApi.get("/videos", {
+        params: {
+          part: "snippet",
+          chart: "mostPopular",
+          maxResults: 5,
+          videoCategoryId: 19,
+          regionCode: "KR"
+          // q: "소녀시대"
+          // videoCategoryId: 2,
+          // id: "ZaB4MmTOZRs"
+        }
+      });
+
+      console.log("response", response.data.items);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //유튜브
+  useEffect(() => {
+    onYoutube();
+  }, []);
+
   return (
     <Container>
       <Wrap>

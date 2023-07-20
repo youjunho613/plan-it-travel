@@ -77,16 +77,7 @@ function SurveyTemplate() {
           })}
 
           <ButtonBox>
-            {/* {step >= 1 && (
-              <Button
-                type={"button"}
-                {...buttonAttr("theme2")}
-                color={"black"}
-                onClick={event => moveStep(event, -1)}
-              >
-                Prev
-              </Button>
-            )} */}
+         
             {step <= 2 && (
               <Button
                 type={"reset"}
@@ -103,6 +94,7 @@ function SurveyTemplate() {
             )}
           </ButtonBox>
         </Form>
+
       </SurveyContainer>
     </Container>
   );
