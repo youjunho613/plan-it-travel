@@ -8,17 +8,6 @@
       "regData": "2023-07-18 12:08"
     }
   ],
-  "maps": [
-    {
-      "id": 1,
-      "position": "33.450705, 126.570677",
-      "title": "카카오",
-      "address": "제주특별자치도 제주시 아라동 첨단로 242",
-      "phoneNumber": "1899-1326"
-    }
-  ],
-  
-  "comments": [
-   
-  ]
+  "comments": [],
+  "bookmarks": []
 }
