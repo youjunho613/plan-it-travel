@@ -12,6 +12,7 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
 import { useSelector } from "react-redux";
+import { youtubeApi } from "../api/youtube";
 
 export const Detail = () => {
   const params = useParams();
