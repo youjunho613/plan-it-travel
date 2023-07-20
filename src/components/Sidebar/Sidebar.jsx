@@ -3,7 +3,7 @@ import * as icons from "@fortawesome/free-solid-svg-icons";
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import logo from "assets/logo.png";
+import sideBarLogo from "assets/sideBarLogo.png";
 import { useDispatch } from "react-redux";
 import { getDataList, getPagination } from "redux/modules/detailData";
 import { openModal } from "redux/modules/modal";
@@ -14,6 +14,7 @@ const { kakao } = window;
 const Sidebar = ({ state, setState, map }) => {
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
+
   const iconAttr = icon => ({
     icon: icons[icon],
     style: { color: "#bf94ff", marginRight: "10px" }
@@ -52,7 +53,7 @@ const Sidebar = ({ state, setState, map }) => {
 
   return (
     <SideBar>
-      <Img src={logo} alt={"plan-it-travel"} />
+      <Img src={sideBarLogo} alt={"plan-it-travel"} />
       <Link to={"/"}>
         <FontAwesomeIcon {...iconAttr("faHouse")} />
         home
@@ -142,31 +143,20 @@ export default Sidebar;
 
 const SideBar = styled.div`
   position: relative;
-
   display: flex;
   flex-direction: column;
   gap: 20px;
-
-  width: 15vw;
-  min-width: 200px;
+  width: 280px;
   height: 100vh;
-
   padding: 20px;
-
   background-color: ${props => props.theme.colors.black};
-
   color: ${props => props.theme.colors.white};
-
   transition: 300ms;
 `;
 
 const Img = styled.img`
   display: inherit;
   align-self: center;
-
-  width: 150px;
-
-  margin: 20px;
 `;
 
 const Ul = styled.ul`

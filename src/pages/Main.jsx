@@ -23,11 +23,12 @@ export const Main = () => {
     markers: [],
     info: ""
   });
+  const navigate = useNavigate();
+  const [map, setMap] = useState();
+
   useEffect(() => {
     localStorage.removeItem("detailData");
   }, []);
-  const navigate = useNavigate();
-  const [map, setMap] = useState();
 
   const submitSearchValue = e => {
     e.preventDefault();
@@ -100,13 +101,18 @@ export const Main = () => {
               position={marker.position}
               image={{
                 src: markerImg,
-                size: { width: 80, height: 70 },
-                options: { offset: { x: 37, y: 60 } }
+                size: { width: 60, height: 50 },
+                options: { offset: { x: 30, y: 50 } }
               }}
               onClick={() => setState({ ...state, info: marker })}
             >
               {state.info && state.info.content === marker.content && (
-                <CustomOverlayMap position={marker.position} xAnchor={0.5} yAnchor={1.6} zIndex={3}>
+                <CustomOverlayMap
+                  position={marker.position}
+                  xAnchor={0.5}
+                  yAnchor={1.56}
+                  zIndex={3}
+                >
                   <OverlayDiv>
                     <XButton onClick={() => setState({ ...state, info: "" })}>
                       <FontAwesomeIcon icon={faXmark} size="lg" style={{ color: "#ffffff" }} />

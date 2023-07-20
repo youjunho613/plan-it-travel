@@ -11,8 +11,9 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
 import { useSelector } from "react-redux";
-import YouTube from "react-youtube";
 import { youtubeApi } from "../api/youtube";
+import YouTube from "react-youtube";
+import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
 import { useAuth } from "components/auth";
 
 export const Detail = () => {
@@ -22,6 +23,7 @@ export const Detail = () => {
   const [zoomable, setZoomable] = useState(true);
   const [comment, setComment] = useState("");
   const queryClient = useQueryClient();
+
   const { id, x, y, address_name, place_name, phone } = useSelector(
     state => state.detailData
   ).dataList.find(e => e.id === paramsId);
@@ -32,6 +34,10 @@ export const Detail = () => {
   const commentsData = useQuery("comments", getComments)
     .data?.filter(e => e.postId === paramsId)
     .reverse();
+
+  const bookmarksData = useQuery("bookmarks", getBookmarks).data?.find(
+    e => e.userEmail === currentUser.email && e.kakaoId === paramsId
+  );
 
   const position = { lat: y, lng: x };
 
@@ -113,7 +119,6 @@ export const Detail = () => {
   }, 100);
 
   useEffect(() => {
-    // 스크롤 이벤트 리스너를 추가합니다.
     window.addEventListener("scroll", handleScroll);
     // 컴포넌트가 unmount될 때 스크롤 이벤트 리스너를 제거합니다.
     return () => window.removeEventListener("scroll", handleScroll);
@@ -135,49 +140,95 @@ export const Detail = () => {
     return { hours, diffDays, minutes };
   };
 
-  //유튜브
-  const [youtubeRes, setYoutubeRes] = useState("");
+  // //유튜브
+  // const [youtubeRes, setYoutubeRes] = useState("");
 
-  const onYoutube = async () => {
-    try {
-      const response = await youtubeApi.get("/videos", {
-        params: {
-          part: "snippet",
-          chart: "mostPopular",
-          maxResults: 5,
-          videoCategoryId: 19,
-          regionCode: "KR"
-          // q: "소녀시대"
-          // videoCategoryId: 2,
-          // id: "ZaB4MmTOZRs"
-        }
-      });
+  // const onYoutube = async () => {
+  //   try {
+  //     const response = await youtubeApi.get("/videos", {
+  //       params: {
+  //         part: "snippet",
+  //         chart: "mostPopular",
+  //         maxResults: 5,
+  //         videoCategoryId: 19,
+  //         regionCode: "KR"
+  //         // q: "소녀시대"
+  //         // videoCategoryId: 2,
+  //         // id: "ZaB4MmTOZRs"
+  //       }
+  //     });
+  //     console.log("response", response.data.items);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // //유튜브
+  // useEffect(() => {
+  //   onYoutube();
+  // }, []);
 
-      // console.log("response", response.data.items);
-    } catch (error) {
-      // console.log(error);
+  // 북마크 관련 로직
+  const bookmarkClickHandler = () => {
+    const date = Date.now();
+    const nowDate = new Date(date).toLocaleString();
+    if (bookmarksData) {
+      deleteBookmarkMutation.mutate(bookmarksData.id);
+    } else {
+      const bookmark = {
+        id: uuid(),
+        kakaoId: paramsId,
+        userEmail: currentUser.email,
+        date: nowDate,
+        place_name,
+        address_name,
+        phone
+      };
+      bookmarkMutation.mutate(bookmark);
     }
   };
-  //유튜브
-  useEffect(() => {
-    onYoutube();
-  }, []);
+
+  const bookmarkMutation = useMutation(addBookmark, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("bookmarks");
+    }
+  });
+
+  const deleteBookmarkMutation = useMutation(deleteBookmark, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("bookmarks");
+    }
+  });
 
   return (
     <Container>
       <Wrap>
-        <Map // 지도를 표시할 Container
-          center={position}
-          style={{
-            width: "700px",
-            height: "700px"
-          }}
-          level={3}
-          draggable={draggable}
-          zoomable={zoomable}
-        >
-          <MapMarker position={position} />
-        </Map>
+        <MapWrap>
+          <Map // 지도를 표시할 Container
+            center={position}
+            style={{
+              width: "500px",
+              height: "500px"
+            }}
+            level={3}
+            draggable={draggable}
+            zoomable={zoomable}
+          >
+            <MapMarker position={position} />
+          </Map>
+
+          <BookmarkSvg
+            xmlns="http://www.w3.org/2000/svg"
+            height="2em"
+            viewBox="0 0 384 512"
+            onClick={bookmarkClickHandler}
+            fill={bookmarksData}
+          >
+            <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" />
+          </BookmarkSvg>
+          <LargeFont>{place_name}</LargeFont>
+          <div>{address_name}</div>
+          <div>{phone}</div>
+        </MapWrap>
       </Wrap>
       <CommentsForm onSubmit={leaveCommentHandler}>
         <Input
@@ -243,17 +294,40 @@ export const Detail = () => {
             style={{ fontSize: "40px" }}
           />
         </SideBar>
-        {loading && (
-          <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", fontSize: "30px" }} />
-        )}
+        {loading && <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "30px" }} />}
       </CommentsWrap>
     </Container>
   );
 };
 
+const BookmarkSvg = styled.svg`
+  cursor: pointer;
+  fill: ${props => (props.fill ? props.theme.colors.theme1 : props.theme.colors.white)};
+  position: relative;
+  top: 43px;
+  left: 230px;
+`;
+const LargeFont = styled.div`
+  font-size: 25px;
+  font-weight: 700;
+  width: 450px;
+  text-align: center;
+`;
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
+`;
+
+const MapWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 30px 60px 30px;
+  background-color: #50505037;
+  gap: 10px;
+  line-break: anywhere;
+  border-radius: 15px;
 `;
 
 const Wrap = styled.div`
