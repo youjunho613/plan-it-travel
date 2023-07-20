@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
 import { Button, Text, Input } from "components/common";
 import { SURVEY_TEXT } from "../surveyData/surveyData";
@@ -6,16 +6,15 @@ import { SURVEY_TEXT } from "../surveyData/surveyData";
 function SurveyTemplate() {
   const [step, setStep] = useState(0);
   const [inputValues, setInputValues] = useState(); // 스테이트 배열 / 넥 = 푸쉬 프리브 = 팝
-  const [isCheck, setIsCheck] = useState(false);
+  // const [isCheck, setIsCheck] = useState(false);
 
   const moveStep = num => {
     setStep(step + num);
   };
 
   // FIXME
-  // test 주석
-  const onNextHandler = event => {
-    push();
+  const onChange = event => {
+    // push();
     setInputValues({ ...inputValues, [event.target.name]: event.target.value });
     // event.target.checked = false;
   };
@@ -141,9 +140,9 @@ const Progress = styled.progress`
   width: 100%;
 `;
 
-const Questions = styled.p`
-  font-size: 25px;
-  padding-bottom: 30px;
-`;
+// const Questions = styled.p`
+//   font-size: 25px;
+//   padding-bottom: 30px;
+// `;
 
 const ButtonBox = styled.div``;

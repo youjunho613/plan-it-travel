@@ -4,7 +4,7 @@ const NavContainer = styled.div`
   width: 100%;
   height: 60px;
   background-color: transparent;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
@@ -46,4 +46,13 @@ const Searchspan = styled.span`
   padding-right: 10px;
 `;
 
-export { NavContainer, Logospan, Searchspan };
+const Img = styled.img`
+  display: inherit;
+  align-self: center;
+
+  width: 150px;
+
+  margin: 20px;
+`;
+
+export { NavContainer, Logospan, Searchspan, Img };

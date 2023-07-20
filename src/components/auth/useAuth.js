@@ -25,7 +25,7 @@ export const useAuth = () => {
     });
   };
 
-  // TODO 쿠키
+  // TODO 쿠키 보류
   // FIXME 라이브러리 사용하는지?
 
   const signIn = async values => {

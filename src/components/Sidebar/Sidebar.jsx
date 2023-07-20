@@ -4,8 +4,16 @@ import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "assets/logo.png";
+import { useDispatch } from "react-redux";
+import { getDataList, getPagination } from "redux/modules/detailData";
+import { openModal } from "redux/modules/modal";
 
-const Sidebar = () => {
+const { kakao } = window;
+
+const Sidebar = ({ state, setState, map, setMap }) => {
+  const dispatch = useDispatch();
+  const modalOpenHandler = target => dispatch(openModal(target));
+
   const iconAttr = icon => ({
     icon: icons[icon],
     style: { color: "#bf94ff", marginRight: "10px" }
@@ -18,7 +26,27 @@ const Sidebar = () => {
       : setIsOpen({ ...isOpen, [target]: true });
 
   // 키워드 검색
-  const SearchHandler = () => {};
+  const SearchHandler = keyword => {
+    const ps = new kakao.maps.services.Places();
+
+    ps.keywordSearch(keyword, (data, status, _pagination) => {
+      if (status === kakao.maps.services.Status.OK) {
+        dispatch(getPagination(_pagination));
+        // const bounds = new kakao.maps.LatLngBounds();
+        let markers = [];
+
+        for (let i = 0; i < data.length; i++) {
+          dispatch(getDataList(data));
+          const { y, x, place_name, id } = data[i];
+          markers.push({ position: { lat: y, lng: x }, content: place_name, id: id });
+          // bounds.extend(new kakao.maps.LatLng(y, x));
+        }
+        setState({ ...state, markers: markers });
+        // map.setBounds(bounds);
+        modalOpenHandler("ListIsOpen");
+      }
+    });
+  };
 
   return (
     <SideBar>
@@ -31,11 +59,11 @@ const Sidebar = () => {
         <FontAwesomeIcon {...iconAttr("faMountain")} />산
         {isOpen.mountain && (
           <>
-            <Li onClick={() => SearchHandler()}>
+            <Li onClick={() => SearchHandler("캠핑장")}>
               <FontAwesomeIcon {...iconAttr("faCaravan")} />
               캠핑장
             </Li>
-            <Li onClick={() => SearchHandler()}>
+            <Li onClick={() => SearchHandler("계곡")}>
               <FontAwesomeIcon {...iconAttr("faCampground")} />
               계곡
             </Li>
@@ -47,7 +75,7 @@ const Sidebar = () => {
         바다
         {isOpen.sea && (
           <>
-            <Li onClick={() => SearchHandler()}>
+            <Li onClick={() => SearchHandler("해수욕장")}>
               <FontAwesomeIcon {...iconAttr("faUmbrellaBeach")} />
               해수욕장
             </Li>
@@ -59,11 +87,11 @@ const Sidebar = () => {
         숙박
         {isOpen.hotel && (
           <>
-            <Li onClick={() => SearchHandler()}>
+            <Li onClick={() => SearchHandler("호텔")}>
               <FontAwesomeIcon {...iconAttr("faHotel")} />
               호텔
             </Li>
-            <Li onClick={() => SearchHandler()}>
+            <Li onClick={() => SearchHandler("모텔")}>
               <FontAwesomeIcon {...iconAttr("faHotel")} />
               모텔
             </Li>
@@ -75,24 +103,23 @@ const Sidebar = () => {
         편의시설
         {isOpen.Store && (
           <>
-            <Li onClick={() => SearchHandler()}>
+            <Li onClick={() => SearchHandler("음식점")}>
               <FontAwesomeIcon {...iconAttr("faSpoon")} />
               음식점
             </Li>
-            <Li onClick={() => SearchHandler()}>
+            <Li onClick={() => SearchHandler("카페")}>
               <FontAwesomeIcon {...iconAttr("faMugSaucer")} />
               카페
             </Li>
-            <Li onClick={() => SearchHandler()}>
+            <Li onClick={() => SearchHandler("편의점")}>
               <FontAwesomeIcon {...iconAttr("faBasketShopping")} />
-              <FontAwesomeIcon size="lg" {...iconAttr("faBarcode")} />
               편의점
             </Li>
-            <Li onClick={() => SearchHandler()}>
+            <Li onClick={() => SearchHandler("마트")}>
               <FontAwesomeIcon {...iconAttr("faCartShopping")} />
               마트
             </Li>
-            <Li onClick={() => SearchHandler()}>
+            <Li onClick={() => SearchHandler("주차장")}>
               <FontAwesomeIcon {...iconAttr("faSquareParking")} />
               주차장
             </Li>

@@ -53,6 +53,7 @@ export const Detail = () => {
     };
     commentMutation.mutate(newComment);
     setComment("");
+    window.scrollTo({ top: 800, behavior: "smooth" });
   };
   const commentMutation = useMutation(addComment, {
     onSuccess: () => {
@@ -110,7 +111,7 @@ export const Detail = () => {
       setLoading(true);
       setVisibleComments(newVisibleComments);
     }
-  }, 500);
+  }, 50);
   useEffect(() => {
     // 스크롤 이벤트 리스너를 추가합니다.
     window.addEventListener("scroll", handleScroll);
@@ -118,11 +119,23 @@ export const Detail = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [visibleComments]);
+  }, [handleScroll]);
 
   // Top 사이드바
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const displayWatch = item => {
+    const date = Date.now();
+    const nowDate = new Date(date);
+    const commentDate = new Date(item.date);
+    const milliDate = Math.abs(nowDate - commentDate);
+    const diffDays = Math.ceil(milliDate / (1000 * 60 * 60 * 24)); //
+    const timeDiff = nowDate - commentDate;
+    const hours = Math.floor(timeDiff / (1000 * 60 * 60)); //
+    const minutes = Math.floor((timeDiff / (1000 * 60)) % 60); //
+    return { hours, diffDays, minutes };
   };
 
   return (
@@ -147,7 +160,7 @@ export const Detail = () => {
             size={"small"}
             $bgcolor={"white"}
             type={"text"}
-            value={loginUserData?.nickname}
+            value={loginUserData?.nickname || ""}
             disabled={true}
           />
           <Input
@@ -155,7 +168,7 @@ export const Detail = () => {
             $bgcolor={"white"}
             type={"text"}
             style={{ margin: "0 20px 0 20px" }}
-            value={comment}
+            value={comment || ""}
             onChange={commentChangeHandler}
             placeholder={"내용을 입력하세요."}
           />
@@ -166,14 +179,7 @@ export const Detail = () => {
       </CommentsLeaveWrap>
       <CommentsWrap>
         {commentsData?.slice(0, visibleComments).map(item => {
-          const date = Date.now();
-          const nowDate = new Date(date);
-          const commentDate = new Date(item.date);
-          const milliDate = Math.abs(nowDate - commentDate);
-          const diffDays = Math.ceil(milliDate / (1000 * 60 * 60 * 24));
-          const timeDiff = nowDate - commentDate;
-          const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-          const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+          const { hours, diffDays, minutes } = displayWatch(item);
           return (
             <Flex key={item.id}>
               <ProfileImg src={item.profileImg} />
@@ -240,7 +246,7 @@ const Container = styled.div`
 const Wrap = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 60px;
+  padding-top: 30px;
 `;
 const Flex = styled.div`
   display: flex;

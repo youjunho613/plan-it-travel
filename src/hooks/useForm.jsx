@@ -1,11 +1,7 @@
 import { useCallback, useState } from "react";
 import _ from "lodash";
 
-// TODO useForm 설명
 const useForm = (initialState, validation, submitAction) => {
-  console.log("initialState", initialState);
-  console.log("validation", validation);
-  console.log("submitAction", submitAction);
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState({});
 

@@ -6,15 +6,18 @@ import { openModal } from "redux/modules/modal";
 import * as Styled from "./Header.style";
 import { Button } from "components/common";
 import { logOut } from "components/auth";
+import logo from "assets/logo.png";
 
 const Header = () => {
   const { LoginIsOpen, SignupIsOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
-
+  console.log("현재 스크롤", document.documentElement.scrollTop);
   return (
     <Styled.NavContainer>
       <Styled.Logospan>
+        {/* TODO 로고이미지 변경 */}
+        {/* <Styled.Img scr={logo} alt={"plan-it-travel"} /> */}
         <h1>Logo</h1>
         <p>Home</p>
         <p>Mypage</p>
