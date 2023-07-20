@@ -1,91 +1,104 @@
 import { useState, useRef } from "react";
 import { styled } from "styled-components";
 import { Button, Text, Input } from "components/common";
-import { SURVEY_TEXT } from "../surveyData/surveyData";
+import { SURVEY_TEXT, SURVEY_RESULT } from "../surveyData/surveyData";
+import { useNavigate } from "react-router";
+
+const initialValue = {
+  1: false,
+  2: false,
+  3: false,
+  4: false,
+  5: false,
+  6: false,
+  7: false,
+  8: false
+};
 
 function SurveyTemplate() {
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  const [inputValues, setInputValues] = useState(); // 스테이트 배열 / 넥 = 푸쉬 프리브 = 팝
-  const [isCheck, setIsCheck] = useState(false);
+  const [inputValues, setInputValues] = useState();
+  const [selectValues, setSelectValues] = useState([]);
+  const [check, setCheck] = useState(initialValue);
 
-  const moveStep = num => {
+  const moveStep = (event, num) => {
+    event.preventDefault();
+    // TODO alert 수정 필요
+    if (!inputValues) return alert("누르고 다음으로 가셔야죠");
+    setSelectValues([...selectValues, inputValues]);
     setStep(step + num);
+    setCheck(initialValue);
   };
 
-  // FIXME
-  // test 주석
-  const onChange = event => {
-    setInputValues({ ...inputValues, [event.target.name]: event.target.value });
-    // event.target.checked = false;
+  const onChange = (event, id) => {
+    setCheck({ id: true });
+    setInputValues(event.target.value);
   };
 
-  const onSubmit = () => {};
+  const onSubmit = event => {
+    event.preventDefault();
+
+    const randomNumber = () => {
+      if (Math.random() < 0.5) {
+        return 1;
+      } else {
+        return 2;
+      }
+    };
+    selectValues.push(randomNumber());
+    const selectId = selectValues.join("");
+    const filterd = SURVEY_RESULT.filter(item => item.id === Number(selectId));
+    navigate(`/detail/${filterd[0].kakaoId}`);
+  };
 
   const buttonAttr = $bgcolor => ({ $bgcolor, size: "small", fontSize: "10px" });
 
   return (
     <Container>
       <SurveyContainer>
-        <Progress value={step} max="4"></Progress>
+        <Progress value={step} max="3"></Progress>
         <Text fontSize={"25px"}>{SURVEY_TEXT[step].question}</Text>
         <Form onSubmit={onSubmit}>
-          {SURVEY_TEXT[step].option.map(item => {
-            console.log(item.result);
+          {SURVEY_TEXT[step].option?.map(item => {
             return (
-              <Label key={item.id} htmlfor={`answer${item.id}`}>
+              <Label key={item.id} htmlFor={`answer${item.id}`}>
                 <Input
-                  // checked={item.result === inputValues[step]}
+                  checked={check[item.id]}
                   type="radio"
                   id={`answer${item.id}`}
                   name={`question${step}`}
-                  onChange={onChange}
-                  value={item.result}
+                  onChange={event => onChange(event, item.id)}
+                  value={item.id}
                 />
                 {item.text}
               </Label>
             );
           })}
+
+          <ButtonBox>
+         
+            {step <= 2 && (
+              <Button
+                type={"reset"}
+                {...buttonAttr("theme3")}
+                onClick={event => moveStep(event, +1)}
+              >
+                Next
+              </Button>
+            )}
+            {step >= 3 && (
+              <Button {...buttonAttr("theme3")} onSubmit={onSubmit}>
+                Submit
+              </Button>
+            )}
+          </ButtonBox>
         </Form>
 
-        <ButtonBox>
-          {step >= 1 && (
-            <Button {...buttonAttr("theme2")} color={"black"} onClick={() => moveStep(-1)}>
-              Prev
-            </Button>
-          )}
-          {step <= 3 && (
-            <Button {...buttonAttr("theme3")} onClick={() => moveStep(+1)}>
-              Next
-            </Button>
-          )}
-
-          {step >= 4 && <Button {...buttonAttr("theme3")}>Submit</Button>}
-        </ButtonBox>
-        {/* <Text
-          fontSize={"20px"}
-        >{`저는 첫번째 질문에 대한 ${inputValues.question0}답변입니다`}</Text>
-        <br />
-        <Text
-          fontSize={"20px"}
-        >{`저는 두번째 질문에 대한 ${inputValues.question1}답변입니다`}</Text>
-        <br />
-        <Text
-          fontSize={"20px"}
-        >{`저는 세번째 질문에 대한 ${inputValues.question2}답변입니다`}</Text>
-        <br />
-        <Text
-          fontSize={"20px"}
-        >{`저는 네번째 질문에 대한 ${inputValues.question3}답변입니다`}</Text>
-        <br />
-        <Text
-          fontSize={"20px"}
-        >{`저는 다섯번째 질문에 대한 ${inputValues.question4}답변입니다`}</Text>
-        <br /> */}
       </SurveyContainer>
     </Container>
   );
 }
-
 export default SurveyTemplate;
 
 const Form = styled.form`
