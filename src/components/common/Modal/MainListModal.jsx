@@ -3,13 +3,14 @@ import { styled } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import logo from "assets/logo.png";
+import sideBarLogo from "assets/sideBarLogo.png";
 import { getDataList } from "redux/modules/detailData";
 import { closeModal } from "redux/modules/modal";
 
 function MainListModal({ setState, state }) {
   const { dataList, pagination } = useSelector(state => state.detailData);
   const dispatch = useDispatch();
+
   const prevPage = () => {
     if (pagination === null) return;
     if (pagination.hasPrevPage) pagination.prevPage();
@@ -47,13 +48,13 @@ function MainListModal({ setState, state }) {
   return (
     <Modaldiv>
       <ImgBox>
-        <Img src={logo} alt={"plan-it-travel"} />
+        <Img src={sideBarLogo} alt={"plan-it-travel"} />
         <XButton onClick={modalCloseHandler}>
           <FontAwesomeIcon icon={faXmark} size="2xl" style={{ color: "#ffffff" }} />
         </XButton>
       </ImgBox>
       <ModalUl>
-        검색 결과: {pagination?.totalCount}건
+        <Result>검색 결과: {pagination?.totalCount}건</Result>
         {dataList?.map(e => (
           <ModalLi key={e.id} onClick={() => showInfoHandler(e)}>
             {e.place_name}
@@ -87,13 +88,13 @@ const Modaldiv = styled.div`
 const ImgBox = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 `;
 
 const XButton = styled.button`
   position: absolute;
   top: 1%;
-  left: 15%;
+  left: 280px;
   background-color: #1f1f22;
   width: 30px;
   height: 50px;
@@ -105,8 +106,6 @@ const XButton = styled.button`
 const Img = styled.img`
   display: inherit;
   align-self: center;
-  width: 150px;
-  margin: 20px;
 `;
 
 const ModalUl = styled.ul`
@@ -115,6 +114,23 @@ const ModalUl = styled.ul`
   flex-direction: column;
   align-items: baseline;
   gap: 10px;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 100%;
+  }
+  &::-webkit-scrollbar-thumb {
+    border: 2px solid #a290e6;
+    background-color: #a290e6;
+  }
+`;
+
+const Result = styled.h1`
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #1f1f22;
+  padding-bottom: 5px;
 `;
 
 const ModalLi = styled.li`

@@ -33,11 +33,10 @@ export const Inner = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 25px;
+        padding: 20px;
         background-color: rgb(31, 31, 34, 1);
         margin-right: auto;
-        width: 14vw;
-        min-width: 200px;
+        width: 280px;
         height: 100%;
         pointer-events: auto;
       `;
