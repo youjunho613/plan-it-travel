@@ -24,9 +24,9 @@ export const Main = () => {
     markers: [],
     info: ""
   });
-  useEffect(()=>{
-    localStorage.removeItem("detailData")
-  },[])
+  useEffect(() => {
+    localStorage.removeItem("detailData");
+  }, []);
   const navigate = useNavigate();
   const [map, setMap] = useState();
 

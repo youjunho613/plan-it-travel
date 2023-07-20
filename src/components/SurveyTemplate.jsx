@@ -61,7 +61,6 @@ function SurveyTemplate() {
 
           {step >= 4 && <Button {...buttonAttr("theme3")}>Submit</Button>}
         </ButtonBox>
-
         {/* <Text
           fontSize={"20px"}
         >{`저는 첫번째 질문에 대한 ${inputValues.question0}답변입니다`}</Text>
