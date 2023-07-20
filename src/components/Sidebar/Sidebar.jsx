@@ -10,7 +10,7 @@ import { openModal } from "redux/modules/modal";
 
 const { kakao } = window;
 
-const Sidebar = ({ state, setState, map, setMap }) => {
+const Sidebar = ({ state, setState, map }) => {
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
 
@@ -32,17 +32,17 @@ const Sidebar = ({ state, setState, map, setMap }) => {
     ps.keywordSearch(keyword, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
         dispatch(getPagination(_pagination));
-        // const bounds = new kakao.maps.LatLngBounds();
+        const bounds = new kakao.maps.LatLngBounds();
         let markers = [];
 
         for (let i = 0; i < data.length; i++) {
           dispatch(getDataList(data));
           const { y, x, place_name, id } = data[i];
           markers.push({ position: { lat: y, lng: x }, content: place_name, id: id });
-          // bounds.extend(new kakao.maps.LatLng(y, x));
+          bounds.extend(new kakao.maps.LatLng(y, x));
         }
         setState({ ...state, markers: markers });
-        // map.setBounds(bounds);
+        map.setBounds(bounds);
         modalOpenHandler("ListIsOpen");
       }
     });

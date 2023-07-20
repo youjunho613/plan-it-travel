@@ -64,10 +64,10 @@ export const Main = () => {
     <Container>
       {ListIsOpen && (
         <Modal type={"main"}>
-          <MainListModal setState={setState} state={state} map={map} />
+          <MainListModal setState={setState} state={state} />
         </Modal>
       )}
-      <Sidebar state={state} setState={setState} setMap={setMap} />
+      <Sidebar state={state} setState={setState} map={map} />
       <MapContainer>
         <form onSubmit={submitSearchValue}>
           <Input
