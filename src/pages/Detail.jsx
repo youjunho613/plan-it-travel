@@ -13,6 +13,7 @@ import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/fre
 import { throttle } from "lodash";
 import { useSelector } from "react-redux";
 import YouTube from "react-youtube";
+import { youtubeApi } from "../api/youtube";
 
 export const Detail = () => {
   const params = useParams();
