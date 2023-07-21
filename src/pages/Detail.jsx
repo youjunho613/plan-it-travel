@@ -11,10 +11,11 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
 import { useSelector } from "react-redux";
-import { youtubeApi } from "../api/youtube";
-import YouTube from "react-youtube";
 import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
 import { useAuth } from "components/auth";
+import markerImg from "assets/marker.png";
+// import { youtubeApi } from "../api/youtube";
+// import YouTube from "react-youtube";
 
 export const Detail = () => {
   const params = useParams();
@@ -24,7 +25,7 @@ export const Detail = () => {
   const [comment, setComment] = useState("");
   const queryClient = useQueryClient();
 
-  const { id, x, y, address_name, place_name, phone } = useSelector(
+  const { x, y, address_name, place_name, phone } = useSelector(
     state => state.detailData
   ).dataList.find(e => e.id === paramsId);
 
@@ -49,7 +50,7 @@ export const Detail = () => {
   // 댓글 작성
   const leaveCommentHandler = event => {
     event.preventDefault();
-    if (!currentUser?.email) return alert("로그인 부탁드립니다.");
+    if (!currentUser?.email) return alert("본 서비스는 로그인 후 이용이 가능합니다.");
     const date = new Date();
     if (comment.length > 300 || comment.length < 1)
       return alert("내용은 1자 이상 300자 이하로 작성해 주세요.");
@@ -122,7 +123,7 @@ export const Detail = () => {
     window.addEventListener("scroll", handleScroll);
     // 컴포넌트가 unmount될 때 스크롤 이벤트 리스너를 제거합니다.
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [visibleComments]);
+  }, [handleScroll]);
 
   // Top 사이드바
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -171,6 +172,7 @@ export const Detail = () => {
   const bookmarkClickHandler = () => {
     const date = Date.now();
     const nowDate = new Date(date).toLocaleString();
+    if (!currentUser?.email) return alert("본 서비스는 로그인 후 이용이 가능합니다.");
     if (bookmarksData) {
       deleteBookmarkMutation.mutate(bookmarksData.id);
     } else {
@@ -213,7 +215,14 @@ export const Detail = () => {
             draggable={draggable}
             zoomable={zoomable}
           >
-            <MapMarker position={position} />
+            <MapMarker
+              position={position}
+              image={{
+                src: markerImg,
+                size: { width: 60, height: 50 },
+                options: { offset: { x: 30, y: 50 } }
+              }}
+            />
           </Map>
 
           <BookmarkSvg
@@ -229,6 +238,7 @@ export const Detail = () => {
           <div>{address_name}</div>
           <div>{phone}</div>
         </MapWrap>
+        
       </Wrap>
       <CommentsForm onSubmit={leaveCommentHandler}>
         <Input
@@ -306,6 +316,14 @@ const BookmarkSvg = styled.svg`
   position: relative;
   top: 43px;
   left: 230px;
+  &:hover {
+    transform: scale(1.2);
+    transition: transform 0.2s ease-in-out;
+  }
+  &:active {
+    transform: scale(0.8);
+    transition: transform 0.2s ease-in-out;
+  }
 `;
 const LargeFont = styled.div`
   font-size: 25px;
