@@ -23,12 +23,12 @@ function SurveyTemplate() {
   const [inputValues, setInputValues] = useState();
   const [selectValues, setSelectValues] = useState([]);
   const [check, setCheck] = useState(initialValue);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const moveStep = (event, num) => {
     event.preventDefault();
-    // TODO alert 수정 필요
-    if (!inputValues) return alert("누르고 다음으로 가셔야죠");
+    if (!inputValues) return alert("보기를 선택해주세요");
+
     setSelectValues([...selectValues, inputValues]);
     setStep(step + num);
     setCheck(initialValue);
@@ -61,6 +61,7 @@ function SurveyTemplate() {
   return (
     <Container>
       <SurveyContainer>
+        <ProgressLevel>{step}/3</ProgressLevel>
         <Progress value={step} max="3"></Progress>
         <Text fontSize={"25px"}>{SURVEY_TEXT[step].question}</Text>
         <Form onSubmit={onSubmit}>
@@ -102,13 +103,24 @@ function SurveyTemplate() {
   );
 }
 export default SurveyTemplate;
+const ProgressLevel = styled.span`
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+`;
+
+const Progress = styled.progress`
+  position: absolute;
+  bottom: 0px;
+
+  width: 100%;
+`;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-
   gap: 5px;
-  margin: 15px;
+  margin: 50px 15px;
 `;
 
 const Label = styled.label`
@@ -147,11 +159,8 @@ const SurveyContainer = styled.div`
   background-color: rgba(255, 255, 255, 0.1);
 `;
 
-const Progress = styled.progress`
+const ButtonBox = styled.div`
   position: absolute;
-  bottom: 0px;
-
-  width: 100%;
+  bottom: 100px;
+  right: 250px;
 `;
-
-const ButtonBox = styled.div``;
