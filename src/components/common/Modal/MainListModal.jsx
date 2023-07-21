@@ -7,7 +7,7 @@ import sideBarLogo from "assets/sideBarLogo.png";
 import { getDataList } from "redux/modules/detailData";
 import { closeModal } from "redux/modules/modal";
 
-export const MainListModal = ({ setState, state }) => {
+export const MainListModal = ({ setState, state, setIsLocation }) => {
   const { dataList, pagination } = useSelector(state => state.detailData);
   const dispatch = useDispatch();
 
@@ -34,6 +34,7 @@ export const MainListModal = ({ setState, state }) => {
         isPanto: false
       }
     });
+    setIsLocation(false);
     dispatch(getDataList([]));
   };
 
