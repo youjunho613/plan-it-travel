@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
-const MyPage = () => {
+export const MyPage = () => {
   return (
     <PageContainer>
       <UserContainer>
@@ -28,8 +28,6 @@ const MyPage = () => {
     </PageContainer>
   );
 };
-
-export default MyPage;
 
 const PageContainer = styled.div`
   display: flex;

@@ -11,10 +11,10 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
 import { useSelector } from "react-redux";
-import { youtubeApi } from "../api/youtube";
-import YouTube from "react-youtube";
+// import { youtubeApi } from "../api/youtube";
+// import YouTube from "react-youtube";
 import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
-import { useAuth } from "components/auth";
+import { useAuth } from "hooks";
 
 export const Detail = () => {
   const params = useParams();
@@ -24,9 +24,14 @@ export const Detail = () => {
   const [comment, setComment] = useState("");
   const queryClient = useQueryClient();
 
-  const { id, x, y, address_name, place_name, phone } = useSelector(
-    state => state.detailData
-  ).dataList.find(e => e.id === paramsId);
+  const {
+    // id,
+    x,
+    y,
+    address_name,
+    place_name,
+    phone
+  } = useSelector(state => state.detailData).dataList.find(e => e.id === paramsId);
 
   // 로그인한 현재 유저 정보 GET
   const { currentUser } = useAuth();
@@ -36,7 +41,7 @@ export const Detail = () => {
     .reverse();
 
   const bookmarksData = useQuery("bookmarks", getBookmarks).data?.find(
-    e => e.userEmail === currentUser.email && e.kakaoId === paramsId
+    e => e.userEmail === currentUser?.email && e.kakaoId === paramsId
   );
 
   const position = { lat: y, lng: x };
@@ -122,7 +127,7 @@ export const Detail = () => {
     window.addEventListener("scroll", handleScroll);
     // 컴포넌트가 unmount될 때 스크롤 이벤트 리스너를 제거합니다.
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [visibleComments]);
+  }, [handleScroll]);
 
   // Top 사이드바
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });

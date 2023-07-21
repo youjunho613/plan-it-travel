@@ -7,7 +7,7 @@ import sideBarLogo from "assets/sideBarLogo.png";
 import { useDispatch } from "react-redux";
 import { getDataList, getPagination } from "redux/modules/detailData";
 import { openModal } from "redux/modules/modal";
-import { useAuth } from "components/auth";
+import { useAuth } from "hooks";
 
 const { kakao } = window;
 

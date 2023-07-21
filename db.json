@@ -1,50 +1,33 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "email": "kimjinsu0210@naver.com",
-      "nickname": "김진수",
-      "profileImg": "defaultImg.png",
-      "regData": "2023-07-18 12:08"
-    }
-  ],
   "comments": [
     {
-      "id": "d9583bcb-9d8e-bbd9-866a-c05a99b19c5c",
+      "id": "942f95d3-99bf-848a-ab97-23afc970a7d8",
       "postId": "27548967",
       "comment": "123",
-      "date": "2023-07-20T13:19:32.534Z",
+      "date": "2023-07-21T00:31:11.798Z",
       "email": "123@naver.com",
-      "displayName": "유준호",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
+      "displayName": "디폴트 이미지 테스트",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
     },
     {
-      "id": "8b536529-4ae0-7b2f-2020-4204d56a3606",
+      "id": "9c52d321-d0be-cb07-c4f4-f1809bdb82f2",
       "postId": "27548967",
       "comment": "123",
-      "date": "2023-07-20T13:19:34.083Z",
+      "date": "2023-07-21T00:31:13.665Z",
       "email": "123@naver.com",
-      "displayName": "유준호",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
-    },
-    {
-      "id": "1afd596f-6c16-dab4-f31c-26247d94dc78",
-      "postId": "27548967",
-      "comment": "123",
-      "date": "2023-07-20T13:19:35.531Z",
-      "email": "123@naver.com",
-      "displayName": "유준호",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
-    },
-    {
-      "id": "34bcaf39-b104-7a97-959c-49d6ef67a175",
-      "postId": "27548967",
-      "comment": "123",
-      "date": "2023-07-20T13:19:36.319Z",
-      "email": "123@naver.com",
-      "displayName": "유준호",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
+      "displayName": "디폴트 이미지 테스트",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
     }
   ],
-  "bookmarks": []
+  "bookmarks": [
+    {
+      "id": "219511e1-995d-fb72-caad-1f9c5524dbdb",
+      "kakaoId": "27548967",
+      "userEmail": "123@naver.com",
+      "date": "2023. 7. 21. 오전 9:32:35",
+      "place_name": "엉덩물계곡",
+      "address_name": "제주특별자치도 서귀포시 색달동 3384-4",
+      "phone": ""
+    }
+  ]
 }

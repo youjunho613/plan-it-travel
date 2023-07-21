@@ -51,3 +51,11 @@ export const Inner = styled.div`
     }
   }}
 `;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 35px;
+`;
