@@ -14,8 +14,8 @@ import { useSelector } from "react-redux";
 import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
 import { useAuth } from "components/auth";
 import markerImg from "assets/marker.png";
-// import { youtubeApi } from "../api/youtube";
-// import YouTube from "react-youtube";
+import { youtubeApi } from "../api/youtube";
+import YouTube from "react-youtube";
 
 export const Detail = () => {
   const params = useParams();
@@ -37,7 +37,7 @@ export const Detail = () => {
     .reverse();
 
   const bookmarksData = useQuery("bookmarks", getBookmarks).data?.find(
-    e => e.userEmail === currentUser.email && e.kakaoId === paramsId
+    e => e.userEmail === currentUser?.email && e.kakaoId === paramsId
   );
 
   const position = { lat: y, lng: x };
@@ -45,6 +45,7 @@ export const Detail = () => {
   useEffect(() => {
     setZoomable(false);
     setDraggable(false);
+    onYoutube();
   }, []);
 
   // 댓글 작성
@@ -141,32 +142,35 @@ export const Detail = () => {
     return { hours, diffDays, minutes };
   };
 
-  // //유튜브
-  // const [youtubeRes, setYoutubeRes] = useState("");
+  //유튜브
+  const [youtubeRes, setYoutubeRes] = useState("");
 
-  // const onYoutube = async () => {
-  //   try {
-  //     const response = await youtubeApi.get("/videos", {
-  //       params: {
-  //         part: "snippet",
-  //         chart: "mostPopular",
-  //         maxResults: 5,
-  //         videoCategoryId: 19,
-  //         regionCode: "KR"
-  //         // q: "소녀시대"
-  //         // videoCategoryId: 2,
-  //         // id: "ZaB4MmTOZRs"
-  //       }
-  //     });
-  //     console.log("response", response.data.items);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // //유튜브
-  // useEffect(() => {
-  //   onYoutube();
-  // }, []);
+  const playList = {
+    서울: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa",
+    제주: "PLnqE8gRs0CvnsCkvdbSDffqNCUnWPkiO4",
+    common: "PLnqE8gRs0CvlBJ_EYU3DFFUSaKdTultEj"
+  };
+
+  const firstAaddress = address_name.split(" ", 1).join();
+
+  const onYoutube = async () => {
+    const selectedPlayList = playList[firstAaddress] ? playList[firstAaddress] : playList["common"];
+    try {
+      const response = await youtubeApi.get("/playlistItems", {
+        params: {
+          part: "snippet",
+          playlistId: `${selectedPlayList}`
+        }
+      });
+
+      const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
+      const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
+
+      setYoutubeRes(selectedViedoId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // 북마크 관련 로직
   const bookmarkClickHandler = () => {
