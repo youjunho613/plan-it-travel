@@ -15,6 +15,7 @@ import { youtubeApi } from "../api/youtube";
 import YouTube from "react-youtube";
 import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
 import { useAuth } from "components/auth";
+import { bookmarks } from "api/bookmarks";
 
 export const Detail = () => {
   const params = useParams();
