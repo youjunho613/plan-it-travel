@@ -7,7 +7,7 @@ import sideBarLogo from "assets/sideBarLogo.png";
 import { getDataList } from "redux/modules/detailData";
 import { closeModal } from "redux/modules/modal";
 
-export const MainListModal = ({ setState, state }) => {
+export const MainListModal = ({ setState, state, setIsLocation }) => {
   const { dataList, pagination } = useSelector(state => state.detailData);
   const dispatch = useDispatch();
 
@@ -26,21 +26,16 @@ export const MainListModal = ({ setState, state }) => {
       ...state,
       searchValue: "",
       markers: [],
-      position: {
-        center: {
-          lat: 37.566826,
-          lng: 126.9786567
-        },
-        isPanto: false
-      }
+      position: { center: { lat: 37.566826, lng: 126.9786567 }, isPanto: false }
     });
+    setIsLocation(false);
     dispatch(getDataList([]));
   };
 
   const showInfoHandler = data => {
     setState({
       ...state,
-      info: { content: data.place_name },
+      info: { id: data.id },
       position: { center: { lat: data.y, lng: data.x }, isPanto: true }
     });
   };

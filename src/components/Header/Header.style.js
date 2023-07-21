@@ -4,16 +4,12 @@ export const Container = styled.div`
   position: sticky;
   top: 0;
   left: 0;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   width: 100%;
   height: 70px;
-
   background-color: transparent;
-
   z-index: 999;
 `;
 
@@ -40,11 +36,11 @@ export const ButtonBox = styled.div`
 
 export const Img = styled.img`
   width: 60px;
-
-  margin: 20px;
+  margin: 0 20px;
 `;
 
 export const ProfileImg = styled.img`
-  width: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 100%;
 `;

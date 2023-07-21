@@ -30,20 +30,14 @@ export const LoginModal = () => {
     <Styled.Form onSubmit={onSubmit}>
       <Text fontSize={"48px"}>Log In</Text>
       <Input {...resister("email")} {...inputAttr("email")} placeholder="email" />
-
       {errors.email ? <Text color={"red"}>{errors.email}</Text> : <Text />}
-
       <Input {...resister("password")} {...inputAttr("password")} placeholder="password" />
-
       {errors.password ? <Text color={"red"}>{errors.password}</Text> : <Text />}
-
       {firebaseError !== "" && <Text color={"red"}>{firebaseError}</Text>}
-
       <div>
         <Button {...buttonAttr("white")} type="button" onClick={modalCloseHandler}>
           닫기
         </Button>
-
         <Button {...buttonAttr("theme1")}>로그인</Button>
       </div>
     </Styled.Form>

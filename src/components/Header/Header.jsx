@@ -1,6 +1,6 @@
 import { Modal, Text, Button, RegisterModal, LoginModal } from "components/common";
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "redux/modules/modal";
+import { openModal } from "redux/modules";
 import logo from "assets/logo.png";
 import * as Styled from "./Header.style";
 import { Link } from "react-router-dom";

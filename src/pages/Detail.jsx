@@ -10,11 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
-import { useSelector } from "react-redux";
-// import { youtubeApi } from "../api/youtube";
-// import YouTube from "react-youtube";
-import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
-import { useAuth } from "hooks";
+import { useSelector, useDispatch } from "react-redux";
+import { useAuth } from "components/auth";
+import markerImg from "assets/marker.png";
+import { youtubeApi } from "../api/youtube";
+import YouTube from "react-youtube";
+import { Bookmark } from "components/Bookmark/Bookmark";
+import { Modal } from "components/common";
+import { openModal, closeModal } from "redux/modules";
 
 export const Detail = () => {
   const params = useParams();
@@ -24,14 +27,9 @@ export const Detail = () => {
   const [comment, setComment] = useState("");
   const queryClient = useQueryClient();
 
-  const {
-    // id,
-    x,
-    y,
-    address_name,
-    place_name,
-    phone
-  } = useSelector(state => state.detailData).dataList.find(e => e.id === paramsId);
+  const { x, y, address_name, place_name, phone } = useSelector(
+    state => state.detailData
+  ).dataList.find(e => e.id === paramsId);
 
   // 로그인한 현재 유저 정보 GET
   const { currentUser } = useAuth();
@@ -40,21 +38,18 @@ export const Detail = () => {
     .data?.filter(e => e.postId === paramsId)
     .reverse();
 
-  const bookmarksData = useQuery("bookmarks", getBookmarks).data?.find(
-    e => e.userEmail === currentUser?.email && e.kakaoId === paramsId
-  );
-
   const position = { lat: y, lng: x };
 
   useEffect(() => {
     setZoomable(false);
     setDraggable(false);
+    // onYoutube();
   }, []);
 
   // 댓글 작성
   const leaveCommentHandler = event => {
     event.preventDefault();
-    if (!currentUser?.email) return alert("로그인 부탁드립니다.");
+    if (!currentUser?.email) return alert("본 서비스는 로그인 후 이용이 가능합니다.");
     const date = new Date();
     if (comment.length > 300 || comment.length < 1)
       return alert("내용은 1자 이상 300자 이하로 작성해 주세요.");
@@ -145,67 +140,62 @@ export const Detail = () => {
     return { hours, diffDays, minutes };
   };
 
-  // //유튜브
+  //유튜브
+  const { isYoutubeOpen } = useSelector(state => state.modal);
+  const dispatch = useDispatch();
+  // const modalOpenHandler = target => dispatch(openModal(target));
+  // modalOpenHandler("ListIsOpen");
+  // dispatch(closeModal("ListIsOpen"));
   // const [youtubeRes, setYoutubeRes] = useState("");
 
+  // const playList = {
+  //   서울: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa",
+  //   제주: "PLnqE8gRs0CvnsCkvdbSDffqNCUnWPkiO4",
+  //   common: "PLnqE8gRs0CvlBJ_EYU3DFFUSaKdTultEj"
+  // };
+
+  // const firstAaddress = address_name.split(" ", 1).join();
+
   // const onYoutube = async () => {
+  //   const selectedPlayList = playList[firstAaddress] ? playList[firstAaddress] : playList["common"];
   //   try {
-  //     const response = await youtubeApi.get("/videos", {
+  //     const response = await youtubeApi.get("/playlistItems", {
   //       params: {
   //         part: "snippet",
-  //         chart: "mostPopular",
-  //         maxResults: 5,
-  //         videoCategoryId: 19,
-  //         regionCode: "KR"
-  //         // q: "소녀시대"
-  //         // videoCategoryId: 2,
-  //         // id: "ZaB4MmTOZRs"
+  //         playlistId: `${selectedPlayList}`
   //       }
   //     });
-  //     console.log("response", response.data.items);
+
+  //     const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
+  //     const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
+
+  //     setYoutubeRes(selectedViedoId);
   //   } catch (error) {
   //     console.log(error);
   //   }
   // };
-  // //유튜브
-  // useEffect(() => {
-  //   onYoutube();
-  // }, []);
-
-  // 북마크 관련 로직
-  const bookmarkClickHandler = () => {
-    const date = Date.now();
-    const nowDate = new Date(date).toLocaleString();
-    if (bookmarksData) {
-      deleteBookmarkMutation.mutate(bookmarksData.id);
-    } else {
-      const bookmark = {
-        id: uuid(),
-        kakaoId: paramsId,
-        userEmail: currentUser.email,
-        date: nowDate,
-        place_name,
-        address_name,
-        phone
-      };
-      bookmarkMutation.mutate(bookmark);
-    }
-  };
-
-  const bookmarkMutation = useMutation(addBookmark, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("bookmarks");
-    }
-  });
-
-  const deleteBookmarkMutation = useMutation(deleteBookmark, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("bookmarks");
-    }
-  });
 
   return (
     <Container>
+      {isYoutubeOpen && (
+        <Modal type={"youtube"} closeTarget={"isYoutubeOpen"}>
+          <YouTube
+            videoId={"EtzvOe1q7gs"}
+            opts={{
+              width: "800",
+              height: "500",
+              playerVars: {
+                autoplay: 1,
+                rel: 0,
+                modestbranding: 1
+              }
+            }}
+            onEnd={e => {
+              e.target.stopVideo(0);
+            }}
+          ></YouTube>
+        </Modal>
+      )}
       <Wrap>
         <MapWrap>
           <Map // 지도를 표시할 Container
@@ -218,18 +208,28 @@ export const Detail = () => {
             draggable={draggable}
             zoomable={zoomable}
           >
-            <MapMarker position={position} />
+            <MapMarker
+              position={position}
+              image={{
+                src: markerImg,
+                size: { width: 60, height: 50 },
+                options: { offset: { x: 30, y: 50 } }
+              }}
+            />
           </Map>
-
-          <BookmarkSvg
+          <YoutubeSvg
             xmlns="http://www.w3.org/2000/svg"
             height="2em"
-            viewBox="0 0 384 512"
-            onClick={bookmarkClickHandler}
-            fill={bookmarksData}
+            viewBox="0 0 576 512"
+            fill="purple"
+            onClick={() => dispatch(openModal("isYoutubeOpen"))}
           >
-            <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" />
-          </BookmarkSvg>
+            <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" />
+          </YoutubeSvg>
+
+          {/* 북마크 컴포넌트 */}
+          <Bookmark kakaoId={paramsId} top={43} left={230} height={"30px"} />
+
           <LargeFont>{place_name}</LargeFont>
           <div>{address_name}</div>
           <div>{phone}</div>
@@ -305,13 +305,6 @@ export const Detail = () => {
   );
 };
 
-const BookmarkSvg = styled.svg`
-  cursor: pointer;
-  fill: ${props => (props.fill ? props.theme.colors.theme1 : props.theme.colors.white)};
-  position: relative;
-  top: 43px;
-  left: 230px;
-`;
 const LargeFont = styled.div`
   font-size: 25px;
   font-weight: 700;
@@ -333,6 +326,7 @@ const MapWrap = styled.div`
   gap: 10px;
   line-break: anywhere;
   border-radius: 15px;
+  position: relative;
 `;
 
 const Wrap = styled.div`
@@ -418,4 +412,12 @@ const SideBar = styled(CommentsWrap)`
   position: fixed;
   right: 20px;
   bottom: 20px;
+`;
+
+const YoutubeSvg = styled.svg`
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
 `;

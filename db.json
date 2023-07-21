@@ -28,6 +28,42 @@
       "place_name": "엉덩물계곡",
       "address_name": "제주특별자치도 서귀포시 색달동 3384-4",
       "phone": ""
+    },
+    {
+      "id": "56bdab48-ce3e-4a60-b8d7-799ab3f5708c",
+      "kakaoId": "11842140",
+      "userEmail": "kimjinsu0210@naver.com",
+      "date": "2023. 7. 21. 오후 1:29:42",
+      "place_name": "용운국제수영장",
+      "address_name": "대전 동구 용운동 301-1",
+      "phone": "042-280-1000"
+    },
+    {
+      "id": "efb56dac-a537-3bb2-10ec-88614125ce91",
+      "kakaoId": "1699946487",
+      "userEmail": "kimjinsu0210@naver.com",
+      "date": "2023. 7. 21. 오후 2:21:02",
+      "place_name": "서울YMCA 수영장",
+      "address_name": "서울 종로구 종로2가 9",
+      "phone": "02-735-4612"
+    },
+    {
+      "id": "b49af051-ba0e-204a-f62b-8bfea1c3d832",
+      "kakaoId": "17575130",
+      "userEmail": "kimjinsu0210@naver.com",
+      "date": "2023. 7. 21. 오후 2:21:10",
+      "place_name": "문학박태환수영장",
+      "address_name": "인천 미추홀구 문학동 515",
+      "phone": "032-715-4224"
+    },
+    {
+      "id": "7f1d2da2-8812-455f-979f-88f94ae8d03e",
+      "kakaoId": "933133252",
+      "userEmail": "kimjinsu0210@naver.com",
+      "date": "2023. 7. 21. 오후 2:21:15",
+      "place_name": "장흥한옥수영장",
+      "address_name": "경기 양주시 장흥면 석현리 352-2",
+      "phone": "031-829-2288"
     }
   ]
 }

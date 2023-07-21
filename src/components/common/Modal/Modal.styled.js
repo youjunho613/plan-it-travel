@@ -18,6 +18,10 @@ export const Outer = styled.div`
         background-color: transparent;
         pointer-events: none;
       `;
+    } else if (type === "youtube") {
+      return css`
+        background-color: rgba(0, 0, 0, 0.5);
+      `;
     } else {
       return css`
         background-color: rgba(0, 0, 0, 0.3);
@@ -39,6 +43,13 @@ export const Inner = styled.div`
         width: 280px;
         height: 100%;
         pointer-events: auto;
+      `;
+    } else if (type === "youtube") {
+      return css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
       `;
     } else {
       return css`

@@ -15,6 +15,10 @@ export const Button = styled.button`
     color: ${props.theme.colors[props.color]};
     font-size: ${SIZE[props.size]?.fontSize};
     font-weight: ${props?.fontWeight};
-    /* transition: 500ms; */
+
+    transition: scale 0.3s;
+    &:hover {
+      scale: 1.1;
+    }
   `}
 `;
