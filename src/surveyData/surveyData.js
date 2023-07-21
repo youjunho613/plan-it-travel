@@ -37,7 +37,7 @@ export const SURVEY_TEXT = [
 export const SURVEY_RESULT = [
   // 수도권
   { id: 1111, kakaoId: 11082086, name: "남산골 한옥마을" },
-  { id: 1112, kakaoId: 1111, name: "인사동" },
+  { id: 1112, kakaoId: 1111, name: "인사동문화거리" },
   { id: 1121, kakaoId: 1111, name: "경복궁" },
   { id: 1122, kakaoId: 1111, name: "인천대공원" },
   { id: 2111, kakaoId: 1111, name: "소야도" },

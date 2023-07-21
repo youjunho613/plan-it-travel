@@ -405,5 +405,15 @@
       "profileImg": "defaultImg.png",
       "date": "2023-07-20T03:52:16.489Z"
     }
+  ],
+  "bookmarks": [
+    {
+      "id": "고유id",
+      "kakaoId": "카카오 지도 id",
+      "userEmail": "김진수",
+      "date": "2023-07-18 12:08",
+      "place_name": "에버랜드",
+      "address_name": "주소"
+    }
   ]
 }
