@@ -238,7 +238,6 @@ export const Detail = () => {
           <div>{address_name}</div>
           <div>{phone}</div>
         </MapWrap>
-        
       </Wrap>
       <CommentsForm onSubmit={leaveCommentHandler}>
         <Input

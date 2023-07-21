@@ -12,16 +12,68 @@ const MyPage = () => {
 
       <BookContainer>
         <BookBiv>
-          <div>
-            <svg fill="white" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
-              <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
-            </svg>
-            <FontAwesomeIcon icon={faBookmark} />
-          </div>
-
           <BookTitle>
-            <h1>ㅁㅇㅁㅇㅁㄴㅇㅁ </h1>
-            <p> 주소: adasdadsda</p>
+            <PlaceName>
+              <PinMarker>
+                <svg
+                  fill="white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="0.8em"
+                  viewBox="0 0 384 512"
+                >
+                  <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
+                </svg>
+              </PinMarker>
+              에버랜드
+              <BookMarker>
+                <FontAwesomeIcon icon={faBookmark} />
+              </BookMarker>
+            </PlaceName>
+            <Adress>경기도 용인시 처인구 포곡읍 에버랜드로 199</Adress>
+          </BookTitle>
+        </BookBiv>
+
+        <BookBiv>
+          <BookTitle>
+            <PlaceName>
+              <PinMarker>
+                <svg
+                  fill="white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="0.8em"
+                  viewBox="0 0 384 512"
+                >
+                  <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
+                </svg>
+              </PinMarker>
+              에버랜드
+              <BookMarker>
+                <FontAwesomeIcon icon={faBookmark} />
+              </BookMarker>
+            </PlaceName>
+            <Adress>경기도 용인시 처인구 포곡읍 에버랜드로 199</Adress>
+          </BookTitle>
+        </BookBiv>
+
+        <BookBiv>
+          <BookTitle>
+            <PlaceName>
+              <PinMarker>
+                <svg
+                  fill="white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="0.8em"
+                  viewBox="0 0 384 512"
+                >
+                  <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
+                </svg>
+              </PinMarker>
+              에버랜드
+              <BookMarker>
+                <FontAwesomeIcon icon={faBookmark} />
+              </BookMarker>
+            </PlaceName>
+            <Adress>경기도 용인시 처인구 포곡읍 에버랜드로 199</Adress>
           </BookTitle>
         </BookBiv>
       </BookContainer>
@@ -30,6 +82,21 @@ const MyPage = () => {
 };
 
 export default MyPage;
+const Adress = styled.p``;
+
+const PinMarker = styled.span`
+  margin: 5px;
+`;
+
+const PlaceName = styled.h1`
+  font-size: 19px;
+`;
+
+const BookMarker = styled.div`
+  position: relative;
+  left: 320px;
+  bottom: 30px;
+`;
 
 const PageContainer = styled.div`
   display: flex;
@@ -37,7 +104,6 @@ const PageContainer = styled.div`
   align-items: center;
   flex-direction: column;
   padding-top: 100px;
-  /* background-image: url("https://rare-gallery.com/uploads/posts/962823-drawing-colorful-artwork-space-space-art.png"); */
 `;
 
 const UserContainer = styled.div`
@@ -60,11 +126,15 @@ const BookContainer = styled.div`
   flex-wrap: wrap;
   gap: 40px;
   justify-content: center;
+  width: 1400px;
 `;
 const BookBiv = styled.div`
+  display: flex;
+  flex-direction: column;
+
   border: 1px solid white;
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 100px;
   padding: 20px;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -73,5 +143,8 @@ const BookBiv = styled.div`
 `;
 
 const BookTitle = styled.div`
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;

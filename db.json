@@ -226,5 +226,14 @@
       "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
     }
   ],
-  "bookmarks": []
+  "bookmarks": [
+    {
+      "id": "고유id",
+      "kakaoId": "카카오 지도 id",
+      "userEmail": "김진수",
+      "date": "2023-07-18 12:08",
+      "place_name": "에버랜드",
+      "address_name": "주소"
+    }
+  ]
 }

@@ -762,4 +762,3 @@ export const SURVEY_RESULT = [
     y: "33.2459037788334"
   }
 ];
-
