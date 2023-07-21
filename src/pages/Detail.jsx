@@ -11,13 +11,13 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
 import { useAuth } from "components/auth";
 import markerImg from "assets/marker.png";
 import { youtubeApi } from "../api/youtube";
-import YouTube from "react-youtube";
+import { Bookmark } from "components/Bookmark/Bookmark";
 import { Modal } from "components/common";
 import { openModal, closeModal } from "redux/modules/modal";
+import YouTube from "react-youtube";
 
 export const Detail = () => {
   const params = useParams();
@@ -37,10 +37,6 @@ export const Detail = () => {
   const commentsData = useQuery("comments", getComments)
     .data?.filter(e => e.postId === paramsId)
     .reverse();
-
-  const bookmarksData = useQuery("bookmarks", getBookmarks).data?.find(
-    e => e.userEmail === currentUser?.email && e.kakaoId === paramsId
-  );
 
   const position = { lat: y, lng: x };
 
@@ -179,45 +175,12 @@ export const Detail = () => {
   //   }
   // };
 
-  // 북마크 관련 로직
-  const bookmarkClickHandler = () => {
-    const date = Date.now();
-    const nowDate = new Date(date).toLocaleString();
-    if (!currentUser?.email) return alert("본 서비스는 로그인 후 이용이 가능합니다.");
-    if (bookmarksData) {
-      deleteBookmarkMutation.mutate(bookmarksData.id);
-    } else {
-      const bookmark = {
-        id: uuid(),
-        kakaoId: paramsId,
-        userEmail: currentUser.email,
-        date: nowDate,
-        place_name,
-        address_name,
-        phone
-      };
-      bookmarkMutation.mutate(bookmark);
-    }
-  };
-
-  const bookmarkMutation = useMutation(addBookmark, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("bookmarks");
-    }
-  });
-
-  const deleteBookmarkMutation = useMutation(deleteBookmark, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("bookmarks");
-    }
-  });
-
   return (
     <Container>
       {isYoutubeOpen && (
-        <Modal closeTarget={"isYoutubeOpen"}>
+        <Modal type={"youtube"} closeTarget={"isYoutubeOpen"}>
           <YouTube
-            videoId={"tcDrZlG4FZk"}
+            videoId={"EtzvOe1q7gs"}
             opts={{
               width: "800",
               height: "500",
@@ -254,16 +217,6 @@ export const Detail = () => {
               }}
             />
           </Map>
-
-          <BookmarkSvg
-            xmlns="http://www.w3.org/2000/svg"
-            height="2em"
-            viewBox="0 0 384 512"
-            onClick={bookmarkClickHandler}
-            fill={bookmarksData}
-          >
-            <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" />
-          </BookmarkSvg>
           <YoutubeSvg
             xmlns="http://www.w3.org/2000/svg"
             height="2em"
@@ -273,6 +226,10 @@ export const Detail = () => {
           >
             <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" />
           </YoutubeSvg>
+
+          {/* 북마크 컴포넌트 */}
+          <Bookmark kakaoId={paramsId} top={43} left={230} height={"30px"} />
+
           <LargeFont>{place_name}</LargeFont>
           <div>{address_name}</div>
           <div>{phone}</div>
@@ -348,21 +305,6 @@ export const Detail = () => {
   );
 };
 
-const BookmarkSvg = styled.svg`
-  cursor: pointer;
-  fill: ${props => (props.fill ? props.theme.colors.theme1 : props.theme.colors.white)};
-  position: relative;
-  top: 43px;
-  left: 230px;
-  &:hover {
-    transform: scale(1.2);
-    transition: transform 0.2s ease-in-out;
-  }
-  &:active {
-    transform: scale(0.8);
-    transition: transform 0.2s ease-in-out;
-  }
-`;
 const LargeFont = styled.div`
   font-size: 25px;
   font-weight: 700;
