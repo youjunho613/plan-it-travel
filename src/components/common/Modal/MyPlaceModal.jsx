@@ -1,42 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import sideBarLogo from "assets/sideBarLogo.png";
-import { getDataList } from "redux/modules/detailData";
 import { closeModal } from "redux/modules/modal";
+import { useQuery } from "react-query";
+import { getUserPost } from "api/userPost";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "server/firebase";
 
-export const MainListModal = ({ setState, state, setIsLocation }) => {
-  const { dataList, pagination } = useSelector(state => state.detailData);
+export const MyPlaceModal = ({ setState, state }) => {
   const dispatch = useDispatch();
+  const [authData, setAuthData] = useState("");
+  const { isLoading, data } = useQuery("userPosts", getUserPost);
 
-  const prevPage = () => {
-    if (pagination === null) return;
-    if (pagination.hasPrevPage) pagination.prevPage();
-  };
-  const NextPage = () => {
-    if (pagination === null) return;
-    if (pagination.hasNextPage) pagination.nextPage();
-  };
+  useEffect(() => {
+    onAuthStateChanged(auth, users => setAuthData(users));
+  }, []);
+
+  if (isLoading) {
+    return;
+  }
+  const myPlaceData = data?.filter(e => e.userId === authData.uid);
+  const markers = [];
+  for (let i = 0; i < myPlaceData?.length; i++) {
+    const { y, x, place_name, id } = data[i];
+    markers.push({ position: { lat: y, lng: x }, content: place_name, id: id });
+  }
 
   const modalCloseHandler = () => {
-    dispatch(closeModal("ListIsOpen"));
+    dispatch(closeModal("MyPlaceIsOpen"));
     setState({
       ...state,
-      searchValue: "",
       markers: [],
       position: { center: { lat: 37.566826, lng: 126.9786567 }, isPanto: false }
     });
-    setIsLocation(false);
-    dispatch(getDataList([]));
   };
 
   const showInfoHandler = data => {
+    console.log(markers);
     setState({
       ...state,
       info: { id: data.id },
-      position: { center: { lat: data.y, lng: data.x }, isPanto: true }
+      position: { center: { lat: data.y, lng: data.x }, isPanto: true },
+      markers: markers
     });
   };
 
@@ -49,25 +57,12 @@ export const MainListModal = ({ setState, state, setIsLocation }) => {
         </XButton>
       </ImgBox>
       <ModalUl>
-        <Result>검색 결과: {pagination?.totalCount}건</Result>
-        {dataList?.map(e => (
+        {myPlaceData?.map(e => (
           <ModalLi key={e.id} onClick={() => showInfoHandler(e)}>
             {e.place_name}
           </ModalLi>
         ))}
       </ModalUl>
-      <MoveBtnBox>
-        <button onClick={prevPage}>
-          <FontAwesomeIcon icon={faChevronLeft} size="lg" style={{ color: "#ffffff" }} />
-        </button>
-        <span>
-          {pagination?.current}...
-          {pagination?.last}
-        </span>
-        <button onClick={NextPage}>
-          <FontAwesomeIcon icon={faChevronRight} size="lg" style={{ color: "#ffffff" }} />
-        </button>
-      </MoveBtnBox>
     </Modaldiv>
   );
 };
@@ -120,14 +115,6 @@ const ModalUl = styled.ul`
   }
 `;
 
-const Result = styled.h1`
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background-color: #1f1f22;
-  padding-bottom: 5px;
-`;
-
 const ModalLi = styled.li`
   padding: 5px 3px;
   width: 100%;
@@ -136,10 +123,4 @@ const ModalLi = styled.li`
     background-color: #a290e6;
     border-radius: 5px;
   }
-`;
-
-const MoveBtnBox = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: auto;
 `;

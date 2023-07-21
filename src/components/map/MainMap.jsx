@@ -32,7 +32,6 @@ export const MainMap = ({
       state.searchValue,
       (data, status, _pagination) => {
         if (status === kakao.maps.services.Status.OK) {
-          console.log("data", data);
           dispatch(getPagination(_pagination));
           const bounds = new kakao.maps.LatLngBounds();
           let markers = [];
@@ -61,7 +60,6 @@ export const MainMap = ({
   const markerClickHandler = id => {
     navigate(`/detail/${id}`);
   };
-  console.log(isLocation);
   return (
     <Styled.MapContainer>
       <form onSubmit={submitSearchValue}>

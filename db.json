@@ -1,16 +1,34 @@
 {
   "comments": [
     {
-      "id": "d4917311-af67-f701-06d3-8990ffe8fef5",
-      "postId": "8465503",
-      "comment": "1",
-      "date": "2023-07-21T03:02:11.110Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FTHTmGQIk3VNRQxXSelqTcwnroQu2?alt=media&token=06e91413-8c68-4407-b9b6-fd552f6caabb"
+      "id": "942f95d3-99bf-848a-ab97-23afc970a7d8",
+      "postId": "27548967",
+      "comment": "123",
+      "date": "2023-07-21T00:31:11.798Z",
+      "email": "123@naver.com",
+      "displayName": "디폴트 이미지 테스트",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
+    },
+    {
+      "id": "9c52d321-d0be-cb07-c4f4-f1809bdb82f2",
+      "postId": "27548967",
+      "comment": "123",
+      "date": "2023-07-21T00:31:13.665Z",
+      "email": "123@naver.com",
+      "displayName": "디폴트 이미지 테스트",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
     }
   ],
   "bookmarks": [
+    {
+      "id": "219511e1-995d-fb72-caad-1f9c5524dbdb",
+      "kakaoId": "27548967",
+      "userEmail": "123@naver.com",
+      "date": "2023. 7. 21. 오전 9:32:35",
+      "place_name": "엉덩물계곡",
+      "address_name": "제주특별자치도 서귀포시 색달동 3384-4",
+      "phone": ""
+    },
     {
       "id": "56bdab48-ce3e-4a60-b8d7-799ab3f5708c",
       "kakaoId": "11842140",

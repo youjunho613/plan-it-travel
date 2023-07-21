@@ -1,6 +1,6 @@
 import React from "react";
 import * as Styled from "./Bookmark.style";
-import { useAuth } from "components/auth";
+import { useAuth } from "hooks";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
@@ -10,14 +10,13 @@ export const Bookmark = ({ kakaoId, top, left, height }) => {
   const queryClient = useQueryClient();
   const { currentUser } = useAuth();
   const detailData = useSelector(state => state.detailData).dataList?.find(e => e.id === kakaoId);
-  console.log("detailData", detailData);
   const bookmarksData = useQuery("bookmarks", getBookmarks).data?.find(
     e => e.userEmail === currentUser?.email && e.kakaoId === kakaoId
   );
   const bookmarkClickHandler = () => {
+    if (!currentUser?.email) return alert("본 서비스는 로그인 후 이용이 가능합니다.");
     const date = Date.now();
     const nowDate = new Date(date).toLocaleString();
-    if (!currentUser?.email) return alert("본 서비스는 로그인 후 이용이 가능합니다.");
 
     if (bookmarksData) {
       deleteBookmarkMutation.mutate(bookmarksData.id);
@@ -35,15 +34,11 @@ export const Bookmark = ({ kakaoId, top, left, height }) => {
     }
   };
   const bookmarkMutation = useMutation(addBookmark, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("bookmarks");
-    }
+    onSuccess: () => queryClient.invalidateQueries("bookmarks")
   });
 
   const deleteBookmarkMutation = useMutation(deleteBookmark, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("bookmarks");
-    }
+    onSuccess: () => queryClient.invalidateQueries("bookmarks")
   });
 
   return (

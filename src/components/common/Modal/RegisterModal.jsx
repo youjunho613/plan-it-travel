@@ -2,9 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { closeModal } from "redux/modules/modal";
-import useForm from "hooks/useForm";
 import { Button, Input, Text } from "components/common";
-import { useAuth } from "components/auth";
+import { useForm, useAuth } from "hooks";
 
 export const RegisterModal = () => {
   const dispatch = useDispatch();

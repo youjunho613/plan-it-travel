@@ -1,18 +1,18 @@
 import styled from "styled-components";
-import { useAuth } from "components/auth";
+import { useAuth } from "hooks";
 import { getBookmarks } from "api/bookmarks";
 import { useQuery } from "react-query";
 import { Bookmark } from "components/Bookmark";
 import { useNavigate } from "react-router";
-const MyPage = () => {
+
+export const MyPage = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const bookmarksData = useQuery("bookmarks", getBookmarks).data?.filter(
     e => e.userEmail === currentUser?.email
   );
-  const markerClickHandler = id => {
-    navigate(`/detail/${id}`);
-  };
+  const markerClickHandler = id => navigate(`/detail/${id}`);
+
   return (
     <PageContainer>
       <UserContainer>
@@ -55,8 +55,6 @@ const MyPage = () => {
     </PageContainer>
   );
 };
-
-export default MyPage;
 
 const DetailSvg = styled.svg`
   cursor: pointer;

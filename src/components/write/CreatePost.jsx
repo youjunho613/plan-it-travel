@@ -8,13 +8,10 @@ import { postUserPost } from "api/userPost";
 import uuid from "react-uuid";
 import { auth } from "server/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-// import CreatePostMap from "./CreatePostMap";
 
 const { kakao } = window;
 
 const CreatePost = () => {
-  // const userUid = [{x,y,adf,content},{x,y,adf,content},{x,y,adf,content}]
-  // const { x, y, address_name, place_name, content,id:uuid()}
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [currentPosition, setCurrentPosition] = useState({ lat: "", lng: "" });
@@ -111,8 +108,6 @@ const CreatePost = () => {
   return (
     <Styled.Container>
       <Styled.ColumnBox>
-        {/* FIXME 지도를 따로 공용 컴포넌트로 뺄 필요성있음 */}
-        {/* <CreatePostMap /> */}
         <Map
           center={currentPosition}
           style={{ width: "100%", height: "450px" }}

@@ -1,5 +1,4 @@
 import { Button } from "components/common";
-// FIXME pages 폴더 스타일 컴포넌트 나누는지 협의
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 

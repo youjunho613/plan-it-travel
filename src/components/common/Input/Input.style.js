@@ -11,7 +11,7 @@ export const Input = styled.input.attrs(props => ({
 
     background-color: ${THEME[props.$bgcolor]?.backgroundColor};
     border: none;
-    border-radius: ${SIZE[props.size]?.borderRadius};
+    border-radius: 5px;
     outline: none;
 
     color: ${THEME[props.$bgcolor]?.color};
