@@ -10,12 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "components/auth";
 import markerImg from "assets/marker.png";
 import { youtubeApi } from "../api/youtube";
 import { Bookmark } from "components/Bookmark/Bookmark";
-// import YouTube from "react-youtube";
+import { Modal } from "components/common";
+import { openModal, closeModal } from "redux/modules/modal";
+import YouTube from "react-youtube";
 
 export const Detail = () => {
   const params = useParams();
@@ -41,7 +43,7 @@ export const Detail = () => {
   useEffect(() => {
     setZoomable(false);
     setDraggable(false);
-    onYoutube();
+    // onYoutube();
   }, []);
 
   // 댓글 작성
@@ -139,37 +141,61 @@ export const Detail = () => {
   };
 
   //유튜브
-  const [youtubeRes, setYoutubeRes] = useState("");
+  const { isYoutubeOpen } = useSelector(state => state.modal);
+  const dispatch = useDispatch();
+  // const modalOpenHandler = target => dispatch(openModal(target));
+  // modalOpenHandler("ListIsOpen");
+  // dispatch(closeModal("ListIsOpen"));
+  // const [youtubeRes, setYoutubeRes] = useState("");
 
-  const playList = {
-    서울: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa",
-    제주: "PLnqE8gRs0CvnsCkvdbSDffqNCUnWPkiO4",
-    common: "PLnqE8gRs0CvlBJ_EYU3DFFUSaKdTultEj"
-  };
+  // const playList = {
+  //   서울: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa",
+  //   제주: "PLnqE8gRs0CvnsCkvdbSDffqNCUnWPkiO4",
+  //   common: "PLnqE8gRs0CvlBJ_EYU3DFFUSaKdTultEj"
+  // };
 
-  const firstAaddress = address_name.split(" ", 1).join();
+  // const firstAaddress = address_name.split(" ", 1).join();
 
-  const onYoutube = async () => {
-    const selectedPlayList = playList[firstAaddress] ? playList[firstAaddress] : playList["common"];
-    try {
-      const response = await youtubeApi.get("/playlistItems", {
-        params: {
-          part: "snippet",
-          playlistId: `${selectedPlayList}`
-        }
-      });
+  // const onYoutube = async () => {
+  //   const selectedPlayList = playList[firstAaddress] ? playList[firstAaddress] : playList["common"];
+  //   try {
+  //     const response = await youtubeApi.get("/playlistItems", {
+  //       params: {
+  //         part: "snippet",
+  //         playlistId: `${selectedPlayList}`
+  //       }
+  //     });
 
-      const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
-      const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
+  //     const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
+  //     const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
 
-      setYoutubeRes(selectedViedoId);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     setYoutubeRes(selectedViedoId);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <Container>
+      {isYoutubeOpen && (
+        <Modal type={"youtube"} closeTarget={"isYoutubeOpen"}>
+          <YouTube
+            videoId={"EtzvOe1q7gs"}
+            opts={{
+              width: "800",
+              height: "500",
+              playerVars: {
+                autoplay: 1,
+                rel: 0,
+                modestbranding: 1
+              }
+            }}
+            onEnd={e => {
+              e.target.stopVideo(0);
+            }}
+          ></YouTube>
+        </Modal>
+      )}
       <Wrap>
         <MapWrap>
           <Map // 지도를 표시할 Container
@@ -191,8 +217,19 @@ export const Detail = () => {
               }}
             />
           </Map>
+          <YoutubeSvg
+            xmlns="http://www.w3.org/2000/svg"
+            height="2em"
+            viewBox="0 0 576 512"
+            fill="purple"
+            onClick={() => dispatch(openModal("isYoutubeOpen"))}
+          >
+            <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" />
+          </YoutubeSvg>
+
           {/* 북마크 컴포넌트 */}
-          <Bookmark kakaoId={paramsId} top={43} left={230} height={"30px"}/>
+          <Bookmark kakaoId={paramsId} top={43} left={230} height={"30px"} />
+
           <LargeFont>{place_name}</LargeFont>
           <div>{address_name}</div>
           <div>{phone}</div>
@@ -289,6 +326,7 @@ const MapWrap = styled.div`
   gap: 10px;
   line-break: anywhere;
   border-radius: 15px;
+  position: relative;
 `;
 
 const Wrap = styled.div`
@@ -374,4 +412,12 @@ const SideBar = styled(CommentsWrap)`
   position: fixed;
   right: 20px;
   bottom: 20px;
+`;
+
+const YoutubeSvg = styled.svg`
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
 `;
