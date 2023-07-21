@@ -2,7 +2,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { Home, Main, Detail, Survey, Layout } from "pages";
 import Header from "components/Header/Header";
 import MyPage from "pages/MyPage";
-
+import CreatePost from "components/wirte/CreatePost";
 
 const Router = () => {
   return (
@@ -21,6 +21,7 @@ const Router = () => {
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/survey" element={<Survey />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/post" element={<CreatePost />} />
         </Route>
         <Route path="/main" element={<Main />} />
       </Routes>
