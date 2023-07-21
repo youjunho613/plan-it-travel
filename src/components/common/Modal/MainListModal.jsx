@@ -7,7 +7,7 @@ import sideBarLogo from "assets/sideBarLogo.png";
 import { getDataList } from "redux/modules/detailData";
 import { closeModal } from "redux/modules/modal";
 
-function MainListModal({ setState, state }) {
+export const MainListModal = ({ setState, state }) => {
   const { dataList, pagination } = useSelector(state => state.detailData);
   const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ function MainListModal({ setState, state }) {
   const showInfoHandler = data => {
     setState({
       ...state,
-      info: { content: data.place_name },
+      info: { id: data.id },
       position: { center: { lat: data.y, lng: data.x }, isPanto: true }
     });
   };
@@ -75,7 +75,7 @@ function MainListModal({ setState, state }) {
       </MoveBtnBox>
     </Modaldiv>
   );
-}
+};
 
 const Modaldiv = styled.div`
   display: flex;
@@ -148,5 +148,3 @@ const MoveBtnBox = styled.div`
   gap: 10px;
   margin-top: auto;
 `;
-
-export default MainListModal;

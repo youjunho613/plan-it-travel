@@ -1,8 +1,10 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
 import { Button, Text, Input } from "components/common";
 import { SURVEY_TEXT, SURVEY_RESULT } from "../surveyData/surveyData";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { getServeyData } from "redux/modules/detailData";
 
 const initialValue = {
   1: false,
@@ -21,6 +23,7 @@ function SurveyTemplate() {
   const [inputValues, setInputValues] = useState();
   const [selectValues, setSelectValues] = useState([]);
   const [check, setCheck] = useState(initialValue);
+  const dispatch = useDispatch()
 
   const moveStep = (event, num) => {
     event.preventDefault();
@@ -48,8 +51,9 @@ function SurveyTemplate() {
     };
     selectValues.push(randomNumber());
     const selectId = selectValues.join("");
-    const filterd = SURVEY_RESULT.filter(item => item.id === Number(selectId));
-    navigate(`/detail/${filterd[0].kakaoId}`);
+    const filterd = SURVEY_RESULT.filter(item => item.resultId === Number(selectId));
+    dispatch(getServeyData(filterd));
+    navigate(`/detail/${filterd[0].id}`);
   };
 
   const buttonAttr = $bgcolor => ({ $bgcolor, size: "small", fontSize: "10px" });
@@ -77,7 +81,6 @@ function SurveyTemplate() {
           })}
 
           <ButtonBox>
-         
             {step <= 2 && (
               <Button
                 type={"reset"}
@@ -94,7 +97,6 @@ function SurveyTemplate() {
             )}
           </ButtonBox>
         </Form>
-
       </SurveyContainer>
     </Container>
   );
@@ -150,11 +152,6 @@ const Progress = styled.progress`
   bottom: 0px;
 
   width: 100%;
-`;
-
-const Questions = styled.p`
-  font-size: 25px;
-  padding-bottom: 30px;
 `;
 
 const ButtonBox = styled.div``;

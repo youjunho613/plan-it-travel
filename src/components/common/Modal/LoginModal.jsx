@@ -3,17 +3,18 @@ import { useDispatch } from "react-redux";
 import { closeModal } from "redux/modules/modal";
 import useForm from "hooks/useForm";
 import { Button, Input, Text } from "components/common";
-import { signIn } from "components/auth";
+import { useAuth } from "components/auth";
 
-const LoginModal = () => {
+export const LoginModal = () => {
   const dispatch = useDispatch();
-  const modalCloseHandler = () => dispatch(closeModal("LoginIsOpen"));
+  const modalCloseHandler = () => dispatch(closeModal("logInIsOpen"));
+  const { signIn } = useAuth();
 
   const initialState = { email: "", password: "" };
   const validation = () => {};
   const submitAction = () => {
     signIn(values);
-    closeModal();
+    modalCloseHandler();
   };
   const { values, errors, onSubmit, resister } = useForm(initialState, validation, submitAction);
 
@@ -27,7 +28,7 @@ const LoginModal = () => {
         size={"modal"}
         $bgcolor={"white"}
       />
-      {errors.email && <Text>{errors.email}</Text>}
+      {/* {errors.email && <Text>{errors.email}</Text>} */}
       <Input
         {...resister("password")}
         type="password"
@@ -35,7 +36,7 @@ const LoginModal = () => {
         size={"modal"}
         $bgcolor={"white"}
       />
-      {errors.password && <Text>{errors.password}</Text>}
+      {/* {errors.password && <Text>{errors.password}</Text>} */}
       <div>
         <Button
           type="button"
@@ -61,5 +62,3 @@ const Form = styled.form`
 
   gap: 35px;
 `;
-
-export default LoginModal;

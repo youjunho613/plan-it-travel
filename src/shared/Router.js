@@ -3,6 +3,7 @@ import { Home, Main, Detail, Survey, Layout } from "pages";
 import Header from "components/Header/Header";
 import MyPage from "pages/MyPage";
 
+
 const Router = () => {
   return (
     <BrowserRouter>
