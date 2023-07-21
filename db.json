@@ -1,239 +1,51 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "email": "kimjinsu0210@naver.com",
-      "nickname": "김진수",
-      "profileImg": "defaultImg.png",
-      "regData": "2023-07-18 12:08"
-    }
-  ],
   "comments": [
     {
-      "id": "d9583bcb-9d8e-bbd9-866a-c05a99b19c5c",
-      "postId": "27548967",
-      "comment": "123",
-      "date": "2023-07-20T13:19:32.534Z",
-      "email": "123@naver.com",
-      "displayName": "유준호",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
-    },
-    {
-      "id": "8b536529-4ae0-7b2f-2020-4204d56a3606",
-      "postId": "27548967",
-      "comment": "123",
-      "date": "2023-07-20T13:19:34.083Z",
-      "email": "123@naver.com",
-      "displayName": "유준호",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
-    },
-    {
-      "id": "1afd596f-6c16-dab4-f31c-26247d94dc78",
-      "postId": "27548967",
-      "comment": "123",
-      "date": "2023-07-20T13:19:35.531Z",
-      "email": "123@naver.com",
-      "displayName": "유준호",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
-    },
-    {
-      "id": "34bcaf39-b104-7a97-959c-49d6ef67a175",
-      "postId": "27548967",
-      "comment": "123",
-      "date": "2023-07-20T13:19:36.319Z",
-      "email": "123@naver.com",
-      "displayName": "유준호",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FFJ5QkleQewZ83FnHaCmBXFhKwnn2?alt=media&token=15efb16a-d883-4b28-873f-eda530c48667"
-    },
-    {
-      "id": "ac9047b9-ba2c-a476-8273-cf3724da3887",
-      "postId": "24925403",
-      "comment": "123",
-      "date": "2023-07-20T14:02:42.908Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "2a7cbf80-ccba-1b09-e489-9de06d006720",
-      "postId": "24925403",
-      "comment": "456",
-      "date": "2023-07-20T14:02:46.654Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "0529157c-88ff-02c1-1b7b-f40c0de70f29",
-      "postId": "24925403",
-      "comment": "789",
-      "date": "2023-07-20T14:02:49.451Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "a42e078d-bbd7-a360-da71-dc4f3d3d18ad",
-      "postId": "1913983226",
-      "comment": "남산 돈까스 꼭 드세요~",
-      "date": "2023-07-20T14:05:54.139Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "e4f7886d-732f-d0c6-3cb1-7cb23abb338d",
-      "postId": "21273056",
-      "comment": "문화의 거리 정말 좋죠 ㅎㅎ",
-      "date": "2023-07-20T14:12:54.463Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "8d64135d-9738-5484-31cf-653711f334f2",
-      "postId": "11842140",
+      "id": "d4917311-af67-f701-06d3-8990ffe8fef5",
+      "postId": "8465503",
       "comment": "1",
-      "date": "2023-07-20T14:45:41.853Z",
+      "date": "2023-07-21T03:02:11.110Z",
       "email": "kimjinsu0210@naver.com",
       "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "0fff06f1-a612-a91e-24fb-63d6f4a7d9b0",
-      "postId": "11842140",
-      "comment": "2",
-      "date": "2023-07-20T14:45:43.637Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "d1065615-d4b8-cea8-f96e-34ba7a591299",
-      "postId": "11842140",
-      "comment": "3",
-      "date": "2023-07-20T14:45:44.613Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "66b4419c-eda0-a231-6383-58431eaae25a",
-      "postId": "11842140",
-      "comment": "4",
-      "date": "2023-07-20T14:45:45.181Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "a43e5d98-3542-8eb4-8e1b-a60a8821c912",
-      "postId": "11842140",
-      "comment": "5",
-      "date": "2023-07-20T14:45:45.677Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "54150071-e33e-d8ce-1760-8892dc309d1e",
-      "postId": "11842140",
-      "comment": "6",
-      "date": "2023-07-20T14:45:46.165Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "b36cd0bb-bf06-6c36-cbee-ee5c01f433ca",
-      "postId": "11842140",
-      "comment": "7",
-      "date": "2023-07-20T14:45:46.661Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "51326004-3390-265c-ad7e-cdbbac541ce6",
-      "postId": "11842140",
-      "comment": "8",
-      "date": "2023-07-20T14:45:47.349Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "139d906a-669c-6535-3da7-e7615a55958a",
-      "postId": "11842140",
-      "comment": "9",
-      "date": "2023-07-20T14:45:47.877Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "4d3b2292-91ac-2aaa-5f6b-d26f401a699a",
-      "postId": "11842140",
-      "comment": "10",
-      "date": "2023-07-20T14:45:48.989Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "ab28da95-d7e3-6785-4247-eaea728c3a04",
-      "postId": "11842140",
-      "comment": "11",
-      "date": "2023-07-20T14:45:49.453Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "6f22486f-55d1-56ba-ec46-efda3befcf2c",
-      "postId": "11842140",
-      "comment": "12",
-      "date": "2023-07-20T14:45:50.173Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "18835dba-7fd9-32f9-09c1-760a0fdd8ba0",
-      "postId": "11842140",
-      "comment": "13",
-      "date": "2023-07-20T14:45:50.701Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "7c2c65e7-c77b-3bf3-0664-f422466e0700",
-      "postId": "11842140",
-      "comment": "14",
-      "date": "2023-07-20T14:45:51.141Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
-    },
-    {
-      "id": "ae7f1d62-a798-756d-cd43-55e84a0c7aa2",
-      "postId": "11842140",
-      "comment": "15",
-      "date": "2023-07-20T14:45:51.549Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FU5GdNYbV3KUXWs05vaJb2HJlqmo1?alt=media&token=31fd046d-4988-4896-89de-569ea56670ff"
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FTHTmGQIk3VNRQxXSelqTcwnroQu2?alt=media&token=06e91413-8c68-4407-b9b6-fd552f6caabb"
     }
   ],
   "bookmarks": [
     {
-      "id": "고유id",
-      "kakaoId": "카카오 지도 id",
-      "userEmail": "김진수",
-      "date": "2023-07-18 12:08",
-      "place_name": "에버랜드",
-      "address_name": "주소"
+      "id": "56bdab48-ce3e-4a60-b8d7-799ab3f5708c",
+      "kakaoId": "11842140",
+      "userEmail": "kimjinsu0210@naver.com",
+      "date": "2023. 7. 21. 오후 1:29:42",
+      "place_name": "용운국제수영장",
+      "address_name": "대전 동구 용운동 301-1",
+      "phone": "042-280-1000"
+    },
+    {
+      "id": "efb56dac-a537-3bb2-10ec-88614125ce91",
+      "kakaoId": "1699946487",
+      "userEmail": "kimjinsu0210@naver.com",
+      "date": "2023. 7. 21. 오후 2:21:02",
+      "place_name": "서울YMCA 수영장",
+      "address_name": "서울 종로구 종로2가 9",
+      "phone": "02-735-4612"
+    },
+    {
+      "id": "b49af051-ba0e-204a-f62b-8bfea1c3d832",
+      "kakaoId": "17575130",
+      "userEmail": "kimjinsu0210@naver.com",
+      "date": "2023. 7. 21. 오후 2:21:10",
+      "place_name": "문학박태환수영장",
+      "address_name": "인천 미추홀구 문학동 515",
+      "phone": "032-715-4224"
+    },
+    {
+      "id": "7f1d2da2-8812-455f-979f-88f94ae8d03e",
+      "kakaoId": "933133252",
+      "userEmail": "kimjinsu0210@naver.com",
+      "date": "2023. 7. 21. 오후 2:21:15",
+      "place_name": "장흥한옥수영장",
+      "address_name": "경기 양주시 장흥면 석현리 352-2",
+      "phone": "031-829-2288"
     }
   ]
 }

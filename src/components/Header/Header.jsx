@@ -78,7 +78,7 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Link to={`/mypage${currentUser?.uid}`}>
+            <Link to={`/mypage`}>
               <Styled.ProfileImg src={currentUser.photoURL} />
             </Link>
             <Button $bgcolor={"theme1"} size={"small"} fontSize={"5px"} onClick={logOut}>
