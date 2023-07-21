@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useAuth } from "components/auth";
+import { useAuth } from "hooks";
 import { getBookmarks } from "api/bookmarks";
 import { useQuery } from "react-query";
 import { Bookmark } from "components/Bookmark";

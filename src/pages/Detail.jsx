@@ -11,7 +11,7 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { useAuth } from "components/auth";
+import { useAuth } from "hooks";
 import markerImg from "assets/marker.png";
 import { youtubeApi } from "../api/youtube";
 import YouTube from "react-youtube";

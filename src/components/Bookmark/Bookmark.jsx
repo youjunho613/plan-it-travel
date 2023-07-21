@@ -1,6 +1,6 @@
 import React from "react";
 import * as Styled from "./Bookmark.style";
-import { useAuth } from "components/auth";
+import { useAuth } from "hooks";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
