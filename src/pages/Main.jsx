@@ -1,182 +1,104 @@
 import styled from "styled-components";
-import { Input, MainListModal, Modal } from "components/common";
+import { MainListModal, Modal } from "components/common";
 import Sidebar from "components/Sidebar/Sidebar";
-import { CustomOverlayMap, Map, MapMarker, ZoomControl } from "react-kakao-maps-sdk";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { openModal, closeModal } from "redux/modules/modal";
-import { getDataList, getPagination } from "redux/modules/detailData";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import markerImg from "assets/marker.png";
-import { useNavigate } from "react-router";
+import { closeModal } from "redux/modules/modal";
+import { MainMap } from "components/map/MainMap";
 
 const { kakao } = window;
 
 export const Main = () => {
   const { ListIsOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
-  const modalOpenHandler = target => dispatch(openModal(target));
+  const [map, setMap] = useState();
+  const [isLocation, setIsLocation] = useState(false);
   const [state, setState] = useState({
     searchValue: "",
     position: { center: { lat: 37.566826, lng: 126.9786567 }, isPanto: false },
     markers: [],
     info: ""
   });
-  const navigate = useNavigate();
-  const [map, setMap] = useState();
 
   useEffect(() => {
     localStorage.removeItem("detailData");
-    dispatch(closeModal("ListIsOpen"))
-  },[dispatch]);
+    dispatch(closeModal("ListIsOpen"));
+  }, [dispatch]);
 
-  const submitSearchValue = e => {
-    e.preventDefault();
-    const ps = new kakao.maps.services.Places();
-
-    ps.keywordSearch(state.searchValue, (data, status, _pagination) => {
-      if (status === kakao.maps.services.Status.OK) {
-        dispatch(getPagination(_pagination));
-        const bounds = new kakao.maps.LatLngBounds();
-        let markers = [];
-
-        for (let i = 0; i < data.length; i++) {
-          dispatch(getDataList(data));
-          markers.push({
+  // 현재 위치 찾기
+  const currentLoaction = () => {
+    if (isLocation === false) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          setState({
+            ...state,
             position: {
-              lat: data[i].y,
-              lng: data[i].x
-            },
-            content: data[i].place_name,
-            id: data[i].id
+              center: { lat: position.coords.latitude, lng: position.coords.longitude },
+              isPanto: true
+            }
           });
-          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-        }
-        setState({ ...state, markers: markers });
-        map.setBounds(bounds);
-        modalOpenHandler("ListIsOpen");
+        });
+        return setIsLocation(true);
+      } else {
+        setState({
+          ...state,
+          position: {
+            center: { lat: 37.566826, lng: 126.9786567 },
+            isPanto: false
+          }
+        });
+        alert("현재 위치를 알 수 없어 기본 위치로 이동합니다.");
       }
-    });
+    }
+    if (isLocation === true) {
+      setState({
+        ...state,
+        position: {
+          center: { lat: 37.566826, lng: 126.9786567 },
+          isPanto: false
+        }
+      });
+      return setIsLocation(false);
+    }
+  };
+  //현재위치 사용 시 검색 함수 옵션
+  const option = {
+    location: new kakao.maps.LatLng(state.position.center.lat, state.position.center.lng),
+    radius: 10000,
+    sor: kakao.maps.services.SortBy.DISTANCE
   };
 
-  const markerClickHandler = id => {
-    navigate(`/detail/${id}`);
-  };
   // TODO 반응형
   return (
     <Container>
       {ListIsOpen && (
         <Modal type={"main"}>
-          <MainListModal setState={setState} state={state} />
+          <MainListModal setState={setState} state={state} setIsLocation={setIsLocation} />
         </Modal>
       )}
-      <Sidebar state={state} setState={setState} map={map} />
-      <MapContainer>
-        <form onSubmit={submitSearchValue}>
-          <Input
-            size={"large"}
-            $bgcolor={"black"}
-            type="search"
-            placeholder="Search"
-            value={state.searchValue}
-            onChange={e => setState({ ...state, searchValue: e.target.value })}
-          />
-        </form>
-        <Map
-          center={state.position.center}
-          isPanto={state.position.isPanto}
-          style={{
-            width: "100%",
-            height: "100%",
-            zIndex: "1"
-          }}
-          level={3}
-          onCreate={setMap}
-          onZoomChanged={map => map.getLevel()}
-        >
-          <ZoomControl />
-          {state.markers.map(marker => (
-            <MapMarker
-              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-              position={marker.position}
-              image={{
-                src: markerImg,
-                size: { width: 60, height: 50 },
-                options: { offset: { x: 30, y: 50 } }
-              }}
-              onClick={() => setState({ ...state, info: marker })}
-            >
-              {state.info && state.info.id === marker.id && (
-                <CustomOverlayMap
-                  position={marker.position}
-                  xAnchor={0.5}
-                  yAnchor={1.56}
-                  zIndex={3}
-                >
-                  <OverlayDiv>
-                    <XButton onClick={() => setState({ ...state, info: "" })}>
-                      <FontAwesomeIcon icon={faXmark} size="lg" style={{ color: "#ffffff" }} />
-                    </XButton>
-                    {marker.content}
-                    <button onClick={() => markerClickHandler(marker.id)}>상세보기</button>
-                  </OverlayDiv>
-                </CustomOverlayMap>
-              )}
-            </MapMarker>
-          ))}
-        </Map>
-      </MapContainer>
+      <Sidebar
+        kakao={kakao}
+        state={state}
+        setState={setState}
+        map={map}
+        isLocation={isLocation}
+        currentLoaction={currentLoaction}
+        option={option}
+      />
+      <MainMap
+        kakao={kakao}
+        state={state}
+        setState={setState}
+        map={map}
+        setMap={setMap}
+        isLocation={isLocation}
+        currentLoaction={currentLoaction}
+        option={option}
+      />
     </Container>
   );
 };
 const Container = styled.div`
   display: flex;
   width: 100%;
-`;
-
-const MapContainer = styled.div`
-  width: 85vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  & > form {
-    z-index: 999;
-    position: fixed;
-    top: 20px;
-  }
-`;
-
-const OverlayDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  min-width: 150px;
-  gap: 10px;
-  height: 100px;
-  padding: 10px;
-  border: 1px solid #1f1f22;
-  background-color: #1f1f22;
-  border-radius: 5px;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    margin-left: -10px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 8px 10px 0 10px;
-    border-color: #1f1f22 transparent transparent transparent;
-  }
-`;
-
-const XButton = styled.button`
-  margin-left: auto;
 `;
