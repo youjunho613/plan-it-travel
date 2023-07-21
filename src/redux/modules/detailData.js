@@ -12,9 +12,13 @@ const detailData = createSlice({
     },
     getPagination: (state, action) => {
       return (state = { ...state, pagination: action.payload });
+    },
+    getServeyData: (state, action) => {
+      localStorage.setItem("detailData", JSON.stringify(action.payload));
+      return (state = { ...state, dataList: action.payload });
     }
   }
 });
 
-export const { getDataList, getPagination } = detailData.actions;
+export const { getDataList, getPagination, getServeyData } = detailData.actions;
 export default detailData.reducer;
