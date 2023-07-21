@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import { Button, Text, Input } from "components/common";
-import { Modal } from "components/common";
 import { SURVEY_TEXT, SURVEY_RESULT } from "../surveyData/surveyData";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
@@ -62,6 +61,7 @@ function SurveyTemplate() {
   return (
     <Container>
       <SurveyContainer>
+        <ProgressLevel>{step}/3</ProgressLevel>
         <Progress value={step} max="3"></Progress>
         <Text fontSize={"25px"}>{SURVEY_TEXT[step].question}</Text>
         <Form onSubmit={onSubmit}>
@@ -103,13 +103,24 @@ function SurveyTemplate() {
   );
 }
 export default SurveyTemplate;
+const ProgressLevel = styled.span`
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+`;
+
+const Progress = styled.progress`
+  position: absolute;
+  bottom: 0px;
+
+  width: 100%;
+`;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-
   gap: 5px;
-  margin: 15px;
+  margin: 50px 15px;
 `;
 
 const Label = styled.label`
@@ -146,14 +157,6 @@ const SurveyContainer = styled.div`
   padding: 30px;
 
   background-color: rgba(255, 255, 255, 0.1);
-`;
-
-const Progress = styled.progress`
-  animation: loader 8s ease infinite;
-  position: absolute;
-  bottom: 0px;
-
-  width: 100%;
 `;
 
 const ButtonBox = styled.div`
