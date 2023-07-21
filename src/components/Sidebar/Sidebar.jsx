@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { getDataList, getPagination } from "redux/modules/detailData";
 import { openModal } from "redux/modules/modal";
 import { useAuth } from "hooks";
+import { Text } from "components/common";
 
 const Sidebar = ({ kakao, state, setState, map, isLocation, option }) => {
   const dispatch = useDispatch();
@@ -132,9 +133,21 @@ const Sidebar = ({ kakao, state, setState, map, isLocation, option }) => {
         )}
       </Ul>
       {currentUser?.uid === null || currentUser?.uid === undefined ? null : (
-        <AuthBox onClick={logOut}>
-          <FontAwesomeIcon {...iconAttr("faArrowRightFromBracket")} />
-          Logout
+        <AuthBox>
+          <FlexBox onClick={() => dispatch(openModal("MyPlaceIsOpen"))}>
+            <FontAwesomeIcon {...iconAttr("faEye")} />
+            <Text as={"span"}>나만의 장소 보기</Text>
+          </FlexBox>
+          <FlexBox>
+            <Link to={"/post"}>
+              <FontAwesomeIcon {...iconAttr("faLocationDot")} />
+              <Text as={"span"}>나만의 장소 지정하기</Text>
+            </Link>
+          </FlexBox>
+          <FlexBox onClick={logOut}>
+            <FontAwesomeIcon {...iconAttr("faArrowRightFromBracket")} />
+            <Text as={"span"}>Logout</Text>
+          </FlexBox>
         </AuthBox>
       )}
     </SideBar>
@@ -175,6 +188,11 @@ const AuthBox = styled.div`
   bottom: 40px;
 
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+`;
+
+const FlexBox = styled.div`
   cursor: pointer;
 `;
