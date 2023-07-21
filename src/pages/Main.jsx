@@ -4,7 +4,7 @@ import Sidebar from "components/Sidebar/Sidebar";
 import { CustomOverlayMap, Map, MapMarker, ZoomControl } from "react-kakao-maps-sdk";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "redux/modules/modal";
+import { openModal, closeModal } from "redux/modules/modal";
 import { getDataList, getPagination } from "redux/modules/detailData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -28,7 +28,8 @@ export const Main = () => {
 
   useEffect(() => {
     localStorage.removeItem("detailData");
-  }, []);
+    dispatch(closeModal("ListIsOpen"))
+  },[dispatch]);
 
   const submitSearchValue = e => {
     e.preventDefault();
@@ -106,7 +107,7 @@ export const Main = () => {
               }}
               onClick={() => setState({ ...state, info: marker })}
             >
-              {state.info && state.info.content === marker.content && (
+              {state.info && state.info.id === marker.id && (
                 <CustomOverlayMap
                   position={marker.position}
                   xAnchor={0.5}

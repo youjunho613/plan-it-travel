@@ -40,7 +40,7 @@ export const MainListModal = ({ setState, state }) => {
   const showInfoHandler = data => {
     setState({
       ...state,
-      info: { content: data.place_name },
+      info: { id: data.id },
       position: { center: { lat: data.y, lng: data.x }, isPanto: true }
     });
   };
