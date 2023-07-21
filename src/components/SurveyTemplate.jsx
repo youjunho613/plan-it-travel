@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import { Button, Text, Input } from "components/common";
+import { Modal } from "components/common";
 import { SURVEY_TEXT, SURVEY_RESULT } from "../surveyData/surveyData";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
@@ -23,12 +24,12 @@ function SurveyTemplate() {
   const [inputValues, setInputValues] = useState();
   const [selectValues, setSelectValues] = useState([]);
   const [check, setCheck] = useState(initialValue);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const moveStep = (event, num) => {
     event.preventDefault();
-    // TODO alert 수정 필요
-    if (!inputValues) return alert("누르고 다음으로 가셔야죠");
+    if (!inputValues) return alert("보기를 선택해주세요");
+
     setSelectValues([...selectValues, inputValues]);
     setStep(step + num);
     setCheck(initialValue);
@@ -148,10 +149,15 @@ const SurveyContainer = styled.div`
 `;
 
 const Progress = styled.progress`
+  animation: loader 8s ease infinite;
   position: absolute;
   bottom: 0px;
 
   width: 100%;
 `;
 
-const ButtonBox = styled.div``;
+const ButtonBox = styled.div`
+  position: absolute;
+  bottom: 100px;
+  right: 250px;
+`;
