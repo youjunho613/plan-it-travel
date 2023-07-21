@@ -26,13 +26,7 @@ export const MainListModal = ({ setState, state, setIsLocation }) => {
       ...state,
       searchValue: "",
       markers: [],
-      position: {
-        center: {
-          lat: 37.566826,
-          lng: 126.9786567
-        },
-        isPanto: false
-      }
+      position: { center: { lat: 37.566826, lng: 126.9786567 }, isPanto: false }
     });
     setIsLocation(false);
     dispatch(getDataList([]));
