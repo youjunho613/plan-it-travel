@@ -44,6 +44,15 @@
       "email": "kimjinsu0210@naver.com",
       "displayName": "김진수입니다.",
       "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
+    },
+    {
+      "id": "2e81484f-327c-3732-feb5-3d6d7387e6bb",
+      "postId": "17733090",
+      "comment": "댓글",
+      "date": "2023-07-22T13:13:24.007Z",
+      "email": "kimjinsu0210@naver.com",
+      "displayName": "김진수입니다.",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
     }
   ],
   "bookmarks": [
@@ -129,6 +138,15 @@
       "content": "물건사요",
       "x": 126.64352033320692,
       "y": 37.4653174695429
+    },
+    {
+      "userId": "LidFwuu4NeZS2rY4KdZZ8zC0cKg1",
+      "id": "7b139ce3-791a-076b-21df-e43937b70da7",
+      "address_name": "인천 미추홀구 용현동 492-34",
+      "place_name": "용현싲시장",
+      "content": "물건을 싸게 샀습니다.",
+      "x": 126.6519927606612,
+      "y": 37.457931936780106
     }
   ]
 }

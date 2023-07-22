@@ -29,8 +29,14 @@ export const AuthBox = styled.div`
 `;
 
 export const FlexBox = styled.div`
+  display: flex;
   cursor: pointer;
 `;
+
+export const IconBox = styled.div`
+  width: 20px;
+  margin-right: 10px;
+`
 
 export const Ul = styled.ul`
   cursor: pointer;

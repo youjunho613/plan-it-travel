@@ -19,6 +19,7 @@ export const MyPlaceModal = ({ setState, state }) => {
     //마운트 시 유저 정보 가져옴
     onAuthStateChanged(auth, users => setAuthData(users));
   }, []);
+  console.log(authData)
   //유저 게시물 데이터 가져와서 리스트업&마커 표시를 위해 mainMap 컴포넌트에 보내줌
   useQuery("userPosts", getUserPost, {
     onSuccess: data => {
@@ -43,6 +44,7 @@ export const MyPlaceModal = ({ setState, state }) => {
     },
     enabled: authData.uid !== ""
   });
+  console.log(myPlaceData)
   // 모달 닫기
   const modalCloseHandler = () => {
     dispatch(closeModal("MyPlaceIsOpen"));
