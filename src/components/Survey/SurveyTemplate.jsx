@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import { Button, Text, Input } from "components/common";
-import { SURVEY_TEXT, SURVEY_RESULT } from "../surveyData/surveyData";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { getServeyData } from "redux/modules/detailData";
+import { SURVEY_TEXT, SURVEY_RESULT } from "surveyData/surveyData";
 
 const initialValue = {
   1: false,
@@ -16,6 +16,7 @@ const initialValue = {
   7: false,
   8: false
 };
+const buttonAttr = $bgcolor => ({ $bgcolor, size: "small", fontSize: "10px" });
 
 function SurveyTemplate() {
   const navigate = useNavigate();
@@ -56,14 +57,12 @@ function SurveyTemplate() {
     navigate(`/detail/${filterd[0].id}`);
   };
 
-  const buttonAttr = $bgcolor => ({ $bgcolor, size: "small", fontSize: "10px" });
-
   return (
     <Container>
       <SurveyContainer>
         <ProgressLevel>{step}/3</ProgressLevel>
         <Progress value={step} max="3"></Progress>
-        <Text fontSize={"25px"}>{SURVEY_TEXT[step].question}</Text>
+        <Text fontSize={"25px"} margin={"0 15px"}>{SURVEY_TEXT[step].question}</Text>
         <Form onSubmit={onSubmit}>
           {SURVEY_TEXT[step].option?.map(item => {
             return (
@@ -103,36 +102,33 @@ function SurveyTemplate() {
   );
 }
 export default SurveyTemplate;
+
 const ProgressLevel = styled.span`
   position: absolute;
   bottom: 15px;
-  right: 10px;
+  right: 276px;
 `;
 
 const Progress = styled.progress`
   position: absolute;
   bottom: 0px;
-
   width: 100%;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 5px;
   margin: 50px 15px;
 `;
 
 const Label = styled.label`
   display: block;
-
   width: 100%;
-
   padding: 10px;
-
   background-color: white;
   border-radius: 5px;
-
   color: black;
 `;
 
@@ -145,18 +141,14 @@ const Container = styled.div`
 const SurveyContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-
+  align-items: center;
   position: relative;
-
   width: 586px;
   height: 600px;
-
   margin-top: 100px;
   padding: 30px;
-
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #000000a2;
 `;
 
 const ButtonBox = styled.div`

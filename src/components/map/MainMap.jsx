@@ -39,6 +39,7 @@ export const MainMap = ({
           for (let i = 0; i < data.length; i++) {
             dispatch(getDataList(data));
             const { y, x, place_name, id } = data[i];
+            console.log(data[i]);
             markers.push({ position: { lat: y, lng: x }, content: place_name, id: id });
             bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
           }
@@ -58,7 +59,7 @@ export const MainMap = ({
   };
   //마커 클릭 시 디테일 페이지로 이동
   const markerClickHandler = id => {
-    navigate(`/detail/${id}`);
+    id.includes("-") ? navigate(`/myplacedetail/${id}`) : navigate(`/detail/${id}`);
   };
   return (
     <Styled.MapContainer>

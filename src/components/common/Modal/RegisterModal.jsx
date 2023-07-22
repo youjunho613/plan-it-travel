@@ -1,64 +1,98 @@
 import { useState } from "react";
-import * as Styled from "./Modal.styled";
-import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import { closeModal } from "redux/modules/modal";
-import { useAuth, useForm } from "hooks";
 import { Button, Input, Text } from "components/common";
+import { useForm, useAuth } from "hooks";
 
 export const RegisterModal = () => {
   const dispatch = useDispatch();
   const modalCloseHandler = () => dispatch(closeModal("signUpIsOpen"));
   const { createUser } = useAuth();
 
-  const { firebaseError } = useSelector(state => state.firebaseError);
-
   const initialState = { email: "", password: "", passwordConfirm: "", displayName: "" };
   const validation = () => {
     let errors = {};
-    if (!values.email) errors.email = "이메일을 입력해주세요.";
-    if (!values.password) errors.password = "비밀번호를 입력해주세요.";
-    if (!values.displayName) errors.displayName = "닉네임을 입력해주세요.";
     if (values.password !== values.passwordConfirm)
-      errors.passwordConfirm = "비밀번호가 일치하지 않습니다.";
-    return errors;
+      return (errors.passwordConfirm = "비밀번호가 일치하지 않습니다.");
   };
 
   const [imgFile, setImgFile] = useState();
   const onChangeAddFile = event => setImgFile(event.target.files[0]);
 
-  const submitAction = async () => createUser(values, imgFile);
+  const submitAction = async () => {
+    createUser(values, imgFile);
+    modalCloseHandler();
+  };
 
   const { values, errors, onSubmit, resister } = useForm(initialState, validation, submitAction);
 
-  const inputAttr = type => ({ type, size: "modal", $bgcolor: "white" });
-  const buttonAttr = $bgcolor => ({ $bgcolor, size: "medium", color: "black" });
-
   return (
-    <Styled.Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
       <Text fontSize={"48px"}>Sign Up</Text>
-      <Input {...resister("email")} {...inputAttr("email")} placeholder="E-mail" />
-      {errors.email ? <Text color={"red"}>{errors.email}</Text> : <div><br/></div>}
-      <Input {...resister("password")} {...inputAttr("password")} placeholder="Password" />
-      {errors.password ? <Text color={"red"}>{errors.password}</Text> : <div><br/></div>}
+      <Input
+        {...resister("email")}
+        type="email"
+        placeholder="E-mail"
+        size={"modal"}
+        $bgcolor={"white"}
+      />
+      {errors.email && <Text>{errors.email}</Text>}
+      <Input
+        {...resister("password")}
+        type="password"
+        placeholder="Password"
+        size={"modal"}
+        $bgcolor={"white"}
+      />
+      {errors.password && <Text>{errors.password}</Text>}
       <Input
         {...resister("passwordConfirm")}
-        {...inputAttr("password")}
+        type="password"
         placeholder="Password Confirm"
+        size={"modal"}
+        $bgcolor={"white"}
       />
-      {errors.passwordConfirm ? <Text color={"red"}>{errors.passwordConfirm}</Text> : <div><br/></div>}
-      <Input {...resister("displayName")} {...inputAttr("text")} placeholder="Nickname" />
-      {errors.displayName ? <Text color={"red"}>{errors.displayName}</Text> : <div><br/></div>}
+      {errors.passwordConfirm && <Text>{errors.passwordConfirm}</Text>}
+      <Input
+        {...resister("displayName")}
+        type="text"
+        placeholder="Nickname"
+        size={"modal"}
+        $bgcolor={"white"}
+      />
+      {errors.displayName && <Text>{errors.displayName}</Text>}
       <Text as={"label"} htmlFor="photoUrl">
-        프로필 이미지 업로드
+        프로필 이미지 입력
       </Text>
-      <Input type="file" id="photoUrl" accept="image/*" onChange={onChangeAddFile} />
-      {firebaseError !== "" && <Text>{firebaseError}</Text>}
+      <Input
+        type="file"
+        id="photoUrl"
+        accept="image/*"
+        onChange={onChangeAddFile}
+        // style={{ display: "none" }}
+      />
       <div>
-        <Button {...buttonAttr("white")} type="button" onClick={modalCloseHandler}>
+        <Button
+          type="button"
+          size={"medium"}
+          $bgcolor={"white"}
+          color={"black"}
+          onClick={modalCloseHandler}
+        >
           닫기
         </Button>
-        <Button {...buttonAttr("theme1")}>회원가입</Button>
+        <Button size={"medium"} $bgcolor={"theme1"} color={"black"}>
+          회원가입
+        </Button>
       </div>
-    </Styled.Form>
+    </Form>
   );
 };
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+`;

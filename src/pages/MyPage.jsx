@@ -194,25 +194,6 @@ export const MyPage = () => {
   );
 };
 
-// const ModalOverlay = styled.div`
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   background-color: rgba(0, 0, 0, 0.582);
-//   backdrop-filter: blur(2px);
-// `;
-
-// const SettingContentBox = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   background-color: rgba(83, 83, 83, 0.445);
-//   border-radius: 10px;
-// `;
 const SettingContentButton = styled.button`
   width: 300px;
   height: 50px;
@@ -240,20 +221,21 @@ const ButtonBox = styled.div`
 
 const rotation = keyframes`
     100%{
-      transform:rotate(180deg);
+      transform:rotate(360deg);
     }
     `;
 
 const SettingSvg = styled.svg`
   height: 30px;
-  fill: #616161;
+  fill: #e2e2e2;
   cursor: pointer;
   &:hover {
-    animation: ${rotation} 0.6s linear;
+    animation: ${rotation} 1.8s linear infinite;
   }
 `;
+
 const CurrentUserInfo = styled.div`
-  background-color: #7e7e7e2c;
+  background-color: #ffffff45;
   color: white;
   padding: 10px;
   border-radius: 5px;
@@ -262,7 +244,7 @@ const UserInfoWrap = styled.div`
   display: flex;
   flex-direction: column;
   padding: 30px;
-  background-color: rgba(255, 255, 255, 0.049);
+  background-color: ${props => props.theme.colors.modalBlack};
   border-radius: 5px;
 `;
 const FlexBox = styled.div`
@@ -276,10 +258,6 @@ const SettingFlexBox = styled(FlexBox)`
   justify-content: space-between;
 `;
 
-// const OptionBarClickDiv = styled.div`
-//   cursor: pointer;
-//   font-size: 20px;
-// `;
 const OptionBar = styled.div`
   display: flex;
   justify-content: center;
@@ -343,6 +321,7 @@ const BookContainer = styled.div`
   flex-wrap: wrap;
   gap: 40px;
   width: 1280px;
+  justify-content: center;
 `;
 const BookBiv = styled.div`
   display: flex;
@@ -352,7 +331,7 @@ const BookBiv = styled.div`
   padding: 40px 40px 70px 40px;
   border-radius: 5px;
   margin-bottom: 20px;
-  background-color: rgba(255, 255, 255, 0.049);
+  background-color: rgba(73, 73, 73, 0.049);
   backdrop-filter: blur(10px);
 `;
 

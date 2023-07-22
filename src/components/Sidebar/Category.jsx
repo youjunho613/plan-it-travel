@@ -1,8 +1,7 @@
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as icons from "@fortawesome/free-solid-svg-icons";
 import * as Styled from "./Sidebar.style";
-
-import { useState } from "react";
 
 export const Category = ({ SearchHandler }) => {
   const [isOpen, setIsOpen] = useState({ mountain: false, sea: false, hotel: false, Store: false });

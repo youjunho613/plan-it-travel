@@ -1,6 +1,5 @@
+import SurveyTemplate from "components/Survey/SurveyTemplate";
 import { styled } from "styled-components";
-
-import SurveyTemplate from "components/SurveyTemplate";
 export const Survey = () => {
   return (
     <Layout>

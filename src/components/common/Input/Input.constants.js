@@ -1,7 +1,7 @@
 export const SIZE = {
   // 댓글 작성자 로그인되면 작성자 있음
   small: {
-    width: "200px"
+    width: "150px"
   },
   // 로그인, 회원가입 모달
   medium: {

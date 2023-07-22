@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { Home, Main, Detail, Survey, Layout, MyPage, CreatePost } from "pages";
+import { Home, Main, Detail, Survey, Layout, MyPage, CreatePost ,MyPlaceDetail} from "pages";
 import Header from "components/Header/Header";
 
 const Router = () => {
@@ -18,8 +18,9 @@ const Router = () => {
           <Route index element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/survey" element={<Survey />} />
-          <Route path="/mypage/:uid" element={<MyPage />} />
           <Route path="/post" element={<CreatePost />} />
+          <Route path="/mypage/:uid" element={<MyPage />} />
+          <Route path="/myplacedetail/:id" element={<MyPlaceDetail />} />
         </Route>
         <Route path="/main" element={<Main />} />
       </Routes>

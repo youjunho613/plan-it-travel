@@ -28,12 +28,14 @@ export const useAuth = () => {
     });
   }, []);
 
+  // 로그아웃 로직
   const logOut = useCallback(async () => {
     await signOut(auth);
     navigate("/");
     navigate(0);
   }, [navigate]);
 
+  // 로그인 로직
   const signIn = useCallback(async ({ email, password }) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -57,9 +59,10 @@ export const useAuth = () => {
     } else return alert("취소 하셨습니다.");
     navigate("/");
     navigate(0);
-    // modalCloseHandler("modifyIsOpen");
+    modalCloseHandler("modifyIsOpen");
   };
 
+  // 회원가입 로직
   const defaultImgUrl = `https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608`;
   const createUser = async (values, imgFile) => {
     const { email, password, displayName } = values;
@@ -78,6 +81,7 @@ export const useAuth = () => {
     }
   };
 
+  // 회원수정 로직
   const modifyUser = async (values, imgFile) => {
     const { displayName, newPassword } = values;
     try {

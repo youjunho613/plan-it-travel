@@ -4,5 +4,6 @@ export const Text = styled.p`
   ${props => css`
     font-size: ${props.fontSize};
     color: ${props.theme.colors[props.color] || props.theme.colors.white};
+    margin: ${props.margin};
   `}
 `;
