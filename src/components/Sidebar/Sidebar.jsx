@@ -4,13 +4,15 @@ import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import sideBarLogo from "assets/sideBarLogo.png";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getDataList, getPagination } from "redux/modules/detailData";
 import { openModal } from "redux/modules/modal";
 import { useAuth } from "hooks";
 import { Text } from "components/common";
+import { Modal } from "components/common";
+import YouTube from "react-youtube";
 
-const Sidebar = ({ kakao, state, setState, map, isLocation, option }) => {
+const Sidebar = ({ kakao, state, setState, map, isLocation, option, youtubeRes }) => {
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
 
@@ -54,6 +56,32 @@ const Sidebar = ({ kakao, state, setState, map, isLocation, option }) => {
       isLocation ? option : ""
     );
   };
+
+  // useEffect(() => {
+  //   onYoutube();
+  // }, []);
+  // //유튜브
+  const { isYoutubeOpen } = useSelector(state => state.modal);
+  // const [youtubeRes, setYoutubeRes] = useState("");
+
+  // const onYoutube = async () => {
+  //   try {
+  //     const response = await youtubeApi.get("/playlistItems", {
+  //       params: {
+  //         part: "snippet",
+  //         playlistId: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa"
+  //       }
+  //     });
+
+  //     const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
+  //     const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
+
+  //     console.log(selectedViedoId);
+  //     setYoutubeRes(selectedViedoId);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <SideBar>
@@ -133,8 +161,32 @@ const Sidebar = ({ kakao, state, setState, map, isLocation, option }) => {
           </>
         )}
       </Ul>
+      {isYoutubeOpen && (
+        <Modal type={"youtube"} closeTarget={"isYoutubeOpen"}>
+          <YouTube
+            videoId={youtubeRes}
+            opts={{
+              width: "800",
+              height: "500",
+              playerVars: {
+                autoplay: 1,
+                rel: 0,
+                modestbranding: 1
+              }
+            }}
+            onEnd={e => {
+              e.target.stopVideo(0);
+            }}
+          ></YouTube>
+        </Modal>
+      )}
       {currentUser?.uid === null || currentUser?.uid === undefined ? null : (
         <AuthBox>
+          <FlexBox onClick={() => dispatch(openModal("isYoutubeOpen"))}>
+            <FontAwesomeIcon {...iconAttr("faYoutube")} />
+            <Text as={"span"}>여행 꿀팁</Text>
+          </FlexBox>
+
           <FlexBox onClick={() => dispatch(openModal("MyPlaceIsOpen"))}>
             <FontAwesomeIcon {...iconAttr("faEye")} />
             <Text as={"span"}>나만의 장소 보기</Text>
