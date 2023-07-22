@@ -13,22 +13,37 @@ import { auth } from "server/firebase";
 export const MyPlaceModal = ({ setState, state }) => {
   const dispatch = useDispatch();
   const [authData, setAuthData] = useState("");
-  const { isLoading, data } = useQuery("userPosts", getUserPost);
+  const [myPlaceData, setMyPlaceData] = useState([]);
 
   useEffect(() => {
+    //마운트 시 유저 정보 가져옴
     onAuthStateChanged(auth, users => setAuthData(users));
   }, []);
-
-  if (isLoading) {
-    return;
-  }
-  const myPlaceData = data?.filter(e => e.userId === authData.uid);
-  const markers = [];
-  for (let i = 0; i < myPlaceData?.length; i++) {
-    const { y, x, place_name, id } = data[i];
-    markers.push({ position: { lat: y, lng: x }, content: place_name, id: id });
-  }
-
+  //유저 게시물 데이터 가져와서 리스트업&마커 표시를 위해 mainMap 컴포넌트에 보내줌
+  useQuery("userPosts", getUserPost, {
+    onSuccess: data => {
+      if (data.length === 0) return;
+      else {
+        const myPlaceData = data?.filter(e => e.userId === authData.uid);
+        const newMarkers = myPlaceData?.map(e => ({
+          position: { lat: e?.y, lng: e?.x },
+          content: e?.place_name,
+          id: e?.id
+        }));
+        setMyPlaceData(myPlaceData);
+        setState({
+          ...state,
+          markers: newMarkers,
+          position: { center: { lat: myPlaceData[0]?.y, lng: myPlaceData[0]?.x }, isPanto: true }
+        });
+      }
+    },
+    onError: error => {
+      alert(error);
+    },
+    enabled: authData.uid !== ""
+  });
+  // 모달 닫기
   const modalCloseHandler = () => {
     dispatch(closeModal("MyPlaceIsOpen"));
     setState({
@@ -37,14 +52,12 @@ export const MyPlaceModal = ({ setState, state }) => {
       position: { center: { lat: 37.566826, lng: 126.9786567 }, isPanto: false }
     });
   };
-
+  // 리스트 클릭 시 마커로 이동 및 오버레이 표시
   const showInfoHandler = data => {
-    console.log(markers);
     setState({
       ...state,
       info: { id: data.id },
-      position: { center: { lat: data.y, lng: data.x }, isPanto: true },
-      markers: markers
+      position: { center: { lat: data.y, lng: data.x }, isPanto: true }
     });
   };
 
@@ -57,6 +70,7 @@ export const MyPlaceModal = ({ setState, state }) => {
         </XButton>
       </ImgBox>
       <ModalUl>
+        <Result>나만의 장소 {myPlaceData?.length}건</Result>
         {myPlaceData?.map(e => (
           <ModalLi key={e.id} onClick={() => showInfoHandler(e)}>
             {e.place_name}
@@ -113,6 +127,14 @@ const ModalUl = styled.ul`
     border: 2px solid #a290e6;
     background-color: #a290e6;
   }
+`;
+
+const Result = styled.h1`
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #1f1f22;
+  padding-bottom: 5px;
 `;
 
 const ModalLi = styled.li`
