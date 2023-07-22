@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "redux/modules/modal";
 import { MainMap } from "components/map/MainMap";
+import { MyPlaceModal } from "components/common/Modal/MyPlaceModal";
+import { youtubeApi } from "api/youtube";
 
 const { kakao } = window;
 
 export const Main = () => {
-  const { ListIsOpen } = useSelector(state => state.modal);
+  const { ListIsOpen, MyPlaceIsOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const [map, setMap] = useState();
   const [isLocation, setIsLocation] = useState(false);
@@ -23,6 +25,7 @@ export const Main = () => {
   useEffect(() => {
     localStorage.removeItem("detailData");
     dispatch(closeModal("ListIsOpen"));
+    onYoutube();
   }, [dispatch]);
 
   // 현재 위치 찾기
@@ -68,12 +71,39 @@ export const Main = () => {
     sor: kakao.maps.services.SortBy.DISTANCE
   };
 
+  //유튜브
+  const { isYoutubeOpen } = useSelector(state => state.modal);
+  const [youtubeRes, setYoutubeRes] = useState("");
+
+  const onYoutube = async () => {
+    try {
+      const response = await youtubeApi.get("/playlistItems", {
+        params: {
+          part: "snippet",
+          playlistId: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa"
+        }
+      });
+
+      const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
+      const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
+
+      setYoutubeRes(selectedViedoId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // TODO 반응형
   return (
     <Container>
       {ListIsOpen && (
         <Modal type={"main"}>
           <MainListModal setState={setState} state={state} setIsLocation={setIsLocation} />
+        </Modal>
+      )}
+      {MyPlaceIsOpen && (
+        <Modal type={"main"}>
+          <MyPlaceModal setState={setState} state={state} />
         </Modal>
       )}
       <Sidebar
@@ -84,6 +114,7 @@ export const Main = () => {
         isLocation={isLocation}
         currentLoaction={currentLoaction}
         option={option}
+        youtubeRes={youtubeRes}
       />
       <MainMap
         kakao={kakao}
