@@ -1,18 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as icons from "@fortawesome/free-solid-svg-icons";
-import { styled } from "styled-components";
+import * as Styled from "./Sidebar.style";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import sideBarLogo from "assets/sideBarLogo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getDataList, getPagination } from "redux/modules/detailData";
 import { openModal } from "redux/modules/modal";
 import { useAuth } from "hooks";
-import { Text } from "components/common";
-import { Modal } from "components/common";
+import { Text, Modal } from "components/common";
+import { Category } from "./Category";
 import YouTube from "react-youtube";
 
-const Sidebar = ({ kakao, state, setState, map, isLocation, option, youtubeRes }) => {
+export const Sidebar = props => {
+  const { kakao, state, setState, map, isLocation, option } = props;
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
 
@@ -21,16 +21,10 @@ const Sidebar = ({ kakao, state, setState, map, isLocation, option, youtubeRes }
     style: { color: "#bf94ff", marginRight: "10px" }
   });
 
-  const [isOpen, setIsOpen] = useState({ mountain: false, sea: false, hotel: false, Store: false });
-  const openHandler = target =>
-    isOpen[target]
-      ? setIsOpen({ ...isOpen, [target]: false })
-      : setIsOpen({ ...isOpen, [target]: true });
-
-  const {currentUser} = useSelector(state => state.userData);
+  const { isYoutubeOpen } = useSelector(state => state.modal);
+  const { currentUser } = useSelector(state => state.userData);
   const { logOut } = useAuth();
 
-  // 키워드 검색
   const SearchHandler = keyword => {
     const ps = new kakao.maps.services.Places();
 
@@ -57,114 +51,19 @@ const Sidebar = ({ kakao, state, setState, map, isLocation, option, youtubeRes }
     );
   };
 
-  // useEffect(() => {
-  //   onYoutube();
-  // }, []);
-  // //유튜브
-  const { isYoutubeOpen } = useSelector(state => state.modal);
-  // const [youtubeRes, setYoutubeRes] = useState("");
-
-  // const onYoutube = async () => {
-  //   try {
-  //     const response = await youtubeApi.get("/playlistItems", {
-  //       params: {
-  //         part: "snippet",
-  //         playlistId: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa"
-  //       }
-  //     });
-
-  //     const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
-  //     const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
-
-  //     console.log(selectedViedoId);
-  //     setYoutubeRes(selectedViedoId);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
-    <SideBar>
-      <Img src={sideBarLogo} alt={"plan-it-travel"} />
+    <Styled.SideBar>
+      <Styled.Img src={sideBarLogo} alt={"plan-it-travel"} />
       <Link to={"/"}>
         <FontAwesomeIcon {...iconAttr("faHouse")} />
         home
       </Link>
-      <Ul onClick={() => openHandler("mountain")}>
-        <FontAwesomeIcon {...iconAttr("faMountain")} />산
-        {isOpen.mountain && (
-          <>
-            <Li onClick={() => SearchHandler("캠핑장")}>
-              <FontAwesomeIcon {...iconAttr("faCaravan")} />
-              캠핑장
-            </Li>
-            <Li onClick={() => SearchHandler("계곡")}>
-              <FontAwesomeIcon {...iconAttr("faCampground")} />
-              계곡
-            </Li>
-          </>
-        )}
-      </Ul>
-      <Ul onClick={() => openHandler("sea")}>
-        <FontAwesomeIcon {...iconAttr("faWater")} />
-        바다
-        {isOpen.sea && (
-          <>
-            <Li onClick={() => SearchHandler("해수욕장")}>
-              <FontAwesomeIcon {...iconAttr("faUmbrellaBeach")} />
-              해수욕장
-            </Li>
-          </>
-        )}
-      </Ul>
-      <Ul onClick={() => openHandler("hotel")}>
-        <FontAwesomeIcon {...iconAttr("faHotel")} />
-        숙박
-        {isOpen.hotel && (
-          <>
-            <Li onClick={() => SearchHandler("호텔")}>
-              <FontAwesomeIcon {...iconAttr("faHotel")} />
-              호텔
-            </Li>
-            <Li onClick={() => SearchHandler("모텔")}>
-              <FontAwesomeIcon {...iconAttr("faHotel")} />
-              모텔
-            </Li>
-          </>
-        )}
-      </Ul>
-      <Ul onClick={() => openHandler("Store")}>
-        <FontAwesomeIcon {...iconAttr("faShop")} />
-        편의시설
-        {isOpen.Store && (
-          <>
-            <Li onClick={() => SearchHandler("음식점")}>
-              <FontAwesomeIcon {...iconAttr("faSpoon")} />
-              음식점
-            </Li>
-            <Li onClick={() => SearchHandler("카페")}>
-              <FontAwesomeIcon {...iconAttr("faMugSaucer")} />
-              카페
-            </Li>
-            <Li onClick={() => SearchHandler("편의점")}>
-              <FontAwesomeIcon {...iconAttr("faBasketShopping")} />
-              편의점
-            </Li>
-            <Li onClick={() => SearchHandler("마트")}>
-              <FontAwesomeIcon {...iconAttr("faCartShopping")} />
-              마트
-            </Li>
-            <Li onClick={() => SearchHandler("주차장")}>
-              <FontAwesomeIcon {...iconAttr("faSquareParking")} />
-              주차장
-            </Li>
-          </>
-        )}
-      </Ul>
+      <Category SearchHandler={SearchHandler} />
+
       {isYoutubeOpen && (
         <Modal type={"youtube"} closeTarget={"isYoutubeOpen"}>
           <YouTube
-            videoId={youtubeRes}
+            videoId={"wogyLl3BbjY"}
             opts={{
               width: "800",
               height: "500",
@@ -177,75 +76,40 @@ const Sidebar = ({ kakao, state, setState, map, isLocation, option, youtubeRes }
             onEnd={e => {
               e.target.stopVideo(0);
             }}
-          ></YouTube>
+          />
         </Modal>
       )}
       {currentUser?.uid === null || currentUser?.uid === undefined ? null : (
-        <AuthBox>
-          <FlexBox onClick={() => dispatch(openModal("isYoutubeOpen"))}>
-            <FontAwesomeIcon {...iconAttr("faYoutube")} />
+        <Styled.AuthBox>
+          <Styled.FlexBox onClick={() => dispatch(openModal("isYoutubeOpen"))}>
+            <svg
+              fill="white"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ marginRight: "10px" }}
+              height="1em"
+              viewBox="0 0 576 512"
+            >
+              <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" />
+            </svg>
             <Text as={"span"}>여행 꿀팁</Text>
-          </FlexBox>
+          </Styled.FlexBox>
 
-          <FlexBox onClick={() => dispatch(openModal("MyPlaceIsOpen"))}>
+          <Styled.FlexBox onClick={() => dispatch(openModal("MyPlaceIsOpen"))}>
             <FontAwesomeIcon {...iconAttr("faEye")} />
             <Text as={"span"}>나만의 장소 보기</Text>
-          </FlexBox>
-          <FlexBox>
+          </Styled.FlexBox>
+          <Styled.FlexBox>
             <Link to={"/post"}>
               <FontAwesomeIcon {...iconAttr("faLocationDot")} />
               <Text as={"span"}>나만의 장소 지정하기</Text>
             </Link>
-          </FlexBox>
-          <FlexBox onClick={logOut}>
+          </Styled.FlexBox>
+          <Styled.FlexBox onClick={logOut}>
             <FontAwesomeIcon {...iconAttr("faArrowRightFromBracket")} />
             <Text as={"span"}>Logout</Text>
-          </FlexBox>
-        </AuthBox>
+          </Styled.FlexBox>
+        </Styled.AuthBox>
       )}
-    </SideBar>
+    </Styled.SideBar>
   );
 };
-
-export default Sidebar;
-
-const SideBar = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 280px;
-  height: 100vh;
-  padding: 20px;
-  background-color: ${props => props.theme.colors.black};
-  color: ${props => props.theme.colors.white};
-  transition: 300ms;
-`;
-
-const Img = styled.img`
-  display: inherit;
-  align-self: center;
-`;
-
-const Ul = styled.ul`
-  cursor: pointer;
-`;
-
-const Li = styled.li`
-  margin: 10px 10px;
-  cursor: pointer;
-`;
-
-const AuthBox = styled.div`
-  position: absolute;
-  bottom: 40px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 20px;
-`;
-
-const FlexBox = styled.div`
-  cursor: pointer;
-`;

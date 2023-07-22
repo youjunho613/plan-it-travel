@@ -1,10 +1,24 @@
 import { styled } from "styled-components";
 
+export const Layout = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 100px;
+`;
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 30px;
+
+  width: 1100px;
+
+  padding: 50px;
+
+  background-color: ${props => props.theme.colors.modalBlack};
+  border-radius: 10px;
 `;
 
 export const ColumnBox = styled.div`
@@ -12,7 +26,6 @@ export const ColumnBox = styled.div`
   width: 500px;
   flex-direction: column;
   align-items: center;
-
   gap: 10px;
 `;
 
@@ -28,9 +41,28 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   width: 500px;
-
   gap: 20px;
 `;
-export const ButtonBox = styled.div``;
+
+export const AddressForm = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  gap: 20px;
+`;
+
+export const AddressInput = styled.input`
+  width: 100%;
+
+  padding: 7px 10px;
+
+  border: none;
+  border-radius: 5px;
+  outline: none;
+
+  color: ${props => props.theme.colors.black};
+
+  font-size: 16px;
+`;

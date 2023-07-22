@@ -47,11 +47,6 @@ const Header = () => {
               <Text fontSize={"15px"}>recommend</Text>
             </Link>
           </Styled.Li>
-          <Styled.Li>
-            <Link to={"/post"}>
-              <Text fontSize={"15px"}>{`Post (삭제예정)`}</Text>
-            </Link>
-          </Styled.Li>
         </Styled.Ul>
       </Styled.Nav>
 
