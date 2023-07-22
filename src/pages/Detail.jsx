@@ -11,7 +11,6 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
 import { useSelector } from "react-redux";
-import { useAuth } from "hooks";
 import markerImg from "assets/marker.png";
 import { Bookmark } from "components/Bookmark/Bookmark";
 
@@ -28,7 +27,7 @@ export const Detail = () => {
   ).dataList.find(e => e.id === paramsId);
 
   // 로그인한 현재 유저 정보 GET
-  const { currentUser } = useAuth();
+  const { currentUser } = useSelector(state => state.userData);
 
   const commentsData = useQuery("comments", getComments)
     .data?.filter(e => e.postId === paramsId)
@@ -39,6 +38,7 @@ export const Detail = () => {
   useEffect(() => {
     setZoomable(false);
     setDraggable(false);
+    // onYoutube();
   }, []);
 
   // 댓글 작성
@@ -158,6 +158,7 @@ export const Detail = () => {
               }}
             />
           </Map>
+
           {/* 북마크 컴포넌트 */}
           <Bookmark kakaoId={paramsId} top={43} left={230} height={"30px"} />
 

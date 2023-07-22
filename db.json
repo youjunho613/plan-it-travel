@@ -17,6 +17,24 @@
       "email": "123@naver.com",
       "displayName": "디폴트 이미지 테스트",
       "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
+    },
+    {
+      "id": "643955bc-0292-a0f5-3877-11fbcecf626d",
+      "postId": "933133252",
+      "comment": "댓글입니다.",
+      "date": "2023-07-21T16:28:24.506Z",
+      "email": "kimjinsu0210@naver.com",
+      "displayName": "김진수",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
+    },
+    {
+      "id": "51833607-e329-c267-a461-d4bd71d10cee",
+      "postId": "933133252",
+      "comment": "댓글2",
+      "date": "2023-07-21T16:28:43.386Z",
+      "email": "kimjinsu0210@naver.com",
+      "displayName": "김진수",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
     }
   ],
   "bookmarks": [
@@ -28,24 +46,6 @@
       "place_name": "엉덩물계곡",
       "address_name": "제주특별자치도 서귀포시 색달동 3384-4",
       "phone": ""
-    },
-    {
-      "id": "56bdab48-ce3e-4a60-b8d7-799ab3f5708c",
-      "kakaoId": "11842140",
-      "userEmail": "kimjinsu0210@naver.com",
-      "date": "2023. 7. 21. 오후 1:29:42",
-      "place_name": "용운국제수영장",
-      "address_name": "대전 동구 용운동 301-1",
-      "phone": "042-280-1000"
-    },
-    {
-      "id": "efb56dac-a537-3bb2-10ec-88614125ce91",
-      "kakaoId": "1699946487",
-      "userEmail": "kimjinsu0210@naver.com",
-      "date": "2023. 7. 21. 오후 2:21:02",
-      "place_name": "서울YMCA 수영장",
-      "address_name": "서울 종로구 종로2가 9",
-      "phone": "02-735-4612"
     },
     {
       "id": "b49af051-ba0e-204a-f62b-8bfea1c3d832",
@@ -64,6 +64,15 @@
       "place_name": "장흥한옥수영장",
       "address_name": "경기 양주시 장흥면 석현리 352-2",
       "phone": "031-829-2288"
+    },
+    {
+      "id": "a7ccc220-28ef-9117-ee9f-5dd58d747c6d",
+      "kakaoId": "11842140",
+      "userEmail": "kimjinsu0210@naver.com",
+      "date": "2023. 7. 22. 오전 1:28:08",
+      "place_name": "용운국제수영장",
+      "address_name": "대전 동구 용운동 301-1",
+      "phone": "042-280-1000"
     }
   ],
   "userPosts": [
@@ -111,6 +120,24 @@
       "content": "ㅇㄹㅇㄴㅇㄹㄴㄴㄹㅇㄹㄴ",
       "x": 127.43797142413824,
       "y": 36.615691469942675
+    },
+    {
+      "userId": "LidFwuu4NeZS2rY4KdZZ8zC0cKg1",
+      "id": "67804659-9ec4-d51b-cb5d-25263a1e261a",
+      "address_name": "인천 미추홀구 숭의동 162-14",
+      "place_name": "몰루",
+      "content": "오거리에요",
+      "x": 126.64295228781839,
+      "y": 37.46235369385576
+    },
+    {
+      "userId": "LidFwuu4NeZS2rY4KdZZ8zC0cKg1",
+      "id": "b954eed1-bf7a-0b2b-e3dd-a3a8bf183171",
+      "address_name": "인천 미추홀구 숭의동 180-6",
+      "place_name": "물건사러가요",
+      "content": "물건사요",
+      "x": 126.64352033320692,
+      "y": 37.4653174695429
     }
   ]
 }

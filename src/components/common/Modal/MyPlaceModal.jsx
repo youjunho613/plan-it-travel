@@ -6,9 +6,9 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import sideBarLogo from "assets/sideBarLogo.png";
 import { closeModal } from "redux/modules/modal";
 import { useQuery } from "react-query";
-import { getUserPost } from "api/userPost";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "server/firebase";
+import { getUserPost } from "api/userPost";
 
 export const MyPlaceModal = ({ setState, state }) => {
   const dispatch = useDispatch();

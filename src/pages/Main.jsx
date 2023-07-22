@@ -129,6 +129,7 @@ export const Main = () => {
     </Container>
   );
 };
+
 const Container = styled.div`
   display: flex;
   width: 100%;

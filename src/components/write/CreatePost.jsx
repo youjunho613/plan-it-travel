@@ -103,7 +103,7 @@ const CreatePost = () => {
     };
 
     postMutation.mutate(newUserPost);
-    navigate(`/mypage/${authData.uid}`);
+    navigate(`/main`);
   };
 
   return (

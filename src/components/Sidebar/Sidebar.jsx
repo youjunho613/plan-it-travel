@@ -27,7 +27,8 @@ const Sidebar = ({ kakao, state, setState, map, isLocation, option, youtubeRes }
       ? setIsOpen({ ...isOpen, [target]: false })
       : setIsOpen({ ...isOpen, [target]: true });
 
-  const { currentUser, logOut } = useAuth();
+  const {currentUser} = useSelector(state => state.userData);
+  const { logOut } = useAuth();
 
   // 키워드 검색
   const SearchHandler = keyword => {
