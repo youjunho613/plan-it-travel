@@ -8,14 +8,13 @@ import { useState } from "react";
 import { useAuth, useForm } from "hooks";
 import { Modal, Input, Button, Text } from "components/common";
 import { openModal, closeModal } from "redux/modules";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 export const MyPage = () => {
   const [bookmarkOpen, setBookmarkOpen] = useState(false);
   const [userInfoOpen, setUserInfoOpen] = useState(true);
 
   const navigate = useNavigate();
-  const { deleteUser, modifyUser } = useAuth();
+  const { removeUser, modifyUser } = useAuth();
   const { currentUser } = useSelector(state => state.userData);
   const bookmarksData = useQuery("bookmarks", getBookmarks).data?.filter(
     e => e.userEmail === currentUser?.email
@@ -38,32 +37,26 @@ export const MyPage = () => {
     setUserInfoOpen(false);
     setBookmarkOpen(true);
   };
-  // form 로직
+
+  // 회원정보 수정 폼 로직
   const [imgFile, setImgFile] = useState();
   const onChangeAddFile = event => setImgFile(event.target.files[0]);
 
-  const initialState = { displayName: "" };
+  const initialState = {
+    displayName: "",
+    newPassword: "",
+    newPasswordConfirm: ""
+  };
   const validation = () => {
     let errors = {};
     if (!values.displayName) errors.displayName = "닉네임을 입력해주세요.";
+    if (values.newPassword !== values.newPasswordConfirm)
+      errors.newPasswordConfirm = "비밀번호가 일치하지 않습니다.";
     return errors;
   };
   const submitAction = () => modifyUser(values, imgFile);
   const { values, errors, onSubmit, resister } = useForm(initialState, validation, submitAction);
 
-  // TODO 비밀번호 찾기 구현
-  const changePwdHandler = () => {};
-  // const changePwdHandler = () => {
-  //   const auth = getAuth();
-  //   sendPasswordResetEmail(auth, currentUser?.email)
-  //     .then(() => {
-  //       console.log("1");
-  //     })
-  //     .catch(error => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //     });
-  // };
   return (
     <PageContainer>
       <UserContainer>
@@ -112,33 +105,53 @@ export const MyPage = () => {
           >
             정보 수정
           </SettingContentButton>
-          <SettingContentButton onClick={deleteUser}>회원 탈퇴</SettingContentButton>
+          <SettingContentButton onClick={removeUser}>회원 탈퇴</SettingContentButton>
         </Modal>
       )}
       {modifyIsOpen && (
         <Modal type={"modify"} closeTarget={"modifyIsOpen"}>
-          <form onSubmit={onSubmit}>
+          <Form onSubmit={onSubmit}>
             <Input
-              {...resister("displayName")}
               type={"text"}
               size={"modal"}
               $bgcolor={"white"}
-              placeholder="Nickname"
+              placeholder={currentUser.displayName}
+              {...resister("displayName")}
             />
             {errors?.displayName && <Text>{errors?.displayName}</Text>}
             <Input type="file" id="photoUrl" accept="image/*" onChange={onChangeAddFile} />
-            <Button $bgcolor={"theme1"} size={"medium"} color={"black"} onClick={changePwdHandler}>
-              비밀번호 변경
-            </Button>
-            <div>
-              <Button type="button" $bgcolor={"white"} size={"medium"} color={"black"}>
+            <Input
+              size={"modal"}
+              $bgcolor={"white"}
+              type="password"
+              placeholder="새로운 비밀번호"
+              {...resister("newPassword")}
+            />
+            <Input
+              size={"modal"}
+              $bgcolor={"white"}
+              type="password"
+              placeholder="새로운 비밀번호 확인"
+              {...resister("newPasswordConfirm")}
+            />
+            {errors?.newPasswordConfirm && <Text>{errors?.newPasswordConfirm}</Text>}
+            <ButtonBox>
+              <Button
+                type="button"
+                $bgcolor={"white"}
+                size={"medium"}
+                color={"black"}
+                onClick={() => {
+                  modalCloseHandler("modifyIsOpen");
+                }}
+              >
                 닫기
               </Button>
               <Button $bgcolor={"theme1"} size={"medium"} color={"black"}>
                 수정
               </Button>
-            </div>
-          </form>
+            </ButtonBox>
+          </Form>
         </Modal>
       )}
       {bookmarkOpen && (
@@ -208,6 +221,21 @@ const SettingContentButton = styled.button`
   &:hover {
     background-color: #8a8a8a81;
   }
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 35px;
+`;
+
+const ButtonBox = styled.div`
+  display: inherit;
+  align-items: center;
+  margin: 0 20px;
+  gap: 20px;
 `;
 
 const rotation = keyframes`

@@ -58,7 +58,7 @@ export const MainMap = ({
   };
   //마커 클릭 시 디테일 페이지로 이동
   const markerClickHandler = id => {
-    navigate(`/detail/${id}`);
+    id.includes("-") ? navigate(`/myplacedetail/${id}`) : navigate(`/detail/${id}`);
   };
   return (
     <Styled.MapContainer>

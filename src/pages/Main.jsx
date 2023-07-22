@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "redux/modules/modal";
 import { MainMap } from "components/map/MainMap";
+import { MyPlaceModal } from "components/common/Modal/MyPlaceModal";
 
 const { kakao } = window;
 
 export const Main = () => {
-  const { ListIsOpen } = useSelector(state => state.modal);
+  const { ListIsOpen, MyPlaceIsOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const [map, setMap] = useState();
   const [isLocation, setIsLocation] = useState(false);
@@ -76,6 +77,11 @@ export const Main = () => {
           <MainListModal setState={setState} state={state} setIsLocation={setIsLocation} />
         </Modal>
       )}
+      {MyPlaceIsOpen && (
+        <Modal type={"main"}>
+          <MyPlaceModal setState={setState} state={state} />
+        </Modal>
+      )}
       <Sidebar
         kakao={kakao}
         state={state}
@@ -98,6 +104,7 @@ export const Main = () => {
     </Container>
   );
 };
+
 const Container = styled.div`
   display: flex;
   width: 100%;

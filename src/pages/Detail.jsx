@@ -13,10 +13,10 @@ import { throttle } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import markerImg from "assets/marker.png";
 import { youtubeApi } from "../api/youtube";
-import YouTube from "react-youtube";
 import { Bookmark } from "components/Bookmark/Bookmark";
 import { Modal } from "components/common";
-import { openModal, closeModal } from "redux/modules";
+import { openModal, closeModal } from "redux/modules/modal";
+import YouTube from "react-youtube";
 
 export const Detail = () => {
   const params = useParams();

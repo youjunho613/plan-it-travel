@@ -84,6 +84,60 @@
       "content": "ㅇㄴㅁㄻㄴㅇㄻㄴㅇㄹ",
       "x": 127.43268264766363,
       "y": 36.621441996172855
+    },
+    {
+      "userId": "BWbPQhNgxeZPCRyTC5lRrF4lzzh2",
+      "id": "f4d0e43a-04c9-45b7-a009-55b8c0445b50",
+      "address_name": "충북 청주시 흥덕구 가경동 166-11",
+      "place_name": "ㄴㅁㅇㄹㅇㄴ",
+      "content": "ㅁㄴㅇㄻㅇㄴㄻㄴㅇㄹ",
+      "x": 127.43747763912114,
+      "y": 36.62326279717542
+    },
+    {
+      "userId": "BWbPQhNgxeZPCRyTC5lRrF4lzzh2",
+      "id": "9679dd05-2631-0779-58a8-25d052ef7505",
+      "address_name": "충북 청주시 흥덕구 가경동 1740",
+      "place_name": "ㅁㄴㅇㄻㄴㅇ",
+      "content": "ㄴㅇㄻㄴㅇㄻㄴㅇㄹㄴㅁㅇㄻㄴ",
+      "x": 127.43903921301411,
+      "y": 36.61475036208487
+    },
+    {
+      "userId": "BWbPQhNgxeZPCRyTC5lRrF4lzzh2",
+      "id": "05641db0-9731-e5bf-c805-a650aaabf847",
+      "address_name": "충북 청주시 서원구 죽림동 416",
+      "place_name": "ㄴㅇㄻㄴㅇㄹㄴㅁㅇ",
+      "content": "ㄴㅇㄻㅇㄴㄻㄴㅇㄹㅇㄴㄹㄹㄹㄴㅇㄴ",
+      "x": 127.44203121566845,
+      "y": 36.61409048495976
+    },
+    {
+      "userId": "BWbPQhNgxeZPCRyTC5lRrF4lzzh2",
+      "id": "037c448a-1d5c-e90e-64ee-4b0a15d0f5bb",
+      "address_name": "충북 청주시 흥덕구 가경동 245-2",
+      "place_name": "ㅇㄴㅁㄻㅇㄴㄹㅇㄹ",
+      "content": "ㅇㄹㅇㄴㅇㄹㄴㄴㄹㅇㄹㄴ",
+      "x": 127.43797142413824,
+      "y": 36.615691469942675
+    },
+    {
+      "userId": "LidFwuu4NeZS2rY4KdZZ8zC0cKg1",
+      "id": "67804659-9ec4-d51b-cb5d-25263a1e261a",
+      "address_name": "인천 미추홀구 숭의동 162-14",
+      "place_name": "몰루",
+      "content": "오거리에요",
+      "x": 126.64295228781839,
+      "y": 37.46235369385576
+    },
+    {
+      "userId": "LidFwuu4NeZS2rY4KdZZ8zC0cKg1",
+      "id": "b954eed1-bf7a-0b2b-e3dd-a3a8bf183171",
+      "address_name": "인천 미추홀구 숭의동 180-6",
+      "place_name": "물건사러가요",
+      "content": "물건사요",
+      "x": 126.64352033320692,
+      "y": 37.4653174695429
     }
   ]
 }

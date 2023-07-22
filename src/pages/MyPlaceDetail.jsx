@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import markerImg from "assets/marker.png";
 import { useQuery } from "react-query";
-import { getUserPosts } from "api/userPost";
+import { getUserPost } from "api/userPost";
 
 export const MyPlaceDetail = () => {
   const params = useParams();
@@ -12,7 +12,7 @@ export const MyPlaceDetail = () => {
   const [draggable, setDraggable] = useState(true);
   const [zoomable, setZoomable] = useState(true);
 
-  const userPosts = useQuery("userPosts", getUserPosts).data?.find(e => e.id === paramsId);
+  const userPosts = useQuery("userPosts", getUserPost).data?.find(e => e.id === paramsId);
 
   const position = { lat: userPosts.y, lng: userPosts.x };
 

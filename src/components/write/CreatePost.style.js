@@ -2,11 +2,14 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 30px;
 `;
 
 export const ColumnBox = styled.div`
   display: inherit;
+  width: 500px;
   flex-direction: column;
   align-items: center;
 

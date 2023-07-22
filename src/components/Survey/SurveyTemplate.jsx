@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import { Button, Text, Input } from "components/common";
-import { SURVEY_TEXT, SURVEY_RESULT } from "../surveyData/surveyData";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { getServeyData } from "redux/modules/detailData";
+import { SURVEY_TEXT, SURVEY_RESULT } from "surveyData/surveyData";
 
 const initialValue = {
   1: false,
@@ -16,6 +16,7 @@ const initialValue = {
   7: false,
   8: false
 };
+const buttonAttr = $bgcolor => ({ $bgcolor, size: "small", fontSize: "10px" });
 
 function SurveyTemplate() {
   const navigate = useNavigate();
@@ -55,8 +56,6 @@ function SurveyTemplate() {
     dispatch(getServeyData(filterd));
     navigate(`/detail/${filterd[0].id}`);
   };
-
-  const buttonAttr = $bgcolor => ({ $bgcolor, size: "small", fontSize: "10px" });
 
   return (
     <Container>
@@ -103,6 +102,7 @@ function SurveyTemplate() {
   );
 }
 export default SurveyTemplate;
+
 const ProgressLevel = styled.span`
   position: absolute;
   bottom: 15px;
