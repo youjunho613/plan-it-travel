@@ -5,6 +5,7 @@ const CreatePost = () => {
   return (
     <Styled.Container>
       <Styled.ColumnBox>
+        <Input placeholder={"주소 검색"} size={"modal"} $bgcolor={"white"} />
         <Text>마커 찍을 지도 필요</Text>
         {/* FIXME 지도를 따로 공용 컴포넌트로 뺄 필요성있음 */}
         <Styled.Map></Styled.Map>

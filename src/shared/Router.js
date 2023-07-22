@@ -1,8 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { Home, Main, Detail, Survey, Layout } from "pages";
+import { Home, Main, Detail, Survey, Layout, MyPage, MyPlaceDetail } from "pages";
 import Header from "components/Header/Header";
-import MyPage from "pages/MyPage";
-
 
 const Router = () => {
   return (
@@ -20,7 +18,8 @@ const Router = () => {
           <Route index element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/survey" element={<Survey />} />
-          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/mypage/:uid" element={<MyPage />} />
+          <Route path="/myplacedetail/:id" element={<MyPlaceDetail />} />
         </Route>
         <Route path="/main" element={<Main />} />
       </Routes>

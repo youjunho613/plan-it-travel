@@ -1,33 +1,51 @@
 {
   "comments": [
     {
-      "id": "d4917311-af67-f701-06d3-8990ffe8fef5",
-      "postId": "8465503",
-      "comment": "1",
-      "date": "2023-07-21T03:02:11.110Z",
+      "id": "942f95d3-99bf-848a-ab97-23afc970a7d8",
+      "postId": "27548967",
+      "comment": "123",
+      "date": "2023-07-21T00:31:11.798Z",
+      "email": "123@naver.com",
+      "displayName": "디폴트 이미지 테스트",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
+    },
+    {
+      "id": "9c52d321-d0be-cb07-c4f4-f1809bdb82f2",
+      "postId": "27548967",
+      "comment": "123",
+      "date": "2023-07-21T00:31:13.665Z",
+      "email": "123@naver.com",
+      "displayName": "디폴트 이미지 테스트",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
+    },
+    {
+      "id": "643955bc-0292-a0f5-3877-11fbcecf626d",
+      "postId": "933133252",
+      "comment": "댓글입니다.",
+      "date": "2023-07-21T16:28:24.506Z",
       "email": "kimjinsu0210@naver.com",
       "displayName": "김진수",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2FTHTmGQIk3VNRQxXSelqTcwnroQu2?alt=media&token=06e91413-8c68-4407-b9b6-fd552f6caabb"
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
+    },
+    {
+      "id": "51833607-e329-c267-a461-d4bd71d10cee",
+      "postId": "933133252",
+      "comment": "댓글2",
+      "date": "2023-07-21T16:28:43.386Z",
+      "email": "kimjinsu0210@naver.com",
+      "displayName": "김진수",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
     }
   ],
   "bookmarks": [
     {
-      "id": "56bdab48-ce3e-4a60-b8d7-799ab3f5708c",
-      "kakaoId": "11842140",
-      "userEmail": "kimjinsu0210@naver.com",
-      "date": "2023. 7. 21. 오후 1:29:42",
-      "place_name": "용운국제수영장",
-      "address_name": "대전 동구 용운동 301-1",
-      "phone": "042-280-1000"
-    },
-    {
-      "id": "efb56dac-a537-3bb2-10ec-88614125ce91",
-      "kakaoId": "1699946487",
-      "userEmail": "kimjinsu0210@naver.com",
-      "date": "2023. 7. 21. 오후 2:21:02",
-      "place_name": "서울YMCA 수영장",
-      "address_name": "서울 종로구 종로2가 9",
-      "phone": "02-735-4612"
+      "id": "219511e1-995d-fb72-caad-1f9c5524dbdb",
+      "kakaoId": "27548967",
+      "userEmail": "123@naver.com",
+      "date": "2023. 7. 21. 오전 9:32:35",
+      "place_name": "엉덩물계곡",
+      "address_name": "제주특별자치도 서귀포시 색달동 3384-4",
+      "phone": ""
     },
     {
       "id": "b49af051-ba0e-204a-f62b-8bfea1c3d832",
@@ -46,6 +64,26 @@
       "place_name": "장흥한옥수영장",
       "address_name": "경기 양주시 장흥면 석현리 352-2",
       "phone": "031-829-2288"
+    },
+    {
+      "id": "a7ccc220-28ef-9117-ee9f-5dd58d747c6d",
+      "kakaoId": "11842140",
+      "userEmail": "kimjinsu0210@naver.com",
+      "date": "2023. 7. 22. 오전 1:28:08",
+      "place_name": "용운국제수영장",
+      "address_name": "대전 동구 용운동 301-1",
+      "phone": "042-280-1000"
+    }
+  ],
+  "userPosts": [
+    {
+      "userId": "BWbPQhNgxeZPCRyTC5lRrF4lzzh2",
+      "id": "fd427843-17cf-df58-098a-d42a7d506ef8",
+      "address_name": "충북 청주시 흥덕구 가경동 2077",
+      "place_name": "ㅁㄴㅇㄻㅇㄴ",
+      "content": "ㅇㄴㅁㄻㄴㅇㄻㄴㅇㄹ",
+      "x": 127.43268264766363,
+      "y": 36.621441996172855
     }
   ]
 }

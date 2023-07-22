@@ -4,10 +4,10 @@ import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import sideBarLogo from "assets/sideBarLogo.png";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { getDataList, getPagination } from "redux/modules/detailData";
 import { openModal } from "redux/modules/modal";
-import { useAuth } from "components/auth";
+import { useAuth } from "hooks";
 
 const Sidebar = ({ kakao, state, setState, map, isLocation, option }) => {
   const dispatch = useDispatch();
@@ -24,7 +24,8 @@ const Sidebar = ({ kakao, state, setState, map, isLocation, option }) => {
       ? setIsOpen({ ...isOpen, [target]: false })
       : setIsOpen({ ...isOpen, [target]: true });
 
-  const { currentUser, logOut } = useAuth();
+  const {currentUser} = useSelector(state => state.userData);
+  const { logOut } = useAuth();
 
   // 키워드 검색
   const SearchHandler = keyword => {

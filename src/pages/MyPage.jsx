@@ -1,23 +1,35 @@
 import styled, { keyframes } from "styled-components";
-import { useAuth } from "components/auth";
+import { useDispatch, useSelector } from "react-redux";
 import { getBookmarks } from "api/bookmarks";
 import { useQuery } from "react-query";
 import { Bookmark } from "components/Bookmark";
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import { deleteUser, getAuth, signOut } from "firebase/auth";
-const MyPage = () => {
+import { useAuth, useForm } from "hooks";
+import { Modal, Input, Button, Text } from "components/common";
+import { openModal, closeModal } from "redux/modules";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+
+export const MyPage = () => {
   const [bookmarkOpen, setBookmarkOpen] = useState(false);
   const [userInfoOpen, setUserInfoOpen] = useState(true);
-  const [settingModal, setSettingModal] = useState(false);
+
   const navigate = useNavigate();
-  const { currentUser } = useAuth();
+  const { deleteUser, modifyUser } = useAuth();
+  const { currentUser } = useSelector(state => state.userData);
   const bookmarksData = useQuery("bookmarks", getBookmarks).data?.filter(
     e => e.userEmail === currentUser?.email
   );
+
+  const { modifyIsOpen, settingIsOpen } = useSelector(state => state.modal);
+  const dispatch = useDispatch();
+  const modalOpenHandler = target => dispatch(openModal(target));
+  const modalCloseHandler = target => dispatch(closeModal(target));
+
   const MoveDetailPageHandler = id => {
     navigate(`/detail/${id}`);
   };
+
   const showUserInfo = () => {
     setBookmarkOpen(false);
     setUserInfoOpen(true);
@@ -26,57 +38,53 @@ const MyPage = () => {
     setUserInfoOpen(false);
     setBookmarkOpen(true);
   };
-  // 설정 모달 열기
-  const openSettingModal = () => setSettingModal(true);
+  // form 로직
+  const [imgFile, setImgFile] = useState();
+  const onChangeAddFile = event => setImgFile(event.target.files[0]);
 
-  // 모달창 외부 클릭 시 모달창 닫힘 로직
-  const clickOutside = event => {
-    setSettingModal(false);
+  const initialState = { displayName: "" };
+  const validation = () => {
+    let errors = {};
+    if (!values.displayName) errors.displayName = "닉네임을 입력해주세요.";
+    return errors;
   };
+  const submitAction = () => modifyUser(values, imgFile);
+  const { values, errors, onSubmit, resister } = useForm(initialState, validation, submitAction);
 
-  // 회원정보수정 모달창 열기
-  const openUserInfoModal = () => {
-    setSettingModal(false);
-  };
-  // 회원탈퇴 로직
-  const userDelete = async () => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    console.log("user",user)
-    const deleteConfirm = window.confirm('정말로 탈퇴하시겠습니까?');
-    console.log("deleteConfirm",deleteConfirm)
-    if(deleteConfirm){
-      deleteUser(user).then(() => {
-        alert('탈퇴가 정상적으로 처리되었습니다.');
-        signOut(auth);
-        navigate('/');
-      }).catch((error) => {
-        console.log('errorCode', error.code);
-      });
-    }else alert('취소 하셨습니다.');
-    setSettingModal(false);
-  };
-  // 비밀번호변경 모달 열기
-  const openPwdModifyModal = () => {
-    setSettingModal(false);
-  };
+  // TODO 비밀번호 찾기 구현
+  const changePwdHandler = () => {};
+  // const changePwdHandler = () => {
+  //   const auth = getAuth();
+  //   sendPasswordResetEmail(auth, currentUser?.email)
+  //     .then(() => {
+  //       console.log("1");
+  //     })
+  //     .catch(error => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //     });
+  // };
   return (
     <PageContainer>
       <UserContainer>
         <UserImg src={currentUser?.photoURL}></UserImg>
-        <LargeFont>{currentUser?.displayName}</LargeFont>
+        <Text fontSize={"20px"}>{currentUser?.displayName}</Text>
       </UserContainer>
       <OptionBar>
-        <OptionBarClickDiv onClick={showUserInfo}>회원정보 보기</OptionBarClickDiv>
-        <div>|</div>
-        <OptionBarClickDiv onClick={showBookmark}>북마크 보기</OptionBarClickDiv>
+        <Text style={{ cursor: "pointer" }} fontSize={"20px"} onClick={showUserInfo}>
+          회원정보 보기
+        </Text>
+        <Text fontSize={"20px"}>|</Text>
+        <Text style={{ cursor: "pointer" }} fontSize={"20px"} onClick={showBookmark}>
+          북마크 보기
+        </Text>
       </OptionBar>
       {userInfoOpen && (
         <UserInfoWrap>
           <SettingFlexBox>
-            기본 회원 정보
+            <Text fontSize={"20px"}>기본 회원 정보</Text>
             <SettingSvg
-              onClick={openSettingModal}
+              onClick={() => modalOpenHandler("settingIsOpen")}
               xmlns="http://www.w3.org/2000/svg"
               height="2em"
               viewBox="0 0 512 512"
@@ -85,24 +93,53 @@ const MyPage = () => {
             </SettingSvg>
           </SettingFlexBox>
           <FlexBox>
-            <label>이메일</label>
+            <Text>이메일</Text>
             <CurrentUserInfo>{currentUser?.email}</CurrentUserInfo>
           </FlexBox>
           <FlexBox>
-            <label>닉네임</label>
+            <Text>닉네임</Text>
             <CurrentUserInfo>{currentUser?.displayName}</CurrentUserInfo>
           </FlexBox>
         </UserInfoWrap>
       )}
-      {/* 설정 모달  */}
-      {settingModal && (
-        <ModalOverlay onClick={clickOutside}>
-          <SettingContentBox>
-            <SettingContentButton onClick={openUserInfoModal}>정보 수정</SettingContentButton>
-            <SettingContentButton onClick={userDelete}>회원 탈퇴</SettingContentButton>
-            <SettingContentButton onClick={openPwdModifyModal}>비밀번호 변경 </SettingContentButton>
-          </SettingContentBox>
-        </ModalOverlay>
+      {settingIsOpen && (
+        <Modal type={"setting"} closeTarget={"settingIsOpen"}>
+          <SettingContentButton
+            onClick={() => {
+              modalOpenHandler("modifyIsOpen");
+              modalCloseHandler("settingIsOpen");
+            }}
+          >
+            정보 수정
+          </SettingContentButton>
+          <SettingContentButton onClick={deleteUser}>회원 탈퇴</SettingContentButton>
+        </Modal>
+      )}
+      {modifyIsOpen && (
+        <Modal type={"modify"} closeTarget={"modifyIsOpen"}>
+          <form onSubmit={onSubmit}>
+            <Input
+              {...resister("displayName")}
+              type={"text"}
+              size={"modal"}
+              $bgcolor={"white"}
+              placeholder="Nickname"
+            />
+            {errors?.displayName && <Text>{errors?.displayName}</Text>}
+            <Input type="file" id="photoUrl" accept="image/*" onChange={onChangeAddFile} />
+            <Button $bgcolor={"theme1"} size={"medium"} color={"black"} onClick={changePwdHandler}>
+              비밀번호 변경
+            </Button>
+            <div>
+              <Button type="button" $bgcolor={"white"} size={"medium"} color={"black"}>
+                닫기
+              </Button>
+              <Button $bgcolor={"theme1"} size={"medium"} color={"black"}>
+                수정
+              </Button>
+            </div>
+          </form>
+        </Modal>
       )}
       {bookmarkOpen && (
         <BookContainer>
@@ -144,31 +181,30 @@ const MyPage = () => {
   );
 };
 
-export default MyPage;
+// const ModalOverlay = styled.div`
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: rgba(0, 0, 0, 0.582);
+//   backdrop-filter: blur(2px);
+// `;
 
-const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.582);
-  backdrop-filter: blur(2px);
-`;
-
-const SettingContentBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(83, 83, 83, 0.445);
-  border-radius: 10px;
-`;
+// const SettingContentBox = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   background-color: rgba(83, 83, 83, 0.445);
+//   border-radius: 10px;
+// `;
 const SettingContentButton = styled.button`
   width: 300px;
   height: 50px;
   border-radius: 12px;
+  color: white;
   &:hover {
     background-color: #8a8a8a81;
   }
@@ -179,6 +215,7 @@ const rotation = keyframes`
       transform:rotate(180deg);
     }
     `;
+
 const SettingSvg = styled.svg`
   height: 30px;
   fill: #616161;
@@ -189,6 +226,7 @@ const SettingSvg = styled.svg`
 `;
 const CurrentUserInfo = styled.div`
   background-color: #7e7e7e2c;
+  color: white;
   padding: 10px;
   border-radius: 5px;
 `;
@@ -210,10 +248,10 @@ const SettingFlexBox = styled(FlexBox)`
   justify-content: space-between;
 `;
 
-const OptionBarClickDiv = styled.div`
-  cursor: pointer;
-  font-size: 20px;
-`;
+// const OptionBarClickDiv = styled.div`
+//   cursor: pointer;
+//   font-size: 20px;
+// `;
 const OptionBar = styled.div`
   display: flex;
   justify-content: center;

@@ -1,19 +1,18 @@
 import { Modal, Text, Button, RegisterModal, LoginModal } from "components/common";
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "redux/modules/modal";
+import { openModal } from "redux/modules";
 import logo from "assets/logo.png";
 import * as Styled from "./Header.style";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuth } from "components/auth";
+import { useAuth } from "hooks";
 
 const Header = () => {
   const { logInIsOpen, signUpIsOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
-
-  const { currentUser, logOut } = useAuth();
-
+  const {currentUser} = useSelector(state => state.userData);
+  const { logOut } = useAuth();
   const [scrollPosition, setScrollPosition] = useState(0);
   const updateScroll = () =>
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -34,6 +33,11 @@ const Header = () => {
         </Link>
         <Styled.Ul>
           <Styled.Li>
+            <Link to={"/"}>
+              <Text fontSize={"15px"}>Home</Text>
+            </Link>
+          </Styled.Li>
+          <Styled.Li>
             <Link to={"/Main"}>
               <Text fontSize={"15px"}>Map</Text>
             </Link>
@@ -47,7 +51,7 @@ const Header = () => {
       </Styled.Nav>
 
       <Styled.ButtonBox>
-        {currentUser?.uid === null || currentUser?.uid === undefined ? (
+        {!currentUser?.uid ? (
           <>
             <Button
               $bgcolor={"theme1"}
@@ -78,8 +82,8 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Link to={`/mypage`}>
-              <Styled.ProfileImg src={currentUser.photoURL} />
+            <Link to={`/mypage/${currentUser?.uid}`}>
+              <Styled.ProfileImg src={currentUser?.photoURL} />
             </Link>
             <Button $bgcolor={"theme1"} size={"small"} fontSize={"5px"} onClick={logOut}>
               Log Out

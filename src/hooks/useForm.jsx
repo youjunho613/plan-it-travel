@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import _ from "lodash";
 
-const useForm = (initialState, validation, submitAction) => {
+export const useForm = (initialState, validation, submitAction) => {
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState({});
 
@@ -25,5 +25,3 @@ const useForm = (initialState, validation, submitAction) => {
   );
   return { values, errors, onSubmit, resister };
 };
-
-export default useForm;

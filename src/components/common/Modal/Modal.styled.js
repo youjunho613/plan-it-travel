@@ -4,7 +4,6 @@ export const Outer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,6 +20,14 @@ export const Outer = styled.div`
     } else if (type === "youtube") {
       return css`
         background-color: rgba(0, 0, 0, 0.5);
+      `;
+    } else if (type === "setting") {
+      return css`
+        background-color: rgba(0, 0, 0, 0.5);
+      `;
+    } else if (type === "modify") {
+      return css`
+        background-color: #rgba(0, 0, 0, 0.5);
       `;
     } else {
       return css`
@@ -51,6 +58,22 @@ export const Inner = styled.div`
         align-items: center;
         padding: 50px;
       `;
+    } else if (type === "setting") {
+      return css`
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(83, 83, 83, 0.445);
+        border-radius: 10px;
+      `;
+    } else if (type === "modify") {
+      return css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
+        background-color: #000;
+        border-radius: 10px;
+      `;
     } else {
       return css`
         display: flex;
@@ -61,4 +84,12 @@ export const Inner = styled.div`
       `;
     }
   }}
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 35px;
 `;
