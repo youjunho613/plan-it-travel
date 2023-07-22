@@ -8,6 +8,7 @@ import { postUserPost } from "api/userPost";
 import uuid from "react-uuid";
 import { auth } from "server/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import markerImg from "assets/marker.png";
 
 const { kakao } = window;
 
@@ -107,63 +108,74 @@ const CreatePost = () => {
   };
 
   return (
-    <Styled.Container>
-      <Styled.ColumnBox>
-        <Map
-          center={currentPosition}
-          style={{ width: "100%", height: "450px" }}
-          level={5}
-          onCreate={setMap}
-          onClick={mapClickEvent}
-        >
-          {currentPosition && <MapMarker position={clickPosition} />}
-        </Map>
-        <form onSubmit={submitSearchValue}>
+    <Styled.Layout>
+      <Styled.Container>
+        <Styled.ColumnBox>
+          <Map
+            center={currentPosition}
+            style={{ width: "100%", height: "450px" }}
+            level={5}
+            onCreate={setMap}
+            onClick={mapClickEvent}
+          >
+            {currentPosition && <MapMarker position={clickPosition} image={{
+              src: markerImg,
+              size: { width: 60, height: 50 },
+              options: { offset: { x: 30, y: 50 } }
+            }}/>}
+          </Map>
+          <Styled.AddressForm onSubmit={submitSearchValue}>
+            <Styled.AddressInput
+              placeholder={"주소 검색"}
+              type="text"
+              size={"modal"}
+              $bgcolor={"white"}
+              value={value.searchValue}
+              autoFocus
+              onChange={e => setValue({ ...value, searchValue: e.target.value })}
+            />
+            <button>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#fff"height="1.5em" viewBox="0 0 512 512">
+                <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+              </svg>
+            </button>
+          </Styled.AddressForm>
+        </Styled.ColumnBox>
+        <Styled.Form>
+          <Text> 글 작성 </Text>
           <Input
-            placeholder={"주소 검색"}
-            type="text"
+            placeholder={"지도에 마커를 찍어주세요!"}
             size={"modal"}
             $bgcolor={"white"}
-            value={value.searchValue}
-            autoFocus
-            onChange={e => setValue({ ...value, searchValue: e.target.value })}
+            value={value.addressValue}
+            disabled
           />
-        </form>
-      </Styled.ColumnBox>
-      <Styled.Form>
-        <Text> 글 작성 </Text>
-        <Input
-          placeholder={"지도에 마커를 찍어주세요!"}
-          size={"modal"}
-          $bgcolor={"white"}
-          value={value.addressValue}
-          disabled
-        />
-        <Input
-          placeholder={"저 곳은 어떤 장소었나요?"}
-          size={"modal"}
-          $bgcolor={"white"}
-          value={value.titleValue}
-          onChange={e => setValue({ ...value, titleValue: e.target.value })}
-        />
-        <Input
-          placeholder={"저 장소에서 어떤일이 있었나요?"}
-          size={"modal"}
-          $bgcolor={"white"}
-          as={"textarea"}
-          value={value.contentValue}
-          onChange={e => setValue({ ...value, contentValue: e.target.value })}
-        />
-        <Styled.ButtonBox>
-          <Button type="button" size={"medium"} $bgcolor={"black"}>
-            취소
-          </Button>
-          <Button type="submit" size={"medium"} $bgcolor={"black"} onClick={submitHandler}>
-            작성
-          </Button>
-        </Styled.ButtonBox>
-      </Styled.Form>
-    </Styled.Container>
+          <Input
+            placeholder={"저 곳은 어떤 장소었나요?"}
+            size={"modal"}
+            $bgcolor={"white"}
+            value={value.titleValue}
+            onChange={e => setValue({ ...value, titleValue: e.target.value })}
+          />
+          <Input
+            placeholder={"저 장소에서 어떤일이 있었나요?"}
+            size={"modal"}
+            $bgcolor={"white"}
+            as={"textarea"}
+            value={value.contentValue}
+            onChange={e => setValue({ ...value, contentValue: e.target.value })}
+          />
+          <div>
+            <Button type="button" size={"medium"} $bgcolor={"black"}>
+              취소
+            </Button>
+            <Button type="submit" size={"medium"} $bgcolor={"black"} onClick={submitHandler}>
+              작성
+            </Button>
+          </div>
+        </Styled.Form>
+      </Styled.Container>
+    </Styled.Layout>
   );
 };
 

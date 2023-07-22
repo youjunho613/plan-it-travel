@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { MainListModal, Modal } from "components/common";
-import Sidebar from "components/Sidebar/Sidebar";
+import { Sidebar } from "components/Sidebar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "redux/modules/modal";

@@ -35,6 +35,15 @@
       "email": "kimjinsu0210@naver.com",
       "displayName": "김진수",
       "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
+    },
+    {
+      "id": "81266260-537f-e3e8-3084-1e1559684ec0",
+      "postId": "11586002",
+      "comment": "댓글입니다.",
+      "date": "2023-07-22T08:30:49.071Z",
+      "email": "kimjinsu0210@naver.com",
+      "displayName": "김진수입니다.",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
     }
   ],
   "bookmarks": [
@@ -48,15 +57,6 @@
       "phone": ""
     },
     {
-      "id": "b49af051-ba0e-204a-f62b-8bfea1c3d832",
-      "kakaoId": "17575130",
-      "userEmail": "kimjinsu0210@naver.com",
-      "date": "2023. 7. 21. 오후 2:21:10",
-      "place_name": "문학박태환수영장",
-      "address_name": "인천 미추홀구 문학동 515",
-      "phone": "032-715-4224"
-    },
-    {
       "id": "7f1d2da2-8812-455f-979f-88f94ae8d03e",
       "kakaoId": "933133252",
       "userEmail": "kimjinsu0210@naver.com",
@@ -64,15 +64,6 @@
       "place_name": "장흥한옥수영장",
       "address_name": "경기 양주시 장흥면 석현리 352-2",
       "phone": "031-829-2288"
-    },
-    {
-      "id": "a7ccc220-28ef-9117-ee9f-5dd58d747c6d",
-      "kakaoId": "11842140",
-      "userEmail": "kimjinsu0210@naver.com",
-      "date": "2023. 7. 22. 오전 1:28:08",
-      "place_name": "용운국제수영장",
-      "address_name": "대전 동구 용운동 301-1",
-      "phone": "042-280-1000"
     }
   ],
   "userPosts": [

@@ -254,7 +254,7 @@ const MapWrap = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 30px 30px 60px 30px;
-  background-color: #50505037;
+  background-color: ${props => props.theme.colors.modalBlack};
   gap: 10px;
   line-break: anywhere;
   border-radius: 15px;
@@ -265,14 +265,18 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 30px;
 `;
 
 const CommentsForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 180px;
+  border-radius: 20px;
+  background-color: ${props => props.theme.colors.modalBlack};
+  height: 80px;
+  width: 46%;
+  min-width: 850px;
+  margin: 20px auto;
 `;
 
 const CommentsWrap = styled.div`
@@ -285,16 +289,12 @@ const Flex = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   position: relative;
-
   width: 46%;
   min-width: 700px;
-
   margin: 15px 0;
   padding: 10px;
-
-  background-color: #4d4d4d13;
+  background-color: ${props => props.theme.colors.modalBlack};
   border-radius: 20px;
 `;
 

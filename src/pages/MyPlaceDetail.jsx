@@ -70,7 +70,7 @@ const MapWrap = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 30px 30px 60px 30px;
-  background-color: #50505037;
+  background-color: #000000a2;
   gap: 10px;
   line-break: anywhere;
   border-radius: 15px;
