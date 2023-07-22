@@ -1,6 +1,5 @@
 import React from "react";
 import * as Styled from "./Bookmark.style";
-import { useAuth } from "hooks";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
@@ -8,7 +7,7 @@ import uuid from "react-uuid";
 
 export const Bookmark = ({ kakaoId, top, left, height }) => {
   const queryClient = useQueryClient();
-  const { currentUser } = useAuth();
+  const {currentUser} = useSelector(state => state.userData);
   const detailData = useSelector(state => state.detailData).dataList?.find(e => e.id === kakaoId);
   const bookmarksData = useQuery("bookmarks", getBookmarks).data?.find(
     e => e.userEmail === currentUser?.email && e.kakaoId === kakaoId

@@ -12,7 +12,7 @@ export const Button = styled.button`
     margin: 5px;
     padding: 5px;
 
-    color: ${props.theme.colors[props.color]};
+    color: ${props.theme.colors[props.color] || props.theme.colors.white};
     font-size: ${SIZE[props.size]?.fontSize};
     font-weight: ${props?.fontWeight};
 

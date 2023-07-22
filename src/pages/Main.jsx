@@ -1,21 +1,22 @@
 import styled from "styled-components";
 import { MainListModal, Modal } from "components/common";
-import Sidebar from "components/Sidebar/Sidebar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal } from "redux/modules/modal";
 import { MainMap } from "components/map/MainMap";
+import { Sidebar } from "components/Sidebar";
+import { closeModal } from "redux/modules";
 
 const { kakao } = window;
 
 export const Main = () => {
+  const initialPosition = { lat: 37.566826, lng: 126.9786567 };
   const { ListIsOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const [map, setMap] = useState();
   const [isLocation, setIsLocation] = useState(false);
   const [state, setState] = useState({
     searchValue: "",
-    position: { center: { lat: 37.566826, lng: 126.9786567 }, isPanto: false },
+    position: { center: initialPosition, isPanto: false },
     markers: [],
     info: ""
   });
@@ -30,34 +31,17 @@ export const Main = () => {
     if (isLocation === false) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
-          setState({
-            ...state,
-            position: {
-              center: { lat: position.coords.latitude, lng: position.coords.longitude },
-              isPanto: true
-            }
-          });
+          const { latitude: lat, longitude: lng } = position.coords;
+          setState({ ...state, position: { center: { lat, lng }, isPanto: true } });
         });
         return setIsLocation(true);
       } else {
-        setState({
-          ...state,
-          position: {
-            center: { lat: 37.566826, lng: 126.9786567 },
-            isPanto: false
-          }
-        });
+        setState({ ...state, position: { center: initialPosition, isPanto: false } });
         alert("현재 위치를 알 수 없어 기본 위치로 이동합니다.");
       }
     }
     if (isLocation === true) {
-      setState({
-        ...state,
-        position: {
-          center: { lat: 37.566826, lng: 126.9786567 },
-          isPanto: false
-        }
-      });
+      setState({ ...state, position: { center: initialPosition, isPanto: false } });
       return setIsLocation(false);
     }
   };
@@ -68,6 +52,8 @@ export const Main = () => {
     sor: kakao.maps.services.SortBy.DISTANCE
   };
 
+  const props = { kakao, state, setState, map, isLocation, currentLoaction, option };
+
   // TODO 반응형
   return (
     <Container>
@@ -76,28 +62,12 @@ export const Main = () => {
           <MainListModal setState={setState} state={state} setIsLocation={setIsLocation} />
         </Modal>
       )}
-      <Sidebar
-        kakao={kakao}
-        state={state}
-        setState={setState}
-        map={map}
-        isLocation={isLocation}
-        currentLoaction={currentLoaction}
-        option={option}
-      />
-      <MainMap
-        kakao={kakao}
-        state={state}
-        setState={setState}
-        map={map}
-        setMap={setMap}
-        isLocation={isLocation}
-        currentLoaction={currentLoaction}
-        option={option}
-      />
+      <Sidebar {...props} />
+      <MainMap {...props} setMap={setMap} />
     </Container>
   );
 };
+
 const Container = styled.div`
   display: flex;
   width: 100%;

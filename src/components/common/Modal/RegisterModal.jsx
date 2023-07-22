@@ -37,17 +37,17 @@ export const RegisterModal = () => {
     <Styled.Form onSubmit={onSubmit}>
       <Text fontSize={"48px"}>Sign Up</Text>
       <Input {...resister("email")} {...inputAttr("email")} placeholder="E-mail" />
-      {errors.email ? <Text color={"red"}>{errors.email}</Text> : <Text></Text>}
+      {errors.email ? <Text color={"red"}>{errors.email}</Text> : <div><br/></div>}
       <Input {...resister("password")} {...inputAttr("password")} placeholder="Password" />
-      {errors.password ? <Text color={"red"}>{errors.password}</Text> : <Text></Text>}
+      {errors.password ? <Text color={"red"}>{errors.password}</Text> : <div><br/></div>}
       <Input
         {...resister("passwordConfirm")}
         {...inputAttr("password")}
         placeholder="Password Confirm"
       />
-      {errors.passwordConfirm ? <Text color={"red"}>{errors.passwordConfirm}</Text> : <Text></Text>}
+      {errors.passwordConfirm ? <Text color={"red"}>{errors.passwordConfirm}</Text> : <div><br/></div>}
       <Input {...resister("displayName")} {...inputAttr("text")} placeholder="Nickname" />
-      {errors.displayName ? <Text color={"red"}>{errors.displayName}</Text> : <Text></Text>}
+      {errors.displayName ? <Text color={"red"}>{errors.displayName}</Text> : <div><br/></div>}
       <Text as={"label"} htmlFor="photoUrl">
         프로필 이미지 업로드
       </Text>

@@ -17,6 +17,60 @@
       "email": "123@naver.com",
       "displayName": "디폴트 이미지 테스트",
       "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
+    },
+    {
+      "id": "6df163a6-4381-e721-98bc-2c54bc218f1e",
+      "postId": "27548967",
+      "comment": "엉덩물계곡",
+      "date": "2023-07-21T16:07:36.159Z",
+      "email": "njn613@gmail.com",
+      "displayName": "123123",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2F3UQxEDq6Q5P4gQc7UZmAJNIjpHX2?alt=media&token=8935d30e-ff80-4d52-800b-4f48182eba49"
+    },
+    {
+      "id": "54559271-e8de-ac9d-6dd8-e284995bbfff",
+      "postId": "27548967",
+      "comment": "사진만 바꼈네요",
+      "date": "2023-07-21T16:10:19.011Z",
+      "email": "njn613@gmail.com",
+      "displayName": "유준호",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2F3UQxEDq6Q5P4gQc7UZmAJNIjpHX2?alt=media&token=620f7e59-2117-4429-8044-921cfcc5bfd1"
+    },
+    {
+      "id": "ef2a3a63-b3d4-8c52-c16d-9378640bec74",
+      "postId": "27548967",
+      "comment": "코끼리",
+      "date": "2023-07-22T06:57:16.112Z",
+      "email": "njn613@gmail.com",
+      "displayName": "코끼리",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2F3UQxEDq6Q5P4gQc7UZmAJNIjpHX2?alt=media&token=59f752fd-7b3b-43cb-aa04-3767697ace0d"
+    },
+    {
+      "id": "2ec84c66-889f-7d84-2f09-7875cf35f1f0",
+      "postId": "27548967",
+      "comment": "나는 코끼리다",
+      "date": "2023-07-22T06:57:19.481Z",
+      "email": "njn613@gmail.com",
+      "displayName": "코끼리",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2F3UQxEDq6Q5P4gQc7UZmAJNIjpHX2?alt=media&token=59f752fd-7b3b-43cb-aa04-3767697ace0d"
+    },
+    {
+      "id": "ff2272f1-7c58-a53a-6f32-b27bd80ac1c1",
+      "postId": "27548967",
+      "comment": "나는 스폰지밥이다",
+      "date": "2023-07-22T07:02:14.385Z",
+      "email": "njn613@gmail.com",
+      "displayName": "스폰지밥",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2F3UQxEDq6Q5P4gQc7UZmAJNIjpHX2?alt=media&token=7a7ecbe7-897a-4066-96a4-6677eea4aa69"
+    },
+    {
+      "id": "ae576229-1e56-79bc-55fe-af6977edede5",
+      "postId": "27548967",
+      "comment": "스폰지밥",
+      "date": "2023-07-22T07:06:27.216Z",
+      "email": "njn613@gmail.com",
+      "displayName": "스폰지밥",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2F3UQxEDq6Q5P4gQc7UZmAJNIjpHX2?alt=media&token=7a7ecbe7-897a-4066-96a4-6677eea4aa69"
     }
   ],
   "bookmarks": [
@@ -64,6 +118,15 @@
       "place_name": "장흥한옥수영장",
       "address_name": "경기 양주시 장흥면 석현리 352-2",
       "phone": "031-829-2288"
+    },
+    {
+      "id": "3bf9707b-b046-e06a-3b29-ddd31210a6bd",
+      "kakaoId": "27548967",
+      "userEmail": "njn613@gmail.com",
+      "date": "2023. 7. 22. 오전 1:09:59",
+      "place_name": "엉덩물계곡",
+      "address_name": "제주특별자치도 서귀포시 색달동 3384-4",
+      "phone": ""
     }
   ]
 }

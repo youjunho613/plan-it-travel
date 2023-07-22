@@ -11,8 +11,8 @@ const Header = () => {
   const { logInIsOpen, signUpIsOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
-
-  const { currentUser, logOut } = useAuth();
+  const { currentUser } = useSelector(state => state.userData);
+  const { logOut } = useAuth();
 
   const [scrollPosition, setScrollPosition] = useState(0);
   const updateScroll = () =>
@@ -45,14 +45,14 @@ const Header = () => {
           </Styled.Li>
           <Styled.Li>
             <Link to={"/survey"}>
-              <Text fontSize={"15px"}>recommend</Text>
+              <Text fontSize={"15px"}>Recommend</Text>
             </Link>
           </Styled.Li>
         </Styled.Ul>
       </Styled.Nav>
 
       <Styled.ButtonBox>
-        {!currentUser.uid ? (
+        {!currentUser?.uid ? (
           <>
             <Button
               $bgcolor={"theme1"}
@@ -83,8 +83,8 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Link to={`/mypage/${currentUser.uid}`}>
-              <Styled.ProfileImg src={currentUser.photoURL} />
+            <Link to={`/mypage/${currentUser?.uid}`}>
+              <Styled.ProfileImg src={currentUser?.photoURL} />
             </Link>
             <Button $bgcolor={"theme1"} size={"small"} fontSize={"5px"} onClick={logOut}>
               Log Out

@@ -6,6 +6,7 @@ import { faXmark, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-
 import sideBarLogo from "assets/sideBarLogo.png";
 import { getDataList } from "redux/modules/detailData";
 import { closeModal } from "redux/modules/modal";
+import { Text } from "../Text";
 
 export const MainListModal = ({ setState, state, setIsLocation }) => {
   const { dataList, pagination } = useSelector(state => state.detailData);
@@ -60,10 +61,10 @@ export const MainListModal = ({ setState, state, setIsLocation }) => {
         <button onClick={prevPage}>
           <FontAwesomeIcon icon={faChevronLeft} size="lg" style={{ color: "#ffffff" }} />
         </button>
-        <span>
+        <Text as={"span"}>
           {pagination?.current}...
           {pagination?.last}
-        </span>
+        </Text>
         <button onClick={NextPage}>
           <FontAwesomeIcon icon={faChevronRight} size="lg" style={{ color: "#ffffff" }} />
         </button>
@@ -125,12 +126,14 @@ const Result = styled.h1`
   top: 0;
   width: 100%;
   background-color: #1f1f22;
+  color: white;
   padding-bottom: 5px;
 `;
 
 const ModalLi = styled.li`
   padding: 5px 3px;
   width: 100%;
+  color: white;
   &:hover {
     cursor: pointer;
     background-color: #a290e6;

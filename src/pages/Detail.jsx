@@ -11,7 +11,6 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { throttle } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { useAuth } from "hooks";
 import markerImg from "assets/marker.png";
 import { youtubeApi } from "../api/youtube";
 import YouTube from "react-youtube";
@@ -32,7 +31,7 @@ export const Detail = () => {
   ).dataList.find(e => e.id === paramsId);
 
   // 로그인한 현재 유저 정보 GET
-  const { currentUser } = useAuth();
+  const { currentUser } = useSelector(state => state.userData);
 
   const commentsData = useQuery("comments", getComments)
     .data?.filter(e => e.postId === paramsId)
@@ -43,7 +42,7 @@ export const Detail = () => {
   useEffect(() => {
     setZoomable(false);
     setDraggable(false);
-    // onYoutube();
+    onYoutube();
   }, []);
 
   // 댓글 작성
@@ -143,10 +142,10 @@ export const Detail = () => {
   //유튜브
   const { isYoutubeOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
-  // const modalOpenHandler = target => dispatch(openModal(target));
-  // modalOpenHandler("ListIsOpen");
-  // dispatch(closeModal("ListIsOpen"));
-  // const [youtubeRes, setYoutubeRes] = useState("");
+  const modalOpenHandler = target => dispatch(openModal(target));
+  modalOpenHandler("ListIsOpen");
+  dispatch(closeModal("ListIsOpen"));
+  const [youtubeRes, setYoutubeRes] = useState("");
 
   // const playList = {
   //   서울: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa",
@@ -156,24 +155,25 @@ export const Detail = () => {
 
   // const firstAaddress = address_name.split(" ", 1).join();
 
-  // const onYoutube = async () => {
-  //   const selectedPlayList = playList[firstAaddress] ? playList[firstAaddress] : playList["common"];
-  //   try {
-  //     const response = await youtubeApi.get("/playlistItems", {
-  //       params: {
-  //         part: "snippet",
-  //         playlistId: `${selectedPlayList}`
-  //       }
-  //     });
+  // 버튼 사이드바로 옮기기🦈
+  const onYoutube = async () => {
+    // const selectedPlayList = playList[firstAaddress] ? playList[firstAaddress] : playList["common"];
+    try {
+      const response = await youtubeApi.get("/playlistItems", {
+        params: {
+          part: "snippet",
+          playlistId: `PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa`
+        }
+      });
 
-  //     const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
-  //     const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
+      const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
+      const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
 
-  //     setYoutubeRes(selectedViedoId);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+      setYoutubeRes(selectedViedoId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Container>
