@@ -15,9 +15,9 @@ import { useAuth } from "hooks";
 import markerImg from "assets/marker.png";
 import { youtubeApi } from "../api/youtube";
 import YouTube from "react-youtube";
-import { Bookmark } from "components/Bookmark/Bookmark";
 import { Modal } from "components/common";
-import { openModal, closeModal } from "redux/modules";
+import { openModal } from "redux/modules";
+import { Bookmark } from "components/Bookmark";
 
 export const Detail = () => {
   const params = useParams();
@@ -143,21 +143,21 @@ export const Detail = () => {
   //유튜브
   const { isYoutubeOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
-  // const modalOpenHandler = target => dispatch(openModal(target));
-  // modalOpenHandler("ListIsOpen");
-  // dispatch(closeModal("ListIsOpen"));
-  // const [youtubeRes, setYoutubeRes] = useState("");
+  const [youtubeRes, setYoutubeRes] = useState("");
 
-  // const playList = {
-  //   서울: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa",
-  //   제주: "PLnqE8gRs0CvnsCkvdbSDffqNCUnWPkiO4",
-  //   common: "PLnqE8gRs0CvlBJ_EYU3DFFUSaKdTultEj"
-  // };
+  const playList = {
+    서울: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa",
+    제주특별자치도: "PLnqE8gRs0CvnsCkvdbSDffqNCUnWPkiO4",
+    인천: "PLnqE8gRs0CvkUJViKD0GP5o6JRsF2sxH6",
+    경기: "PLnqE8gRs0CvlmYoUTypcQSP2Q6s0WyntV",
+    부산: "PLnqE8gRs0Cvnw9_IS_XxYh8c06h2g26y6",
+    common: "PLnqE8gRs0CvlBJ_EYU3DFFUSaKdTultEj"
+  };
 
-  // const firstAaddress = address_name.split(" ", 1).join();
+  const firstAddress = address_name.split(" ", 1).join();
 
   // const onYoutube = async () => {
-  //   const selectedPlayList = playList[firstAaddress] ? playList[firstAaddress] : playList["common"];
+  //   const selectedPlayList = playList[firstAddress] ? playList[firstAddress] : playList["common"];
   //   try {
   //     const response = await youtubeApi.get("/playlistItems", {
   //       params: {
@@ -169,6 +169,7 @@ export const Detail = () => {
   //     const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
   //     const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
 
+  //     console.log(selectedViedoId);
   //     setYoutubeRes(selectedViedoId);
   //   } catch (error) {
   //     console.log(error);
@@ -180,7 +181,7 @@ export const Detail = () => {
       {isYoutubeOpen && (
         <Modal type={"youtube"} closeTarget={"isYoutubeOpen"}>
           <YouTube
-            videoId={"EtzvOe1q7gs"}
+            videoId={youtubeRes}
             opts={{
               width: "800",
               height: "500",
