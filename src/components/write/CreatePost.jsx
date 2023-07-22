@@ -144,14 +144,14 @@ const CreatePost = () => {
         <Styled.Form>
           <Text> 글 작성 </Text>
           <Input
-            placeholder={"지도에 마커를 찍어주세요!"}
+            placeholder={"지도를 클릭 마커를 찍어주세요!"}
             size={"modal"}
             $bgcolor={"white"}
             value={value.addressValue}
             disabled
           />
           <Input
-            placeholder={"저 곳은 어떤 장소었나요?"}
+            placeholder={"지정한 장소의 이름을 정해주세요!"}
             size={"modal"}
             $bgcolor={"white"}
             value={value.titleValue}
@@ -166,7 +166,7 @@ const CreatePost = () => {
             onChange={e => setValue({ ...value, contentValue: e.target.value })}
           />
           <div>
-            <Button type="button" size={"medium"} $bgcolor={"black"}>
+            <Button type="button" size={"medium"} $bgcolor={"black"} onClick={()=>navigate("/main")}>
               취소
             </Button>
             <Button type="submit" size={"medium"} $bgcolor={"black"} onClick={submitHandler}>

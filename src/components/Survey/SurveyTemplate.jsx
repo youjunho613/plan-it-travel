@@ -62,7 +62,9 @@ function SurveyTemplate() {
       <SurveyContainer>
         <ProgressLevel>{step}/3</ProgressLevel>
         <Progress value={step} max="3"></Progress>
-        <Text fontSize={"25px"} margin={"0 15px"}>{SURVEY_TEXT[step].question}</Text>
+        <Text fontSize={"25px"} margin={"0 15px"}>
+          {SURVEY_TEXT[step].question}
+        </Text>
         <Form onSubmit={onSubmit}>
           {SURVEY_TEXT[step].option?.map(item => {
             return (
@@ -82,19 +84,22 @@ function SurveyTemplate() {
 
           <ButtonBox>
             {step <= 2 && (
-              <Button
-                type={"reset"}
-                {...buttonAttr("theme3")}
-                onClick={event => moveStep(event, +1)}
-              >
-                Next
-              </Button>
+              <>
+                <Button
+                  type={"reset"}
+                  {...buttonAttr("theme3")}
+                  onClick={event => moveStep(event, +1)}
+                >
+                  Next
+                </Button>
+              </>
             )}
             {step >= 3 && (
               <Button {...buttonAttr("theme3")} onSubmit={onSubmit}>
                 Submit
               </Button>
             )}
+            <Button {...buttonAttr("theme3")} onClick={()=>navigate("/")}>홈으로</Button>
           </ButtonBox>
         </Form>
       </SurveyContainer>
@@ -154,5 +159,5 @@ const SurveyContainer = styled.div`
 const ButtonBox = styled.div`
   position: absolute;
   bottom: 100px;
-  right: 250px;
+  right: 220px;
 `;

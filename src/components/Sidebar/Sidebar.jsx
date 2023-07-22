@@ -12,7 +12,7 @@ import { Category } from "./Category";
 import YouTube from "react-youtube";
 
 export const Sidebar = props => {
-  const { kakao, state, setState, map, isLocation, option } = props;
+  const { kakao, state, setState, map, isLocation, option, youtubeRes } = props;
   const dispatch = useDispatch();
   const modalOpenHandler = target => dispatch(openModal(target));
 
@@ -63,7 +63,7 @@ export const Sidebar = props => {
       {isYoutubeOpen && (
         <Modal type={"youtube"} closeTarget={"isYoutubeOpen"}>
           <YouTube
-            videoId={"wogyLl3BbjY"}
+            videoId={youtubeRes}
             opts={{
               width: "800",
               height: "500",
@@ -82,7 +82,7 @@ export const Sidebar = props => {
       {currentUser?.uid === null || currentUser?.uid === undefined ? null : (
         <Styled.AuthBox>
           <Styled.FlexBox onClick={() => dispatch(openModal("isYoutubeOpen"))}>
-            <svg
+              <svg
               fill="white"
               xmlns="http://www.w3.org/2000/svg"
               style={{ marginRight: "10px" }}
@@ -93,7 +93,6 @@ export const Sidebar = props => {
             </svg>
             <Text as={"span"}>여행 꿀팁</Text>
           </Styled.FlexBox>
-
           <Styled.FlexBox onClick={() => dispatch(openModal("MyPlaceIsOpen"))}>
             <FontAwesomeIcon {...iconAttr("faEye")} />
             <Text as={"span"}>나만의 장소 보기</Text>
