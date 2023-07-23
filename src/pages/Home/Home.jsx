@@ -15,17 +15,17 @@ export const Home = () => {
       <ButtonBoxE>
         <DivBoxE>
           <Link to={"/main"}>
-          <img
-            src={earthIcon}
-            alt="지구아이콘"
-            onMouseEnter={() => setShowEarthBubble(true)}
-            onMouseLeave={() => setShowEarthBubble(false)}
-          />
-        </Link>
+            <img
+              src={earthIcon}
+              alt="지구아이콘"
+              onMouseEnter={() => setShowEarthBubble(true)}
+              onMouseLeave={() => setShowEarthBubble(false)}
+            />
+          </Link>
           <EarthBubbleImg src={bubbleIcon} display={earthDisplay}>
             모두 보기
           </EarthBubbleImg>
-          </DivBoxE>
+        </DivBoxE>
       </ButtonBoxE>
       <ButtonBoxL>
         <DivBoxL>
@@ -35,7 +35,7 @@ export const Home = () => {
               alt="달아이콘"
               onMouseEnter={() => setShowLunaBubble(true)}
               onMouseLeave={() => setShowLunaBubble(false)}
-              />
+            />
           </Link>
           {showLunaBubble && <LunaBubbleImg src={bubbleIcon}>추천 보기</LunaBubbleImg>}
         </DivBoxL>
@@ -61,32 +61,33 @@ const ButtonBoxE = styled.div`
   top: 43%;
   left: 65%;
   transform: translate(-50%, -50%);
-  `;
+`;
 
 const DivBoxE = styled.div`
   position: relative;
   animation: ${earthMoveUpDown} 2.5s linear infinite;
-  `;
+`;
 
-  const EarthBubbleImg = styled.div`
-    display: ${props => props.display};
-    color: black;
-    text-align: center;
-    padding-top: 50px;
-    font-size: x-large;
-    font-weight: bolder;
-    position: absolute;
-    bottom: 200px;
-    left: 100px;
-    width: 200px;
-    height: 145px;
-    background-image: url(${props => props.src});
-    background-size: cover;
-    `;
+const EarthBubbleImg = styled.div`
+  display: ${props => props.display};
 
-// const EarthImg = styled.img`
-//   animation: ${earthMoveUpDown} 2.5s linear infinite;
-// `;
+  position: absolute;
+  bottom: 200px;
+  left: 100px;
+
+  width: 200px;
+  height: 145px;
+
+  padding-top: 50px;
+
+  background-image: url(${props => props.src});
+  background-size: cover;
+
+  color: black;
+  text-align: center;
+  font-size: x-large;
+  font-weight: bolder;
+`;
 
 const lunaMoveUpDown = keyframes`
   100% {
@@ -105,7 +106,7 @@ const ButtonBoxL = styled.div`
   top: 43%;
   left: 35%;
   transform: translate(-50%, -50%);
-  `;
+`;
 
 const DivBoxL = styled.div`
   position: relative;
@@ -116,22 +117,20 @@ const LunaBubbleImg = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: black;
-  padding-bottom: 15px;
-  font-size: x-large;
-  font-weight: bolder;
+
   position: absolute;
   bottom: 200px;
   right: -100px;
+
   width: 200px;
   height: 145px;
+
+  padding-bottom: 15px;
+
   background-image: url(${props => props.src});
   background-size: cover;
 
-  `;
-
-// 바꾸기 전
-// const LanaImg = styled.img`
-//   animation: ${lunaMoveUpDown} 2.5s linear infinite;
-//   &:hover {}
-// `;
+  color: black;
+  font-size: x-large;
+  font-weight: bolder;
+`;

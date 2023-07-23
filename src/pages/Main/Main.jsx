@@ -1,23 +1,23 @@
 import styled from "styled-components";
-import { MainListModal, Modal } from "components/common";
+import { Modal, MainListModal, MyPlaceModal } from "components/common";
 import { Sidebar } from "components/Sidebar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal } from "redux/modules/modal";
-import { MainMap } from "components/map/MainMap";
-import { MyPlaceModal } from "components/common/Modal/MyPlaceModal";
+import { MainMap } from "components/Map/MainMap";
 import { youtubeApi } from "api/youtube";
+import { closeModal } from "redux/modules";
 
 const { kakao } = window;
 
 export const Main = () => {
+  const initialPosition = { lat: 37.566826, lng: 126.9786567 };
   const { ListIsOpen, MyPlaceIsOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const [map, setMap] = useState();
   const [isLocation, setIsLocation] = useState(false);
   const [state, setState] = useState({
     searchValue: "",
-    position: { center: { lat: 37.566826, lng: 126.9786567 }, isPanto: false },
+    position: { center: initialPosition, isPanto: false },
     markers: [],
     info: ""
   });
@@ -29,38 +29,22 @@ export const Main = () => {
   }, [dispatch]);
 
   // 현재 위치 찾기
-  const currentLoaction = () => {
+  // state position, isLocation
+  const currentLocation = () => {
     if (isLocation === false) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
-          setState({
-            ...state,
-            position: {
-              center: { lat: position.coords.latitude, lng: position.coords.longitude },
-              isPanto: true
-            }
-          });
+          const { latitude: lat, longitude: lng } = position.coords;
+          setState({ ...state, position: { center: { lat, lng }, isPanto: true } });
         });
         return setIsLocation(true);
       } else {
-        setState({
-          ...state,
-          position: {
-            center: { lat: 37.566826, lng: 126.9786567 },
-            isPanto: false
-          }
-        });
+        setState({ ...state, position: { center: initialPosition, isPanto: false } });
         alert("현재 위치를 알 수 없어 기본 위치로 이동합니다.");
       }
     }
     if (isLocation === true) {
-      setState({
-        ...state,
-        position: {
-          center: { lat: 37.566826, lng: 126.9786567 },
-          isPanto: false
-        }
-      });
+      setState({ ...state, position: { center: initialPosition, isPanto: false } });
       return setIsLocation(false);
     }
   };
@@ -72,7 +56,6 @@ export const Main = () => {
   };
 
   //유튜브
-  const { isYoutubeOpen } = useSelector(state => state.modal);
   const [youtubeRes, setYoutubeRes] = useState("");
 
   const onYoutube = async () => {
@@ -85,15 +68,24 @@ export const Main = () => {
       });
 
       const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
-      const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
+      const selectedVideoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
 
-      setYoutubeRes(selectedViedoId);
+      setYoutubeRes(selectedVideoId);
     } catch (error) {
       console.log(error);
     }
   };
-
   // TODO 반응형
+
+  const props = {
+    kakao,
+    state,
+    setState,
+    map,
+    isLocation,
+    currentLocation,
+    option
+  };
   return (
     <Container>
       {ListIsOpen && (
@@ -101,31 +93,13 @@ export const Main = () => {
           <MainListModal setState={setState} state={state} setIsLocation={setIsLocation} />
         </Modal>
       )}
+      <Sidebar {...props} youtubeRes={youtubeRes} />
+      <MainMap {...props} setMap={setMap} />
       {MyPlaceIsOpen && (
         <Modal type={"main"}>
           <MyPlaceModal setState={setState} state={state} />
         </Modal>
       )}
-      <Sidebar
-        kakao={kakao}
-        state={state}
-        setState={setState}
-        map={map}
-        isLocation={isLocation}
-        currentLoaction={currentLoaction}
-        option={option}
-        youtubeRes={youtubeRes}
-      />
-      <MainMap
-        kakao={kakao}
-        state={state}
-        setState={setState}
-        map={map}
-        setMap={setMap}
-        isLocation={isLocation}
-        currentLoaction={currentLoaction}
-        option={option}
-      />
     </Container>
   );
 };

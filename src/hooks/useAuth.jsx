@@ -18,15 +18,16 @@ import { addUserData } from "redux/modules";
 export const useAuth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const modalCloseHandler = target => dispatch(closeModal(target));
+  const modalCloseHandler = useCallback(target => dispatch(closeModal(target)), [dispatch]);
 
   useEffect(() => {
     onAuthStateChanged(auth, user => {
       if (!user) return;
       const { email, uid, displayName, photoURL } = user;
       dispatch(addUserData({ email, uid, displayName, photoURL }));
+      console.log("useAuth : useEffect");
     });
-  }, []);
+  }, [dispatch]);
 
   // 로그아웃 로직
   const logOut = useCallback(async () => {
@@ -36,14 +37,17 @@ export const useAuth = () => {
   }, [navigate]);
 
   // 로그인 로직
-  const signIn = useCallback(async ({ email, password }) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      modalCloseHandler("logInIsOpen");
-    } catch (error) {
-      dispatch(postError(error.code));
-    }
-  }, []);
+  const signIn = useCallback(
+    async ({ email, password }) => {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        modalCloseHandler("logInIsOpen");
+      } catch (error) {
+        dispatch(postError(error.code));
+      }
+    },
+    [dispatch, modalCloseHandler]
+  );
 
   // 회원탈퇴 로직
   const removeUser = async () => {

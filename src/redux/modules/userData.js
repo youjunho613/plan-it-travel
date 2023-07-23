@@ -9,7 +9,7 @@ const userData = createSlice({
     addUserData: (state, action) => {
       return (state = { ...state, currentUser: action.payload });
     },
-    deleteUserData: (state, action) => {
+    deleteUserData: (state) => {
       return (state = { ...state, currentUser: null });
     }
   }

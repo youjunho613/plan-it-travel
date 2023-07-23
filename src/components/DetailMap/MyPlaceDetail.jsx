@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import markerImg from "assets/marker.png";
 import { useQuery } from "react-query";
 import { getUserPost } from "api/userPost";
+import * as Styled from "./DetailMap.style";
 
 export const MyPlaceDetail = () => {
   const params = useParams();
@@ -22,9 +22,9 @@ export const MyPlaceDetail = () => {
   }, []);
 
   return (
-    <Container>
-      <Wrap>
-        <MapWrap>
+    <>
+      <Styled.Wrap>
+        <Styled.MapWrap>
           <Map // 지도를 표시할 Container
             center={position}
             style={{
@@ -44,42 +44,11 @@ export const MyPlaceDetail = () => {
               }}
             />
           </Map>
-          <LargeFont>{userPosts.place_name}</LargeFont>
+          <Styled.LargeFont style={{ paddingTop: "30px" }}>{userPosts.place_name}</Styled.LargeFont>
           <div>{userPosts.address_name}</div>
           <div>{userPosts.content}</div>
-        </MapWrap>
-      </Wrap>
-    </Container>
+        </Styled.MapWrap>
+      </Styled.Wrap>
+    </>
   );
 };
-
-const LargeFont = styled.div`
-  font-size: 25px;
-  font-weight: 700;
-  width: 450px;
-  text-align: center;
-`;
-
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-const MapWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px 30px 60px 30px;
-  background-color: #000000a2;
-  gap: 10px;
-  line-break: anywhere;
-  border-radius: 15px;
-  position: relative;
-`;
-
-const Wrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 30px;
-`;

@@ -53,26 +53,41 @@
       "email": "kimjinsu0210@naver.com",
       "displayName": "김진수입니다.",
       "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
+    },
+    {
+      "id": "aa5582c7-371c-7968-ecd3-0e6ecb48b32f",
+      "postId": "8178901",
+      "comment": "안녕하세요",
+      "date": "2023-07-23T09:15:52.529Z",
+      "email": "kimjinsu0210@naver.com",
+      "displayName": "김진수입니다.",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
     }
   ],
   "bookmarks": [
     {
-      "id": "219511e1-995d-fb72-caad-1f9c5524dbdb",
+      "id": "bdbd061e-5c45-ee43-2e87-c1ca40d80a35",
       "kakaoId": "27548967",
-      "userEmail": "123@naver.com",
-      "date": "2023. 7. 21. 오전 9:32:35",
+      "email": "njn613@gmail.com",
       "place_name": "엉덩물계곡",
       "address_name": "제주특별자치도 서귀포시 색달동 3384-4",
       "phone": ""
     },
     {
-      "id": "7f1d2da2-8812-455f-979f-88f94ae8d03e",
-      "kakaoId": "933133252",
-      "userEmail": "kimjinsu0210@naver.com",
-      "date": "2023. 7. 21. 오후 2:21:15",
-      "place_name": "장흥한옥수영장",
-      "address_name": "경기 양주시 장흥면 석현리 352-2",
-      "phone": "031-829-2288"
+      "id": "c19e7deb-aaa8-aef4-1573-0724c78ec203",
+      "kakaoId": "385621254",
+      "email": "njn613@gmail.com",
+      "place_name": "장호비치캠핑장",
+      "address_name": "강원특별자치도 삼척시 근덕면 장호리 217-2",
+      "phone": "033-576-0884"
+    },
+    {
+      "id": "a0d2dc10-19d4-0e38-b670-a66b7d77a97e",
+      "kakaoId": "8386093",
+      "email": "njn613@gmail.com",
+      "place_name": "뱀사골계곡",
+      "address_name": "전북 남원시 산내면 부운리",
+      "phone": ""
     }
   ],
   "userPosts": [

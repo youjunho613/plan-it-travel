@@ -1,4 +1,4 @@
-import * as Styled from "./Modal.styled";
+import * as Styled from "../Modal.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "redux/modules";
 import { useForm, useAuth } from "hooks";
