@@ -1,1 +1,2 @@
-export * from "./Bookmark.jsx";
+export * from "./Bookmark";
+export * from "./BookmarkIcon";

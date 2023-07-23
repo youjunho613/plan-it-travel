@@ -28,7 +28,7 @@ const CreatePost = () => {
 
   useEffect(() => {
     // 현재 위치 정보 함수 호출
-    currentLoaction();
+    currentLocations();
     // 로그인 유저 정보
     onAuthStateChanged(auth, users => setAuthData(users));
   }, []);
@@ -37,7 +37,7 @@ const CreatePost = () => {
     onSuccess: () => queryClient.invalidateQueries("userPosts")
   });
   // 현재 위치 정보
-  const currentLoaction = () => {
+  const currentLocations = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
@@ -64,7 +64,7 @@ const CreatePost = () => {
     });
   };
   // 클릭한 마커 좌표 주소로 변환
-  const geocorder = new kakao.maps.services.Geocoder();
+  const geoCorder = new kakao.maps.services.Geocoder();
   const getAddress = (lat, lng) => {
     const callback = (result, status) => {
       if (status === kakao.maps.services.Status.OK) {
@@ -73,7 +73,7 @@ const CreatePost = () => {
         setValue({ ...value, addressValue: _arr });
       }
     };
-    geocorder.coord2Address(lng, lat, callback);
+    geoCorder.coord2Address(lng, lat, callback);
   };
   // 맵에서 클릭시 마커로 좌표를 보내주는 이벤트
   const mapClickEvent = (_t, MouseEvent) => {
@@ -118,11 +118,16 @@ const CreatePost = () => {
             onCreate={setMap}
             onClick={mapClickEvent}
           >
-            {currentPosition && <MapMarker position={clickPosition} image={{
-              src: markerImg,
-              size: { width: 60, height: 50 },
-              options: { offset: { x: 30, y: 50 } }
-            }}/>}
+            {currentPosition && (
+              <MapMarker
+                position={clickPosition}
+                image={{
+                  src: markerImg,
+                  size: { width: 60, height: 50 },
+                  options: { offset: { x: 30, y: 50 } }
+                }}
+              />
+            )}
           </Map>
           <Styled.AddressForm onSubmit={submitSearchValue}>
             <Styled.AddressInput
@@ -135,7 +140,12 @@ const CreatePost = () => {
               onChange={e => setValue({ ...value, searchValue: e.target.value })}
             />
             <button>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="#fff"height="1.5em" viewBox="0 0 512 512">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#fff"
+                height="1.5em"
+                viewBox="0 0 512 512"
+              >
                 <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
               </svg>
             </button>

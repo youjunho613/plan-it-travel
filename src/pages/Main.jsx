@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { MainListModal, Modal } from "components/common";
+import { Modal, MainListModal, MyPlaceModal } from "components/common";
 import { Sidebar } from "components/Sidebar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MainMap } from "components/map/MainMap";
-import { MyPlaceModal } from "components/common/Modal/MyPlaceModal";
 import { youtubeApi } from "api/youtube";
 import { closeModal } from "redux/modules";
 
@@ -30,7 +29,8 @@ export const Main = () => {
   }, [dispatch]);
 
   // 현재 위치 찾기
-  const currentLoaction = () => {
+  // state position, isLocation
+  const currentLocation = () => {
     if (isLocation === false) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
@@ -55,9 +55,7 @@ export const Main = () => {
     sor: kakao.maps.services.SortBy.DISTANCE
   };
 
-  const props = { kakao, state, setState, map, isLocation, currentLoaction, option };
   //유튜브
-  const { isYoutubeOpen } = useSelector(state => state.modal);
   const [youtubeRes, setYoutubeRes] = useState("");
 
   const onYoutube = async () => {
@@ -70,15 +68,24 @@ export const Main = () => {
       });
 
       const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
-      const selectedViedoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
+      const selectedVideoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
 
-      setYoutubeRes(selectedViedoId);
+      setYoutubeRes(selectedVideoId);
     } catch (error) {
       console.log(error);
     }
   };
-
   // TODO 반응형
+
+  const props = {
+    kakao,
+    state,
+    setState,
+    map,
+    isLocation,
+    currentLocation,
+    option
+  };
   return (
     <Container>
       {ListIsOpen && (

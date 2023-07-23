@@ -15,6 +15,10 @@ const Header = () => {
   const { logOut } = useAuth();
 
   const [scrollPosition, setScrollPosition] = useState(0);
+  const scrollStyle = {
+    style: { backgroundColor: scrollPosition === 0 ? "transparent" : "#1f1f22" }
+  };
+
   const updateScroll = () =>
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   useEffect(() => {
@@ -22,76 +26,61 @@ const Header = () => {
     return () => window.removeEventListener("scroll", updateScroll);
   }, []);
 
+  const buttonAttr = { $bgcolor: "theme1", size: "small", fontSize: "5px" };
+  const headerNav = [
+    { path: "/", name: "Home" },
+    { path: "/main", name: "Map" },
+    { path: "/survey", name: "Recommend" }
+  ];
+
   return (
-    <Styled.Container
-      style={{
-        backgroundColor: scrollPosition === 0 ? "transparent" : "#1f1f22"
-      }}
-    >
+    <Styled.Container {...scrollStyle}>
       <Styled.Nav>
         <Link to={"/"}>
           <Styled.Img src={logo} alt={"plan-it-travel"} />
         </Link>
         <Styled.Ul>
-          <Styled.Li>
-            <Link to={"/"}>
-              <Text fontSize={"15px"}>Home</Text>
-            </Link>
-          </Styled.Li>
-          <Styled.Li>
-            <Link to={"/Main"}>
-              <Text fontSize={"15px"}>Map</Text>
-            </Link>
-          </Styled.Li>
-          <Styled.Li>
-            <Link to={"/survey"}>
-              <Text fontSize={"15px"}>Recommend</Text>
-            </Link>
-          </Styled.Li>
+          {headerNav.map(li => {
+            return (
+              <Styled.Li key={li.name}>
+                <Link to={li.path}>
+                  <Text fontSize={"15px"}>{li.name}</Text>
+                </Link>
+              </Styled.Li>
+            );
+          })}
         </Styled.Ul>
       </Styled.Nav>
 
-      <Styled.ButtonBox>
-        {!currentUser?.uid ? (
-          <>
-            <Button
-              $bgcolor={"theme1"}
-              size={"small"}
-              fontSize={"5px"}
-              onClick={() => modalOpenHandler("logInIsOpen")}
-            >
-              Log In
-            </Button>
-            {logInIsOpen && (
-              <Modal closeTarget={"logInIsOpen"}>
-                <LoginModal />
-              </Modal>
-            )}
-            <Button
-              $bgcolor={"theme1"}
-              size={"small"}
-              fontSize={"5px"}
-              onClick={() => modalOpenHandler("signUpIsOpen")}
-            >
-              Sign Up
-            </Button>
-            {signUpIsOpen && (
-              <Modal closeTarget={"signUpIsOpen"}>
-                <RegisterModal />
-              </Modal>
-            )}
-          </>
-        ) : (
-          <>
-            <Link to={`/mypage/${currentUser?.uid}`}>
-              <Styled.ProfileImg src={currentUser?.photoURL} />
-            </Link>
-            <Button $bgcolor={"theme1"} size={"small"} fontSize={"5px"} onClick={logOut}>
-              Log Out
-            </Button>
-          </>
-        )}
-      </Styled.ButtonBox>
+      {!currentUser?.uid ? (
+        <Styled.ButtonBox>
+          <Button {...buttonAttr} onClick={() => modalOpenHandler("logInIsOpen")}>
+            Log In
+          </Button>
+          {logInIsOpen && (
+            <Modal closeTarget={"logInIsOpen"}>
+              <LoginModal />
+            </Modal>
+          )}
+          <Button {...buttonAttr} onClick={() => modalOpenHandler("signUpIsOpen")}>
+            Sign Up
+          </Button>
+          {signUpIsOpen && (
+            <Modal closeTarget={"signUpIsOpen"}>
+              <RegisterModal />
+            </Modal>
+          )}
+        </Styled.ButtonBox>
+      ) : (
+        <Styled.ButtonBox>
+          <Link to={`/mypage/${currentUser?.uid}`}>
+            <Styled.ProfileImg src={currentUser?.photoURL} />
+          </Link>
+          <Button {...buttonAttr} onClick={logOut}>
+            Log Out
+          </Button>
+        </Styled.ButtonBox>
+      )}
     </Styled.Container>
   );
 };

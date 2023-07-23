@@ -59,13 +59,13 @@ export const Category = ({ SearchHandler }) => {
     <>
       {ulMap.map(ul => {
         return (
-          <Styled.Ul onClick={() => openHandler(ul.func)}>
+          <Styled.Ul key={ul.name} onClick={() => openHandler(ul.func)}>
             <FontAwesomeIcon {...iconAttr(ul.icon)} />
             {ul.name}
             {isOpen[ul.func] &&
               ul.liMap.map(li => {
                 return (
-                  <Styled.Li onClick={() => SearchHandler(li.name)}>
+                  <Styled.Li key={li.name} onClick={() => SearchHandler(li.name)}>
                     <FontAwesomeIcon {...iconAttr(li.icon)} />
                     {li.name}
                   </Styled.Li>

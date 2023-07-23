@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -62,7 +62,7 @@ export const MyPlaceModal = ({ setState, state }) => {
   };
 
   return (
-    <Modaldiv>
+    <ModalDiv>
       <ImgBox>
         <Img src={sideBarLogo} alt={"plan-it-travel"} />
         <XButton onClick={modalCloseHandler}>
@@ -77,11 +77,11 @@ export const MyPlaceModal = ({ setState, state }) => {
           </ModalLi>
         ))}
       </ModalUl>
-    </Modaldiv>
+    </ModalDiv>
   );
 };
 
-const Modaldiv = styled.div`
+const ModalDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

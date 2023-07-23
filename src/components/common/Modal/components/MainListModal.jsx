@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,7 +5,7 @@ import { faXmark, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-
 import sideBarLogo from "assets/sideBarLogo.png";
 import { getDataList } from "redux/modules/detailData";
 import { closeModal } from "redux/modules/modal";
-import { Text } from "../Text";
+import { Text } from "components/common/Text";
 
 export const MainListModal = ({ setState, state, setIsLocation }) => {
   const { dataList, pagination } = useSelector(state => state.detailData);
@@ -42,7 +41,7 @@ export const MainListModal = ({ setState, state, setIsLocation }) => {
   };
 
   return (
-    <Modaldiv>
+    <ModalDiv>
       <ImgBox>
         <Img src={sideBarLogo} alt={"plan-it-travel"} />
         <XButton onClick={modalCloseHandler}>
@@ -69,11 +68,11 @@ export const MainListModal = ({ setState, state, setIsLocation }) => {
           <FontAwesomeIcon icon={faChevronRight} size="lg" style={{ color: "#ffffff" }} />
         </button>
       </MoveBtnBox>
-    </Modaldiv>
+    </ModalDiv>
   );
 };
 
-const Modaldiv = styled.div`
+const ModalDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

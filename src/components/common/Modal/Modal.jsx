@@ -16,6 +16,7 @@ export const Modal = ({ children, closeTarget, type }) => {
   useEffect(() => {
     document.addEventListener("mousedown", clickOutside);
     return () => document.removeEventListener("mousedown", clickOutside);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return createPortal(

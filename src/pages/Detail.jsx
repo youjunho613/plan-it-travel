@@ -12,7 +12,7 @@ import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/fre
 import { throttle } from "lodash";
 import { useSelector } from "react-redux";
 import markerImg from "assets/marker.png";
-import { Bookmark } from "components/Bookmark/Bookmark";
+import { BookmarkIcon } from "components/Bookmark";
 
 export const Detail = () => {
   const params = useParams();
@@ -123,14 +123,10 @@ export const Detail = () => {
 
   // 몇분,몇시간,몇일 전
   const displayWatch = item => {
-    const date = Date.now();
-    const nowDate = new Date(date);
-    const commentDate = new Date(item.date);
-    const milliDate = Math.abs(nowDate - commentDate);
-    const diffDays = Math.ceil(milliDate / (1000 * 60 * 60 * 24)); //
-    const timeDiff = nowDate - commentDate;
-    const hours = Math.floor(timeDiff / (1000 * 60 * 60)); //
-    const minutes = Math.floor((timeDiff / (1000 * 60)) % 60); //
+    const timeDiff = Date.now() - new Date(item.date);
+    const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
     return { hours, diffDays, minutes };
   };
 
@@ -159,7 +155,7 @@ export const Detail = () => {
           </Map>
 
           {/* 북마크 컴포넌트 */}
-          <Bookmark kakaoId={paramsId} top={43} left={230} height={"30px"} />
+          <BookmarkIcon kakaoId={paramsId} top={43} left={230} height={"30px"} />
 
           <LargeFont>{place_name}</LargeFont>
           <div>{address_name}</div>

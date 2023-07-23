@@ -17,7 +17,7 @@ export const MainMap = ({
   map,
   setMap,
   isLocation,
-  currentLoaction,
+  currentLocation,
   option
 }) => {
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ export const MainMap = ({
           size={"small"}
           $bgcolor={"black"}
           type="button"
-          onClick={currentLoaction}
+          onClick={currentLocation}
         >
           {isLocation ? (
             <svg

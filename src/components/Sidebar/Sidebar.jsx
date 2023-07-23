@@ -25,10 +25,9 @@ export const Sidebar = props => {
   const { logOut } = useAuth();
 
   // 키워드 검색
+  // state. marker 사용
   const SearchHandler = keyword => {
-    const ps = new kakao.maps.services.Places();
-
-    ps.keywordSearch(
+    new kakao.maps.services.Places().keywordSearch(
       keyword,
       (data, status, _pagination) => {
         if (status === kakao.maps.services.Status.OK) {
