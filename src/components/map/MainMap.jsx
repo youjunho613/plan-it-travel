@@ -1,4 +1,3 @@
-import React from "react";
 import { Input } from "components/common";
 import { CustomOverlayMap, Map, MapMarker, ZoomControl } from "react-kakao-maps-sdk";
 import { openModal } from "redux/modules/modal";
@@ -39,7 +38,6 @@ export const MainMap = ({
           for (let i = 0; i < data.length; i++) {
             dispatch(getDataList(data));
             const { y, x, place_name, id } = data[i];
-            console.log(data[i]);
             markers.push({ position: { lat: y, lng: x }, content: place_name, id: id });
             bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
           }

@@ -25,7 +25,6 @@ export const useAuth = () => {
       if (!user) return;
       const { email, uid, displayName, photoURL } = user;
       dispatch(addUserData({ email, uid, displayName, photoURL }));
-      console.log("useAuth : useEffect");
     });
   }, [dispatch]);
 
@@ -58,7 +57,7 @@ export const useAuth = () => {
           alert("탈퇴가 정상적으로 처리되었습니다.");
         })
         .catch(error => {
-          console.log("errorCode", error.code);
+          dispatch(postError(error.code));
         });
     } else return alert("취소 하셨습니다.");
     navigate("/");

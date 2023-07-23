@@ -54,7 +54,6 @@ export const CreatePost = () => {
       if (status === kakao.maps.services.Status.OK) {
         const bounds = new kakao.maps.LatLngBounds();
         const { y, x } = data[0];
-        console.log(data[0].y);
         bounds.extend(new kakao.maps.LatLng(y, x));
         map.setBounds(bounds);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {

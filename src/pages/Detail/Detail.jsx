@@ -12,7 +12,7 @@ import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/fre
 import { throttle } from "lodash";
 import { useSelector } from "react-redux";
 import markerImg from "assets/marker.png";
-import { BookmarkIcon } from "components/Bookmark";
+import { BookmarkIcon } from "pages/MyPage";
 
 export const Detail = () => {
   const params = useParams();

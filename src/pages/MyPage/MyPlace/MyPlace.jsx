@@ -1,26 +1,25 @@
-import * as Styled from "./Bookmark.style";
-import { useNavigate } from "react-router";
+import * as Styled from "../Bookmark/Bookmark.style";
 import { useQuery } from "react-query";
-import { getBookmarks } from "api/bookmarks";
-import { BookmarkIcon } from "components/Bookmark";
+import { useNavigate } from "react-router";
+import { getUserPost } from "api/userPost";
 
-export const Bookmark = ({ currentUser }) => {
+export const MyPlace = ({ currentUser }) => {
   const navigate = useNavigate();
 
-  const bookmarksData = useQuery("bookmarks", getBookmarks).data?.filter(
-    e => e.email === currentUser?.email
+  const userPostData = useQuery("userPosts", getUserPost).data?.filter(
+    e => e.userId === currentUser?.uid
   );
 
-  const MoveDetailPageHandler = id => navigate(`/detail/${id}`);
+  const MoveDetailPageHandler = id => navigate(`/myplacedetail/${id}`);
 
   return (
     <Styled.BookContainer>
-      {bookmarksData?.map(bookmark => {
+      {userPostData?.map(userPost => {
         return (
-          <Styled.BookBiv key={bookmark.id}>
+          <Styled.BookBiv key={userPost.id}>
             <Styled.BookTitle>
               <Styled.DetailSvg
-                onClick={() => MoveDetailPageHandler(bookmark.kakaoId)}
+                onClick={() => MoveDetailPageHandler(userPost.id)}
                 xmlns="http://www.w3.org/2000/svg"
                 height="1em"
                 viewBox="0 0 576 512"
@@ -39,10 +38,12 @@ export const Bookmark = ({ currentUser }) => {
                     <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
                   </svg>
                 </Styled.PinMarker>
-                {bookmark.place_name}
+                {userPost.place_name}
               </Styled.LargeFont>
-              <BookmarkIcon kakaoId={bookmark.kakaoId} left={170} height={"30px"} />
-              <Styled.Address>{bookmark.address_name}</Styled.Address>
+              {/* 북마크 대신 쓰래기통 
+              <BookmarkIcon kakaoId={userPost.kakaoId} left={170} height={"30px"} />
+              */}
+              <Styled.Address>{userPost.address_name}</Styled.Address>
             </Styled.BookTitle>
           </Styled.BookBiv>
         );

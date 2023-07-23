@@ -1,14 +1,17 @@
-import * as Styled from "./MyPage.styled";
+import * as Styled from "./MyPage.style";
 import { useDispatch, useSelector } from "react-redux";
-import { UserInfo } from "./UserInfo";
 import { useState } from "react";
 import { useAuth } from "hooks";
 import { Modal, Text, UserModifyModal } from "components/common";
 import { openModal, closeModal } from "redux/modules";
-import { Bookmark } from "components/Bookmark";
+import { UserInfo, Bookmark, MyPlace } from "pages/MyPage";
 
 export const MyPage = () => {
-  const [isOpen, setIsOpen] = useState({ bookmarkIsOpen: false, userInfoIsOpen: true });
+  const [isOpen, setIsOpen] = useState({
+    userInfoIsOpen: true,
+    bookmarkIsOpen: false,
+    myPlaceIsOpen: false
+  });
 
   const { removeUser } = useAuth();
   const { currentUser } = useSelector(state => state.userData);
@@ -19,7 +22,11 @@ export const MyPage = () => {
   const modalCloseHandler = target => dispatch(closeModal(target));
 
   const openHandler = target => {
-    setIsOpen({ bookmarkIsOpen: target === "bookmark", userInfoIsOpen: target === "userInfo" });
+    setIsOpen({
+      userInfoIsOpen: target === "userInfo",
+      bookmarkIsOpen: target === "bookmark",
+      myPlaceIsOpen: target === "myPlace"
+    });
   };
 
   return (
@@ -44,8 +51,18 @@ export const MyPage = () => {
         >
           북마크 보기
         </Text>
+        <Text fontSize={"20px"}>|</Text>
+        <Text
+          style={{ cursor: "pointer" }}
+          fontSize={"20px"}
+          onClick={() => openHandler("myPlace")}
+        >
+          나만의 장소 보기
+        </Text>
       </Styled.OptionBar>
       {isOpen.userInfoIsOpen && <UserInfo currentUser={currentUser} />}
+      {isOpen.bookmarkIsOpen && <Bookmark currentUser={currentUser} />}
+      {isOpen.myPlaceIsOpen && <MyPlace currentUser={currentUser} />}
       {settingIsOpen && (
         <Modal type={"setting"} closeTarget={"settingIsOpen"}>
           <Styled.SettingContentButton
@@ -64,7 +81,6 @@ export const MyPage = () => {
           <UserModifyModal />
         </Modal>
       )}
-      {isOpen.bookmarkIsOpen && <Bookmark currentUser={currentUser} />}
     </Styled.PageContainer>
   );
 };

@@ -15,6 +15,8 @@ export const RegisterModal = () => {
     let errors = {};
     if (values.password !== values.passwordConfirm)
       return (errors.passwordConfirm = "비밀번호가 일치하지 않습니다.");
+    if (values.displayName.length >= 8)
+      return (errors.displayName = "닉네임은 8자 이하로 입력해주세요.");
   };
 
   const [imgFile, setImgFile] = useState();
