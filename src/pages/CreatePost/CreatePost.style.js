@@ -29,7 +29,6 @@ export const ColumnBox = styled.div`
   gap: 10px;
 `;
 
-// FIXME 임시 지도
 export const Map = styled.div`
   width: 500px;
   height: 500px;
