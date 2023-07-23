@@ -55,13 +55,49 @@
       "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
     },
     {
-      "id": "aa5582c7-371c-7968-ecd3-0e6ecb48b32f",
-      "postId": "8178901",
+      "id": "8263fc57-a778-a601-5a8a-a7f024251407",
+      "postId": "27548967",
+      "comment": "Hello",
+      "date": "2023-07-23T07:09:48.989Z",
+      "email": "njn613@gmail.com",
+      "displayName": "스폰지밥",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2F3UQxEDq6Q5P4gQc7UZmAJNIjpHX2?alt=media&token=27eda631-4e77-42fe-b7ef-1a805f652a17"
+    },
+    {
+      "id": "0db6c4d6-b11f-272b-3d09-4f86f434596d",
+      "postId": "27548967",
+      "comment": "hi",
+      "date": "2023-07-23T07:09:50.828Z",
+      "email": "njn613@gmail.com",
+      "displayName": "스폰지밥",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2F3UQxEDq6Q5P4gQc7UZmAJNIjpHX2?alt=media&token=27eda631-4e77-42fe-b7ef-1a805f652a17"
+    },
+    {
+      "id": "f48730b1-4645-d3ef-6360-cb0a867b4696",
+      "postId": "27548967",
+      "comment": "저는 한글입니다",
+      "date": "2023-07-23T07:09:54.131Z",
+      "email": "njn613@gmail.com",
+      "displayName": "스폰지밥",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2F3UQxEDq6Q5P4gQc7UZmAJNIjpHX2?alt=media&token=27eda631-4e77-42fe-b7ef-1a805f652a17"
+    },
+    {
+      "id": "5b99b6cd-c793-64b4-7385-a8af172f6e3d",
+      "postId": "27548967",
+      "comment": "고운돋음",
+      "date": "2023-07-23T07:10:33.394Z",
+      "email": "njn613@gmail.com",
+      "displayName": "스폰지밥",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2F3UQxEDq6Q5P4gQc7UZmAJNIjpHX2?alt=media&token=27eda631-4e77-42fe-b7ef-1a805f652a17"
+    },
+    {
+      "id": "8c13b953-df1b-94c6-54c5-4a0a23a18d16",
+      "postId": "10805294",
       "comment": "안녕하세요",
-      "date": "2023-07-23T09:15:52.529Z",
-      "email": "kimjinsu0210@naver.com",
-      "displayName": "김진수입니다.",
-      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2Fdefault.png?alt=media&token=8120e805-4c3c-47d6-af3b-d191b6b81608"
+      "date": "2023-07-23T09:06:28.277Z",
+      "email": "njn613@gmail.com",
+      "displayName": "스폰지밥",
+      "photoURL": "https://firebasestorage.googleapis.com/v0/b/plan-it-travel.appspot.com/o/profileImg%2F3UQxEDq6Q5P4gQc7UZmAJNIjpHX2?alt=media&token=27eda631-4e77-42fe-b7ef-1a805f652a17"
     }
   ],
   "bookmarks": [
@@ -87,6 +123,14 @@
       "email": "njn613@gmail.com",
       "place_name": "뱀사골계곡",
       "address_name": "전북 남원시 산내면 부운리",
+      "phone": ""
+    },
+    {
+      "id": "d6798608-3113-f53d-a2b2-bbfb300a786f",
+      "kakaoId": "10805294",
+      "email": "njn613@gmail.com",
+      "place_name": "제주목 관아",
+      "address_name": "제주특별자치도 제주시 삼도2동 1045-1",
       "phone": ""
     }
   ],
@@ -162,6 +206,15 @@
       "content": "물건을 싸게 샀습니다.",
       "x": 126.6519927606612,
       "y": 37.457931936780106
+    },
+    {
+      "userId": "3UQxEDq6Q5P4gQc7UZmAJNIjpHX2",
+      "id": "2c35a013-238d-588b-d594-3acfbd58dce2",
+      "address_name": "서울 강서구 방화동 534-2",
+      "place_name": "개화산역",
+      "content": "개화산역",
+      "x": 126.80679145181475,
+      "y": 37.5726236085082
     }
   ]
 }

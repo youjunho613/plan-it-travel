@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-
 export const CommentsForm = styled.form`
   display: flex;
   justify-content: center;

@@ -48,6 +48,7 @@ export const Main = () => {
       return setIsLocation(false);
     }
   };
+
   //현재위치 사용 시 검색 함수 옵션
   const option = {
     location: new kakao.maps.LatLng(state.position.center.lat, state.position.center.lng),
@@ -61,21 +62,15 @@ export const Main = () => {
   const onYoutube = async () => {
     try {
       const response = await youtubeApi.get("/playlistItems", {
-        params: {
-          part: "snippet",
-          playlistId: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa"
-        }
+        params: { part: "snippet", playlistId: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa" }
       });
 
       const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
       const selectedVideoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
 
       setYoutubeRes(selectedVideoId);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
-  // TODO 반응형
 
   const props = {
     kakao,

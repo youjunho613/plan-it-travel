@@ -1,4 +1,4 @@
-import * as Styled from "./MyPage.styled";
+import * as Styled from "./UserInfo.style";
 import { Text } from "components/common";
 import { useDispatch } from "react-redux";
 import { openModal } from "redux/modules";

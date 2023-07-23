@@ -1,21 +1,21 @@
-import { addComment, deleteComment, getComments, modifyComment } from 'api/comments';
-import { throttle } from 'lodash';
-import React, { useEffect, useState } from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useSelector } from 'react-redux';
-import uuid from 'react-uuid';
+import { addComment, deleteComment, getComments, modifyComment } from "api/comments";
+import { throttle } from "lodash";
+import React, { useEffect, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useSelector } from "react-redux";
+import uuid from "react-uuid";
 import * as Styled from "./Comment.style";
-import { Button, Input } from 'components/common';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faSpinner, faSquareCaretUp, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-export const Comment = ({paramsId}) => {
-    const [comment, setComment] = useState("");
-    const queryClient = useQueryClient();
+import { Button, Input } from "components/common";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComment, faSpinner, faSquareCaretUp, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+export const Comment = ({ paramsId }) => {
+  const [comment, setComment] = useState("");
+  const queryClient = useQueryClient();
   const { currentUser } = useSelector(state => state.userData);
   const commentsData = useQuery("comments", getComments)
-  .data?.filter(e => e.postId === paramsId)
-  .reverse();
+    .data?.filter(e => e.postId === paramsId)
+    .reverse();
   const leaveCommentHandler = event => {
     event.preventDefault();
     if (!currentUser?.email) return alert("본 서비스는 로그인 후 이용이 가능합니다.");
@@ -104,7 +104,7 @@ export const Comment = ({paramsId}) => {
   };
   return (
     <>
-    <Styled.CommentsForm onSubmit={leaveCommentHandler}>
+      <Styled.CommentsForm onSubmit={leaveCommentHandler}>
         <Input
           size={"small"}
           $bgcolor={"white"}
@@ -170,6 +170,6 @@ export const Comment = ({paramsId}) => {
         </Styled.SideBar>
         {loading && <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "30px" }} />}
       </Styled.CommentsWrap>
-      </>
-  )
-}
+    </>
+  );
+};

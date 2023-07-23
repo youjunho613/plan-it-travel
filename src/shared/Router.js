@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { Home, Main, Detail, Survey, Layout, MyPage, CreatePost} from "pages";
+import { Home, Main, Detail, Survey, Layout, MyPage, CreatePost } from "pages";
 import Header from "components/Header/Header";
 import { MyPlaceDetail } from "components/DetailMap";
 

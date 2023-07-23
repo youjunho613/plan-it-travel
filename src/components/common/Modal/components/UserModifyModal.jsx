@@ -28,6 +28,8 @@ export const UserModifyModal = () => {
     if (!values.displayName) errors.displayName = "닉네임을 입력해주세요.";
     if (values.newPassword !== values.newPasswordConfirm)
       errors.newPasswordConfirm = "비밀번호가 일치하지 않습니다.";
+    if (values.displayName.length >= 8)
+      return (errors.displayName = "닉네임은 8자 이하로 입력해주세요.");
     return errors;
   };
   const submitAction = () => modifyUser(values, imgFile);
