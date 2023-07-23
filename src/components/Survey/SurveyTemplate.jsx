@@ -99,7 +99,6 @@ function SurveyTemplate() {
                 Submit
               </Button>
             )}
-            <Button {...buttonAttr("theme3")} onClick={()=>navigate("/")}>홈으로</Button>
           </ButtonBox>
         </Form>
       </SurveyContainer>
@@ -159,5 +158,5 @@ const SurveyContainer = styled.div`
 const ButtonBox = styled.div`
   position: absolute;
   bottom: 100px;
-  right: 220px;
+  right: 250px;
 `;
