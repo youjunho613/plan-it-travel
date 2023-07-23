@@ -16,9 +16,10 @@ const initialValue = {
   7: false,
   8: false
 };
+
 const buttonAttr = $bgcolor => ({ $bgcolor, size: "small", fontSize: "10px" });
 
-function SurveyTemplate() {
+export const SurveyTemplate = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [inputValues, setInputValues] = useState();
@@ -92,5 +93,4 @@ function SurveyTemplate() {
       </Styled.SurveyContainer>
     </Styled.Container>
   );
-}
-export default SurveyTemplate;
+};

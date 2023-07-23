@@ -3,7 +3,7 @@ import { Modal, MainListModal, MyPlaceModal } from "components/common";
 import { Sidebar } from "components/Sidebar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MainMap } from "components/map/MainMap";
+import { MainMap } from "components/Map/MainMap";
 import { youtubeApi } from "api/youtube";
 import { closeModal } from "redux/modules";
 

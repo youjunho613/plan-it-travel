@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { addComment, deleteComment, getComments, modifyComment } from "../api/comments";
+import { addComment, deleteComment, getComments, modifyComment } from "api/comments";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { useEffect, useState } from "react";
