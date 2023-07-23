@@ -7,7 +7,7 @@ import { closeModal } from "redux/modules";
 export const Modal = ({ children, closeTarget, type }) => {
   const modalRef = useRef();
   const dispatch = useDispatch();
-  
+
   const clickOutside = event => {
     if (modalRef.current === event.target) {
       dispatch(closeModal(closeTarget));
@@ -15,9 +15,8 @@ export const Modal = ({ children, closeTarget, type }) => {
   };
   useEffect(() => {
     document.addEventListener("mousedown", clickOutside);
-    return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
+    return () => document.removeEventListener("mousedown", clickOutside);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return createPortal(

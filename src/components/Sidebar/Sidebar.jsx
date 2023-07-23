@@ -4,8 +4,7 @@ import * as Styled from "./Sidebar.style";
 import { Link } from "react-router-dom";
 import sideBarLogo from "assets/sideBarLogo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getDataList, getPagination } from "redux/modules/detailData";
-import { openModal } from "redux/modules/modal";
+import { getDataList, getPagination, openModal } from "redux/modules";
 import { useAuth } from "hooks";
 import { Text, Modal } from "components/common";
 import { Category } from "./Category";
@@ -25,10 +24,10 @@ export const Sidebar = props => {
   const { currentUser } = useSelector(state => state.userData);
   const { logOut } = useAuth();
 
+  // 키워드 검색
+  // state. marker 사용
   const SearchHandler = keyword => {
-    const ps = new kakao.maps.services.Places();
-
-    ps.keywordSearch(
+    new kakao.maps.services.Places().keywordSearch(
       keyword,
       (data, status, _pagination) => {
         if (status === kakao.maps.services.Status.OK) {

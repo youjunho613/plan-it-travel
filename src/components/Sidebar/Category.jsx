@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as icons from "@fortawesome/free-solid-svg-icons";
 import * as Styled from "./Sidebar.style";
 
-export const Category = ({SearchHandler}) => {
+export const Category = ({ SearchHandler }) => {
   const [isOpen, setIsOpen] = useState({ mountain: false, sea: false, hotel: false, Store: false });
 
   const openHandler = target =>
@@ -15,7 +15,6 @@ export const Category = ({SearchHandler}) => {
     icon: icons[icon],
     style: { color: "#bf94ff", marginRight: "10px" }
   });
-
 
   const ulMap = [
     {
@@ -60,13 +59,13 @@ export const Category = ({SearchHandler}) => {
     <>
       {ulMap.map(ul => {
         return (
-          <Styled.Ul onClick={() => openHandler(ul.func)}>
+          <Styled.Ul key={ul.name} onClick={() => openHandler(ul.func)}>
             <FontAwesomeIcon {...iconAttr(ul.icon)} />
             {ul.name}
             {isOpen[ul.func] &&
               ul.liMap.map(li => {
                 return (
-                  <Styled.Li onClick={() => SearchHandler(li.name)}>
+                  <Styled.Li key={li.name} onClick={() => SearchHandler(li.name)}>
                     <FontAwesomeIcon {...iconAttr(li.icon)} />
                     {li.name}
                   </Styled.Li>

@@ -1,7 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { Home, Main, Detail, Survey, Layout, MyPage, MyPlaceDetail } from "pages";
+import { Home, Main, Detail, Survey, Layout, MyPage, CreatePost ,MyPlaceDetail} from "pages";
 import Header from "components/Header/Header";
-import CreatePost from "components/write/CreatePost";
 
 const Router = () => {
   return (
