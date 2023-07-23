@@ -1,4 +1,4 @@
-import * as Styled from "./Bookmark.style";
+import * as Styled from "../MyPage.style";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";

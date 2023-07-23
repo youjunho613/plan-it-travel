@@ -43,7 +43,9 @@ export const Survey = () => {
 
   const onSubmit = event => {
     event.preventDefault();
-    const selectId = selectValues.push(Math.random() < 0.5 ? 1 : 2).join("");
+
+    selectValues.push(Math.random() < 0.5 ? 1 : 2);
+    const selectId = selectValues.join("");
     const filtered = SURVEY_RESULT.filter(item => item.resultId === Number(selectId));
     dispatch(getSurveyData(filtered));
     navigate(`/detail/${filtered[0].id}`);

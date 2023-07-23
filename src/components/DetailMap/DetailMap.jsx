@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import markerImg from "assets/marker.png";
-import { BookmarkIcon } from "components/Bookmark";
 import { useSelector } from "react-redux";
 import * as Styled from "./DetailMap.style";
+import { BookmarkIcon } from "pages";
 
 export const DetailMap = ({ paramsId }) => {
   const [draggable, setDraggable] = useState(true);

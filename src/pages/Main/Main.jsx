@@ -65,7 +65,10 @@ export const Main = () => {
         params: { part: "snippet", playlistId: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa" }
       });
 
-      const youtubeRandom = Math.floor(Math.random() * response.data.items.length);
+      const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+      const youtubeRandom = getRandomInt(0, response.data.items.length);
+      console.log("youtubeRandom :", youtubeRandom);
       const selectedVideoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
 
       setYoutubeRes(selectedVideoId);
