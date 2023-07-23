@@ -3,14 +3,20 @@ import { styled } from "styled-components";
 
 export const SideBar = styled.div`
   position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 20px;
+
   width: 280px;
   height: 100vh;
+
   padding: 20px;
+
   background-color: ${props => props.theme.colors.black};
+
   color: ${props => props.theme.colors.white};
+
   transition: 300ms;
 `;
 
@@ -31,6 +37,7 @@ export const AuthBox = styled.ul`
 
 export const FlexBox = styled.div`
   display: flex;
+
   cursor: pointer;
 `;
 

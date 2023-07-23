@@ -1,7 +1,6 @@
 import { Input } from "components/common";
 import { CustomOverlayMap, Map, MapMarker, ZoomControl } from "react-kakao-maps-sdk";
-import { openModal } from "redux/modules/modal";
-import { getDataList, getPagination } from "redux/modules/detailData";
+import { openModal, getDataList, getPagination } from "redux/modules";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import markerImg from "assets/marker.png";
@@ -61,7 +60,7 @@ export const MainMap = ({
   };
   return (
     <Styled.MapContainer>
-      <form onSubmit={submitSearchValue}>
+      <Styled.Form onSubmit={submitSearchValue}>
         <Input
           size={"large"}
           $bgcolor={"black"}
@@ -91,7 +90,7 @@ export const MainMap = ({
             </svg>
           )}
         </Styled.LocationBtn>
-      </form>
+      </Styled.Form>
       <Map
         center={state.position.center}
         isPanto={state.position.isPanto}

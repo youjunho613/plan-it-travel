@@ -23,9 +23,9 @@ const GlobalStyle = styled.createGlobalStyle`
 
   * {
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
     color: #ffffff;
     font-family: "Pretendard-Regular";
+    -webkit-tap-highlight-color: transparent;
   }
 
   a {
@@ -50,8 +50,8 @@ const GlobalStyle = styled.createGlobalStyle`
   button {
     border: 0;
     background: transparent;
-    cursor: pointer;
     padding: 0;
+    cursor: pointer;
   }
 `;
 

@@ -25,58 +25,27 @@ export const RegisterModal = () => {
   const [imgFile, setImgFile] = useState();
   const onChangeAddFile = event => setImgFile(event.target.files[0]);
 
-  const submitAction = async () => {
-    createUser(values, imgFile);
-  };
+  const submitAction = async () => createUser(values, imgFile);
   const { firebaseError } = useSelector(state => state.firebaseError);
 
   const { values, errors, onSubmit, resister } = useForm(initialState, validation, submitAction);
+  const inputAttr = placeholder => ({ placeholder, size: "modal", $bgcolor: "white" });
 
   return (
     <Form onSubmit={onSubmit}>
       <Text fontSize={"48px"}>Sign Up</Text>
-      <Input
-        {...resister("email")}
-        type="email"
-        placeholder="E-mail"
-        size={"modal"}
-        $bgcolor={"white"}
-      />
+      <Input {...resister("email")} {...inputAttr("E-mail")} type="email" />
       {errors.email && <Text>{errors.email}</Text>}
-      <Input
-        {...resister("password")}
-        type="password"
-        placeholder="Password"
-        size={"modal"}
-        $bgcolor={"white"}
-      />
+      <Input {...resister("password")} {...inputAttr("Password")} type="password" />
       {errors.password && <Text>{errors.password}</Text>}
-      <Input
-        {...resister("passwordConfirm")}
-        type="password"
-        placeholder="Password Confirm"
-        size={"modal"}
-        $bgcolor={"white"}
-      />
+      <Input {...resister("passwordConfirm")} {...inputAttr("Password Confirm")} type="password" />
       {errors.passwordConfirm && <Text>{errors.passwordConfirm}</Text>}
-      <Input
-        {...resister("displayName")}
-        type="text"
-        placeholder="Nickname"
-        size={"modal"}
-        $bgcolor={"white"}
-      />
+      <Input {...resister("displayName")} {...inputAttr("Nickname")} type="text" />
       {errors.displayName && <Text>{errors.displayName}</Text>}
       <Text as={"label"} htmlFor="photoUrl">
         프로필 이미지 입력
       </Text>
-      <Input
-        type="file"
-        id="photoUrl"
-        accept="image/*"
-        onChange={onChangeAddFile}
-        // style={{ display: "none" }}
-      />
+      <Input type="file" id="photoUrl" accept="image/*" onChange={onChangeAddFile} />
       {firebaseError !== "" && <Text color={"red"}>{firebaseError}</Text>}
       <div>
         <Button

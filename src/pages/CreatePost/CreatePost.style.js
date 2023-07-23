@@ -4,6 +4,7 @@ export const Layout = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   margin: 100px;
 `;
 
@@ -23,15 +24,17 @@ export const Container = styled.div`
 
 export const ColumnBox = styled.div`
   display: inherit;
-  width: 500px;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+
+  width: 500px;
 `;
 
 export const Map = styled.div`
   width: 500px;
   height: 500px;
+
   background-color: white;
 `;
 
@@ -40,16 +43,18 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 500px;
   gap: 20px;
+
+  width: 500px;
 `;
 
 export const AddressForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px;
   gap: 20px;
+
+  width: 500px;
 `;
 
 export const AddressInput = styled.input`
