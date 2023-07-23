@@ -25,6 +25,7 @@ const GlobalStyle = styled.createGlobalStyle`
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
     color: #ffffff;
+    font-family: "Pretendard-Regular";
   }
 
   a {

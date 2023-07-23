@@ -1,4 +1,4 @@
-import * as Styled from "./Bookmark.style";
+import * as Styled from "../MyPage.style";
 import { useNavigate } from "react-router";
 import { useQuery } from "react-query";
 import { getBookmarks } from "api/bookmarks";

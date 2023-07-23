@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "redux/modules/modal";
 import { Button, Input, Text } from "components/common";
 import { useForm, useAuth } from "hooks";
@@ -13,10 +13,13 @@ export const RegisterModal = () => {
   const initialState = { email: "", password: "", passwordConfirm: "", displayName: "" };
   const validation = () => {
     let errors = {};
+    if (!values.email) errors.email = "이메일을 입력해주세요.";
+    if (!values.password) errors.password = "비밀번호를 입력해주세요.";
+    if (!values.displayName) errors.displayName = "닉네임을 입력해주세요.";
     if (values.password !== values.passwordConfirm)
-      return (errors.passwordConfirm = "비밀번호가 일치하지 않습니다.");
-    if (values.displayName.length >= 8)
-      return (errors.displayName = "닉네임은 8자 이하로 입력해주세요.");
+      errors.passwordConfirm = "비밀번호가 일치하지 않습니다.";
+    if (values.displayName.length >= 8) errors.displayName = "닉네임은 8자 이하로 입력해주세요.";
+    return errors;
   };
 
   const [imgFile, setImgFile] = useState();
@@ -24,8 +27,8 @@ export const RegisterModal = () => {
 
   const submitAction = async () => {
     createUser(values, imgFile);
-    modalCloseHandler();
   };
+  const { firebaseError } = useSelector(state => state.firebaseError);
 
   const { values, errors, onSubmit, resister } = useForm(initialState, validation, submitAction);
 
@@ -74,6 +77,7 @@ export const RegisterModal = () => {
         onChange={onChangeAddFile}
         // style={{ display: "none" }}
       />
+      {firebaseError !== "" && <Text color={"red"}>{firebaseError}</Text>}
       <div>
         <Button
           type="button"

@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import markerImg from "assets/marker.png";
-import { useQuery } from "react-query";
-import { getUserPost } from "api/userPost";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { deleteUserPost, getUserPost } from "api/userPost";
 import * as Styled from "./DetailMap.style";
+import { styled } from "styled-components";
 
 export const MyPlaceDetail = () => {
   const params = useParams();
@@ -20,6 +21,19 @@ export const MyPlaceDetail = () => {
     setZoomable(false);
     setDraggable(false);
   }, []);
+
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const deleteUserPostHandler = id => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      deleteMutation.mutate(id);
+      navigate("/");
+    }
+  };
+
+  const deleteMutation = useMutation(deleteUserPost, {
+    onSuccess: () => queryClient.invalidateQueries("userPosts")
+  });
 
   return (
     <>
@@ -44,7 +58,14 @@ export const MyPlaceDetail = () => {
               }}
             />
           </Map>
-          <Styled.LargeFont style={{ paddingTop: "30px" }}>{userPosts.place_name}</Styled.LargeFont>
+          <TrashIcon
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+            onClick={() => deleteUserPostHandler(userPosts.id)}
+          >
+            <path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+          </TrashIcon>
+          <Styled.LargeFont>{userPosts.place_name}</Styled.LargeFont>
           <div>{userPosts.address_name}</div>
           <div>{userPosts.content}</div>
         </Styled.MapWrap>
@@ -52,3 +73,21 @@ export const MyPlaceDetail = () => {
     </>
   );
 };
+
+const TrashIcon = styled.svg`
+  fill: ${props => props.theme.colors.white};
+  position: relative;
+  top: 43px;
+  left: 230px;
+
+  height: 30px;
+  transition: scale 0.3s;
+  cursor: pointer;
+  &:hover {
+    fill: ${props => props.theme.colors.theme1};
+    scale: 1.2;
+  }
+  &:active {
+    scale: 0.8;
+  }
+`;

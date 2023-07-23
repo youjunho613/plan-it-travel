@@ -1,10 +1,12 @@
-import * as Styled from "../Bookmark/Bookmark.style";
-import { useQuery } from "react-query";
+import * as Styled from "../MyPage.style";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router";
-import { getUserPost } from "api/userPost";
+import { deleteUserPost, getUserPost } from "api/userPost";
+import { Link } from "react-router-dom";
 
 export const MyPlace = ({ currentUser }) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const userPostData = useQuery("userPosts", getUserPost).data?.filter(
     e => e.userId === currentUser?.uid
@@ -12,8 +14,27 @@ export const MyPlace = ({ currentUser }) => {
 
   const MoveDetailPageHandler = id => navigate(`/myplacedetail/${id}`);
 
+  const deleteUserPostHandler = id => {
+    if (window.confirm("정말 삭제하시겠습니까?")) deleteMutation.mutate(id);
+  };
+
+  const deleteMutation = useMutation(deleteUserPost, {
+    onSuccess: () => queryClient.invalidateQueries("userPosts")
+  });
   return (
     <Styled.BookContainer>
+      {!userPostData?.length && (
+        <Link to={"/post"}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#ADBED2"
+            height="100px"
+            viewBox="0 0 448 512"
+          >
+            <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
+          </svg>
+        </Link>
+      )}
       {userPostData?.map(userPost => {
         return (
           <Styled.BookBiv key={userPost.id}>
@@ -40,9 +61,14 @@ export const MyPlace = ({ currentUser }) => {
                 </Styled.PinMarker>
                 {userPost.place_name}
               </Styled.LargeFont>
-              {/* 북마크 대신 쓰래기통 
-              <BookmarkIcon kakaoId={userPost.kakaoId} left={170} height={"30px"} />
-              */}
+              <Styled.TrashIcon
+                xmlns="http://www.w3.org/2000/svg"
+                height="1em"
+                viewBox="0 0 448 512"
+                onClick={() => deleteUserPostHandler(userPost.id)}
+              >
+                <path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+              </Styled.TrashIcon>
               <Styled.Address>{userPost.address_name}</Styled.Address>
             </Styled.BookTitle>
           </Styled.BookBiv>
