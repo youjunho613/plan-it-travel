@@ -44,6 +44,7 @@ export const MyPlaceModal = ({ setState, state }) => {
     },
     enabled: authData.uid !== ""
   });
+
   // 모달 닫기
   const modalCloseHandler = () => {
     dispatch(closeModal("MyPlaceIsOpen"));
@@ -53,6 +54,7 @@ export const MyPlaceModal = ({ setState, state }) => {
       position: { center: { lat: 37.566826, lng: 126.9786567 }, isPanto: false }
     });
   };
+
   // 리스트 클릭 시 마커로 이동 및 오버레이 표시
   const showInfoHandler = data => {
     setState({
