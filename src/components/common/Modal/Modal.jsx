@@ -9,10 +9,9 @@ export const Modal = ({ children, closeTarget, type }) => {
   const dispatch = useDispatch();
 
   const clickOutside = event => {
-    if (modalRef.current === event.target) {
-      dispatch(closeModal(closeTarget));
-    }
+    if (modalRef.current === event.target) dispatch(closeModal(closeTarget));
   };
+
   useEffect(() => {
     document.addEventListener("mousedown", clickOutside);
     return () => document.removeEventListener("mousedown", clickOutside);

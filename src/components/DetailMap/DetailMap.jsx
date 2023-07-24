@@ -22,7 +22,7 @@ export const DetailMap = ({ paramsId }) => {
   return (
     <Styled.Wrap>
       <Styled.MapWrap>
-        <Map // 지도를 표시할 Container
+        <Map
           center={position}
           style={{
             width: "500px",

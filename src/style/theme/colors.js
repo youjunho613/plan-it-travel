@@ -8,6 +8,3 @@ export const colors = {
   theme2: "#ADBED2",
   theme3: "#3D82AB"
 };
-/*
-${props => props.theme.colors.modalBlack};
-*/

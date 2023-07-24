@@ -4,6 +4,7 @@ export const ModalDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   width: 100%;
   height: 100%;
 `;
@@ -11,6 +12,7 @@ export const ModalDiv = styled.div`
 export const ImgBox = styled.div`
   display: flex;
   justify-content: space-between;
+
   margin-bottom: 20px;
 `;
 
@@ -18,10 +20,13 @@ export const XButton = styled.button`
   position: absolute;
   top: 1%;
   left: 280px;
-  background-color: #1f1f22;
+
   width: 30px;
   height: 50px;
+
   padding-right: 5px;
+
+  background-color: #1f1f22;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 `;
@@ -33,11 +38,14 @@ export const Img = styled.img`
 
 export const ModalUl = styled.ul`
   display: flex;
-  width: 100%;
   flex-direction: column;
   align-items: baseline;
   gap: 10px;
+
+  width: 100%;
+
   overflow: scroll;
+
   &::-webkit-scrollbar {
     width: 5px;
     height: 100%;
@@ -51,15 +59,21 @@ export const ModalUl = styled.ul`
 export const Result = styled.h1`
   position: sticky;
   top: 0;
+
   width: 100%;
-  background-color: #1f1f22;
-  color: white;
+
   padding-bottom: 5px;
+
+  background-color: #1f1f22;
+
+  color: white;
 `;
 
 export const ModalLi = styled.li`
-  padding: 5px 3px;
   width: 100%;
+
+  padding: 5px 3px;
+
   color: white;
   &:hover {
     background-color: #a290e6;

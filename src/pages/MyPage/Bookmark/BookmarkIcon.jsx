@@ -45,23 +45,3 @@ export const BookmarkIcon = ({ kakaoId, top, left, height }) => {
     </Styled.BookmarkSvg>
   );
 };
-
-// const bookmarkClickHandler = () => {
-//   const date = Date.now();
-//   const nowDate = new Date(date).toLocaleString();
-//   if (!currentUser?.email) return alert("본 서비스는 로그인 후 이용이 가능합니다.");
-//   if (bookmarksData) {
-//     deleteBookmarkMutation.mutate(bookmarksData.id);
-//   } else {
-//     const bookmark = {
-//       id: uuid(),
-//       kakaoId,
-//       userEmail: currentUser.email,
-//       date: nowDate,
-//       place_name: detailData.place_name,
-//       address_name: detailData.address_name,
-//       phone: detailData.phone
-//     };
-//     bookmarkMutation.mutate(bookmark);
-//   }
-// };

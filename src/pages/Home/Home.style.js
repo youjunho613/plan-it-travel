@@ -15,6 +15,7 @@ const earthMoveUpDown = keyframes`
 const ButtonBox = styled.div`
   position: absolute;
   top: 43%;
+
   transform: translate(-50%, -50%);
 `;
 
@@ -28,11 +29,13 @@ export const ButtonBoxLuna = styled(ButtonBox)`
 
 export const DivBoxEarth = styled.div`
   position: relative;
+
   animation: ${earthMoveUpDown} 2.5s linear infinite;
 `;
 
 export const DivBoxLuna = styled.div`
   position: relative;
+
   animation: ${lunaMoveUpDown} 2.5s linear infinite;
 `;
 

@@ -6,12 +6,13 @@ export const Container = styled.div`
 `;
 
 export const SurveyContainer = styled.div`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  position: relative;
   width: 586px;
   height: 600px;
 

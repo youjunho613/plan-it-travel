@@ -1,26 +1,21 @@
+import { FlexColumnDiv } from "style/common/Flex";
 import { styled } from "styled-components";
 
-export const PageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+export const PageContainer = styled(FlexColumnDiv)`
   gap: 50px;
 `;
 
-export const UserContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+export const UserContainer = styled(FlexColumnDiv)`
   margin-bottom: 30px;
 `;
 
 export const UserImg = styled.img`
   width: 150px;
   height: 150px;
-  border-radius: 50%;
+
   margin-bottom: 20px;
+
+  border-radius: 50%;
 `;
 
 export const OptionBar = styled.div`
@@ -32,8 +27,11 @@ export const OptionBar = styled.div`
 export const SettingContentButton = styled.button`
   width: 300px;
   height: 50px;
+
   border-radius: 12px;
-  color: white;
+
+  color: ${props => props.theme.colors.white};
+
   &:hover {
     background-color: #8a8a8a81;
   }
@@ -41,39 +39,44 @@ export const SettingContentButton = styled.button`
 
 export const BookContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  width: 1280px;
   justify-content: center;
+  gap: 40px;
+
+  width: 1280px;
+
+  flex-wrap: wrap;
 `;
 
 export const BookBiv = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid white;
+
   width: 400px;
+
   padding: 40px 40px 70px 40px;
-  border-radius: 5px;
   margin-bottom: 20px;
+
   background-color: rgba(73, 73, 73, 0.049);
   backdrop-filter: blur(10px);
+  border: 1px solid white;
+  border-radius: 5px;
 `;
 
-export const BookTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+export const BookTitle = styled(FlexColumnDiv)``;
 
 export const DetailSvg = styled.svg`
-  cursor: pointer;
-  fill: ${props => props.theme.colors.white};
   position: relative;
   bottom: 30px;
   left: 170px;
+
   height: 25px;
+
+  fill: ${props => props.theme.colors.white};
+
   transition: scale 0.3s;
+
+  cursor: pointer;
+
   &:hover {
     scale: 1.2;
   }
@@ -83,10 +86,11 @@ export const DetailSvg = styled.svg`
 `;
 
 export const LargeFont = styled.div`
+  width: 300px;
+
   font-weight: 700;
   font-size: 20px;
   text-align: center;
-  width: 300px;
 `;
 
 export const PinMarker = styled.span`
@@ -95,16 +99,21 @@ export const PinMarker = styled.span`
 
 export const Address = styled.p`
   width: 300px;
+
   text-align: center;
 `;
 
 export const BookmarkSvg = styled.svg`
-  cursor: pointer;
-  fill: ${props => (props.fill ? props.theme.colors.theme1 : props.theme.colors.white)};
   position: relative;
   top: ${props => props.top}px;
   left: ${props => props.left}px;
+
+  fill: ${props => (props.fill ? props.theme.colors.theme1 : props.theme.colors.white)};
+
   transition: scale 0.3s;
+
+  cursor: pointer;
+
   &:hover {
     scale: 1.2;
   }
@@ -122,6 +131,7 @@ export const TrashIcon = styled.svg`
   fill: ${props => props.theme.colors.white};
 
   transition: scale 0.3s;
+
   cursor: pointer;
 
   &:hover {

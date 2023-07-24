@@ -29,7 +29,6 @@ export const Main = () => {
   }, [dispatch]);
 
   // 현재 위치 찾기
-  // state position, isLocation
   const currentLocation = () => {
     if (isLocation === false) {
       if (navigator.geolocation) {
@@ -62,13 +61,12 @@ export const Main = () => {
   const onYoutube = async () => {
     try {
       const response = await youtubeApi.get("/playlistItems", {
-        params: { part: "snippet", playlistId: "PLnqE8gRs0CvmvJCoHWTZe7vHtHRDYXPRa" }
+        params: { part: "snippet", playlistId: "PLDK9yVjhZbdvaexvyfvWbasLQqBEfMCPd" }
       });
 
       const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
       const youtubeRandom = getRandomInt(0, response.data.items.length);
-      console.log("youtubeRandom :", youtubeRandom);
       const selectedVideoId = response.data.items[youtubeRandom].snippet.resourceId.videoId;
 
       setYoutubeRes(selectedVideoId);

@@ -32,10 +32,12 @@ export const CreatePost = () => {
     // 로그인 유저 정보
     onAuthStateChanged(auth, users => setAuthData(users));
   }, []);
+
   // json 서버로 유저 게시물 post
   const postMutation = useMutation(postUserPost, {
     onSuccess: () => queryClient.invalidateQueries("userPosts")
   });
+
   // 현재 위치 정보
   const currentLocations = () => {
     if (navigator.geolocation) {
@@ -45,6 +47,7 @@ export const CreatePost = () => {
       });
     }
   };
+
   // 위치 검색(유효성 검사 포함)
   const submitSearchValue = event => {
     event.preventDefault();
@@ -62,6 +65,7 @@ export const CreatePost = () => {
       }
     });
   };
+
   // 클릭한 마커 좌표 주소로 변환
   const geoCorder = new kakao.maps.services.Geocoder();
   const getAddress = (lat, lng) => {
@@ -74,11 +78,13 @@ export const CreatePost = () => {
     };
     geoCorder.coord2Address(lng, lat, callback);
   };
+
   // 맵에서 클릭시 마커로 좌표를 보내주는 이벤트
   const mapClickEvent = (_t, MouseEvent) => {
     setClickPosition({ lat: MouseEvent.latLng.getLat(), lng: MouseEvent.latLng.getLng() });
     getAddress(MouseEvent.latLng.getLat(), MouseEvent.latLng.getLng());
   };
+
   // 게시물 submit 핸들러(유효성 검사 포함)
   const submitHandler = e => {
     e.preventDefault();

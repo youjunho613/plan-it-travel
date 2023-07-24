@@ -37,7 +37,6 @@ export const UserModifyModal = () => {
 
   return (
     <Form onSubmit={onSubmit}>
-      {/* <Styled.Form onSubmit={onSubmit}> */}
       <Input
         type={"text"}
         size={"modal"}
@@ -62,7 +61,6 @@ export const UserModifyModal = () => {
         {...resister("newPasswordConfirm")}
       />
       {errors?.newPasswordConfirm && <Text>{errors?.newPasswordConfirm}</Text>}
-      {/* <Styled.ButtonBox> */}
       <ButtonBox>
         <Button
           type="button"
