@@ -33,7 +33,7 @@ export const Comment = ({ paramsId }) => {
     };
     commentMutation.mutate(newComment);
     setComment("");
-    window.scrollTo({ top: 800, behavior: "smooth" });
+    window.scrollTo({ top: 700, behavior: "smooth" });
   };
   const commentMutation = useMutation(addComment, {
     onSuccess: () => queryClient.invalidateQueries("comments")
@@ -69,7 +69,7 @@ export const Comment = ({ paramsId }) => {
   // 무한스크롤
   // 페이지당 표시할 댓글 수를 설정합니다.
   const [loading, setLoading] = useState(false);
-  const COMMENTS_PER_PAGE = 5;
+  const COMMENTS_PER_PAGE = 3;
   const [visibleComments, setVisibleComments] = useState(COMMENTS_PER_PAGE);
   const handleScroll = throttle(() => {
     const scrollHeight = document.documentElement.scrollHeight;
@@ -82,6 +82,9 @@ export const Comment = ({ paramsId }) => {
       const newVisibleComments = visibleComments + COMMENTS_PER_PAGE;
       setLoading(true);
       setVisibleComments(newVisibleComments);
+      if (newVisibleComments >= 20) {
+        setLoading(false);
+      }
     }
   }, 100);
 

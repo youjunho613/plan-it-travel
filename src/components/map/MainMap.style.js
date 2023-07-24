@@ -28,8 +28,8 @@ export const OverlayDiv = styled(FlexColumnDiv)`
 
   padding: 10px;
 
-  background-color: ${props => props.theme.color.black};
-  border: 1px solid ${props => props.theme.color.black};
+  background-color: ${props => props.theme.colors.black};
+  border: 1px solid ${props => props.theme.colors.black};
   border-radius: 5px;
 
   &::after {

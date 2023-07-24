@@ -66,7 +66,7 @@ export const MainMap = ({
           $bgcolor={"black"}
           type="search"
           placeholder="Search"
-          value={state.searchValue}
+          value={state.searchValue || ""}
           onChange={e => setState({ ...state, searchValue: e.target.value })}
         />
         <Styled.LocationBtn
@@ -104,7 +104,7 @@ export const MainMap = ({
         onZoomChanged={map => map.getLevel()}
       >
         <ZoomControl />
-        {state.markers.map(marker => (
+        {state.markers?.map(marker => (
           <MapMarker
             key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
             position={marker.position}

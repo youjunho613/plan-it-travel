@@ -61,7 +61,7 @@ export const Main = () => {
   const onYoutube = async () => {
     try {
       const response = await youtubeApi.get("/playlistItems", {
-        params: { part: "snippet", playlistId: "PLDK9yVjhZbdvaexvyfvWbasLQqBEfMCPd" }
+        params: { part: "snippet", playlistId: "PLnqE8gRs0CvlBJ_EYU3DFFUSaKdTultEj" }
       });
 
       const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;

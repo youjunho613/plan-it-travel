@@ -31,18 +31,25 @@ export const MyPlaceModal = ({ setState, state }) => {
           content: e?.place_name,
           id: e?.id
         }));
-        setMyPlaceData(myPlaceData);
-        setState({
-          ...state,
-          markers: newMarkers,
-          position: { center: { lat: myPlaceData[0]?.y, lng: myPlaceData[0]?.x }, isPanto: true }
-        });
+        if (myPlaceData?.length === 0) {
+          setMyPlaceData(myPlaceData);
+          setState({ position: { center: { lat: 37.566826, lng: 126.9786567 }, isPanto: false } });
+        } else {
+          setMyPlaceData(myPlaceData);
+          setState({
+            ...state,
+            markers: newMarkers,
+            position: { center: { lat: myPlaceData[0]?.y, lng: myPlaceData[0]?.x }, isPanto: true }
+          });
+        }
       }
     },
     onError: error => {
       alert(error);
     },
-    enabled: authData.uid !== ""
+    enabled: authData.uid !== "",
+    retry: false,
+    refetchOnWindowFocus: false
   });
 
   // 모달 닫기

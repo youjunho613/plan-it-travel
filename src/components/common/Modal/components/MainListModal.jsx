@@ -21,13 +21,14 @@ export const MainListModal = ({ setState, state, setIsLocation }) => {
   };
 
   const modalCloseHandler = () => {
-    dispatch(closeModal("ListIsOpen"));
     setState({
       ...state,
       searchValue: "",
       markers: [],
       position: { center: { lat: 37.566826, lng: 126.9786567 }, isPanto: false }
     });
+    dispatch(closeModal("ListIsOpen"));
+    dispatch(closeModal("MyPlaceIsOpen"));
     setIsLocation(false);
     dispatch(getDataList([]));
   };
