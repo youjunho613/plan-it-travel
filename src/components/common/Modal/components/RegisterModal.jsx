@@ -35,13 +35,13 @@ export const RegisterModal = () => {
     <Form onSubmit={onSubmit}>
       <Text fontSize={"48px"}>Sign Up</Text>
       <Input {...resister("email")} {...inputAttr("E-mail")} type="email" />
-      {errors.email && <Text>{errors.email}</Text>}
+      {errors.email && <Text color={"red"}>{errors.email}</Text>}
       <Input {...resister("password")} {...inputAttr("Password")} type="password" />
-      {errors.password && <Text>{errors.password}</Text>}
+      {errors.password && <Text color={"red"}>{errors.password}</Text>}
       <Input {...resister("passwordConfirm")} {...inputAttr("Password Confirm")} type="password" />
-      {errors.passwordConfirm && <Text>{errors.passwordConfirm}</Text>}
+      {errors.passwordConfirm && <Text color={"red"}>{errors.passwordConfirm}</Text>}
       <Input {...resister("displayName")} {...inputAttr("Nickname")} type="text" />
-      {errors.displayName && <Text>{errors.displayName}</Text>}
+      {errors.displayName && <Text color={"red"}>{errors.displayName}</Text>}
       <Text as={"label"} htmlFor="photoUrl">
         프로필 이미지 입력
       </Text>

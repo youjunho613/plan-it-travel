@@ -44,7 +44,7 @@ export const UserModifyModal = () => {
         placeholder={currentUser.displayName}
         {...resister("displayName")}
       />
-      {errors?.displayName && <Text>{errors?.displayName}</Text>}
+      {errors?.displayName && <Text color={"red"}>{errors?.displayName}</Text>}
       <Input type="file" id="photoUrl" accept="image/*" onChange={onChangeAddFile} />
       <Input
         size={"modal"}
@@ -60,7 +60,7 @@ export const UserModifyModal = () => {
         placeholder="새로운 비밀번호 확인"
         {...resister("newPasswordConfirm")}
       />
-      {errors?.newPasswordConfirm && <Text>{errors?.newPasswordConfirm}</Text>}
+      {errors?.newPasswordConfirm && <Text color={"red"}>{errors?.newPasswordConfirm}</Text>}
       <ButtonBox>
         <Button
           type="button"
