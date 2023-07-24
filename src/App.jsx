@@ -14,7 +14,6 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <GlobalStyle />
-          {/* <Modal /> */}
           <Router />
         </QueryClientProvider>
       </ThemeProvider>

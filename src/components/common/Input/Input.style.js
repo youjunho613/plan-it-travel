@@ -1,8 +1,9 @@
 import { css, styled } from "styled-components";
 import { SIZE, THEME } from "./Input.constants";
 
-// TODO background 프롭스받기
-export const Input = styled.input`
+export const Input = styled.input.attrs(props => ({
+  as: props.as || "input"
+}))`
   ${props => css`
     width: ${SIZE[props.size]?.width};
 
@@ -10,20 +11,51 @@ export const Input = styled.input`
 
     background-color: ${THEME[props.$bgcolor]?.backgroundColor};
     border: none;
-    border-radius: ${SIZE[props.size]?.borderRadius};
+    border-radius: 5px;
     outline: none;
 
     color: ${THEME[props.$bgcolor]?.color};
-    font-size: 1.5rem;
+    font-size: 16px;
 
     &[type="radio"] {
-      width: 20px;
     }
-  `}
-`;
+    &[type="file"] {
+      width: 100%;
+      &:hover {
+        background-color: ${props => props.theme.colors.theme1};
+      }
+      &::-webkit-file-upload-button {
+        width: 100px;
+        height: 35px;
 
-export const Input2 = styled(Input).attrs(props => ({
-  type: "radio"
-}))`
-  width: 20px;
+        margin-right: 20px;
+
+        background-color: ${props => props.theme.colors.theme1};
+        border-radius: 5px;
+
+        font-size: 16px;
+        color: white;
+        border: none;
+        outline: none;
+      }
+    }
+
+    ${props.as === "textarea" &&
+    css`
+      width: ${SIZE[props.size]?.width};
+      height: 200px;
+
+      padding: 7px 10px;
+
+      background-color: ${THEME[props.$bgcolor]?.backgroundColor};
+      border: none;
+      border-radius: ${SIZE[props.size]?.borderRadius};
+      outline: none;
+
+      color: ${THEME[props.$bgcolor]?.color};
+      font-size: 16px;
+
+      resize: none;
+    `}
+  `}
 `;

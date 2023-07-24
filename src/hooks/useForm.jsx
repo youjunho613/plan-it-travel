@@ -1,8 +1,7 @@
 import { useCallback, useState } from "react";
 import _ from "lodash";
 
-// TODO useForm 설명
-const useForm = (initialState, validation, submitAction) => {
+export const useForm = (initialState, validation, submitAction) => {
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState({});
 
@@ -10,6 +9,8 @@ const useForm = (initialState, validation, submitAction) => {
     event => setValues({ ...values, [event.target.name]: event.target.value }),
     [values]
   );
+
+  const resister = name => ({ name, value: values[name], onChange });
 
   const onSubmit = useCallback(
     event => {
@@ -22,10 +23,5 @@ const useForm = (initialState, validation, submitAction) => {
     },
     [initialState, submitAction, validation, values]
   );
-
-  const resister = name => ({ name, value: values[name], onChange });
-
   return { values, errors, onSubmit, resister };
 };
-
-export default useForm;

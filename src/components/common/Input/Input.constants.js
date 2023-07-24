@@ -1,18 +1,19 @@
 export const SIZE = {
   // 댓글 작성자 로그인되면 작성자 있음
   small: {
-    width: "200px",
-    borderRadius: "5px"
+    width: "150px"
   },
   // 로그인, 회원가입 모달
   medium: {
-    width: "200px",
-    borderRadius: "5px"
+    width: "200px"
   },
   // 모두보기 서치바, 댓글 내용
   large: {
-    width: "450px",
-    borderRadius: "16px"
+    width: "450px"
+  },
+  // 모달용 인풋
+  modal: {
+    width: "100%"
   }
 };
 

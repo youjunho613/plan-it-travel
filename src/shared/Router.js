@@ -1,16 +1,29 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { Home, Map, Detail, Survey } from "pages";
+import { Home, Main, Detail, Survey, Layout, MyPage, CreatePost } from "pages";
+import Header from "components/Header/Header";
+import { MyPlaceDetail } from "components/DetailMap";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/map" element={<Map />} />
-        {/* TODO detail 페이지 UI 구성 후 삭제 */}
-        <Route path="/detail/" element={<Detail />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/survey" element={<Survey />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <Header />
+              <Layout />
+            </>
+          }
+        >
+          <Route index element={<Home />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/survey" element={<Survey />} />
+          <Route path="/post" element={<CreatePost />} />
+          <Route path="/mypage/:uid" element={<MyPage />} />
+          <Route path="/myplacedetail/:id" element={<MyPlaceDetail />} />
+        </Route>
+        <Route path="/main" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );
