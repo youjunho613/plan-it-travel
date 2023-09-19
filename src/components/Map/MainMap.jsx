@@ -7,6 +7,7 @@ import markerImg from "assets/marker.png";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import * as Styled from "./MainMap.style";
+import toast from "react-simple-toasts";
 
 export const MainMap = ({
   kakao,
@@ -44,10 +45,10 @@ export const MainMap = ({
           map.setBounds(bounds);
           dispatch(openModal("ListIsOpen"));
         } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-          alert("검색 결과가 없습니다. 검색어를 확인해주세요");
+          toast("검색 결과가 없습니다. 검색어를 확인해주세요", { theme: "failure", zIndex: 9999 });
           return;
         } else if (status === kakao.maps.services.Status.ERROR) {
-          alert("검색 결과 중 오류가 발생했습니다.");
+          toast("검색 결과 중 오류가 발생했습니다.", { theme: "failure", zIndex: 9999 });
           return;
         }
       },

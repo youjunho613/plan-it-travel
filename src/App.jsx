@@ -6,6 +6,10 @@ import { Provider } from "react-redux";
 import store from "redux/config/store";
 import Router from "shared/Router";
 
+import "react-simple-toasts/dist/theme/success.css";
+import "react-simple-toasts/dist/theme/warning.css";
+import "react-simple-toasts/dist/theme/failure.css";
+
 const queryClient = new QueryClient();
 
 const App = () => {

@@ -9,6 +9,7 @@ import uuid from "react-uuid";
 import { auth } from "server/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import markerImg from "assets/marker.png";
+import toast from "react-simple-toasts";
 
 const { kakao } = window;
 
@@ -60,7 +61,7 @@ export const CreatePost = () => {
         bounds.extend(new kakao.maps.LatLng(y, x));
         map.setBounds(bounds);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-        alert("검색 결과가 없습니다. 검색어를 확인해주세요");
+        toast("검색 결과가 없습니다. 검색어를 확인해주세요.", { theme: "warning", zIndex: 9999 });
         return;
       }
     });
@@ -90,14 +91,18 @@ export const CreatePost = () => {
     e.preventDefault();
 
     if (!value.addressValue) {
-      return alert("마커를 지정해 주소를 넣어주세요!");
+      toast("마커를 지정해 주소를 넣어주세요!", { theme: "warning", zIndex: 9999 });
+      return;
     }
     if (!value.titleValue) {
-      return alert("장소명을 작성해주세요!");
+      toast("장소명을 작성해주세요!", { theme: "warning", zIndex: 9999 });
+      return;
     }
     if (!value.contentValue) {
-      return alert("장소에 대한 내용을 작성해주세요!");
+      toast("장소에 대한 내용을 작성해주세요!", { theme: "warning", zIndex: 9999 });
+      return;
     }
+
     const newUserPost = {
       userId: authData.uid,
       id: uuid(),

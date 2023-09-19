@@ -14,6 +14,7 @@ import { useNavigate } from "react-router";
 import { closeModal, postError } from "redux/modules";
 import { auth, storage } from "server/firebase";
 import { addUserData } from "redux/modules";
+import toast from "react-simple-toasts";
 
 export const useAuth = () => {
   const navigate = useNavigate();
@@ -54,12 +55,15 @@ export const useAuth = () => {
     if (deleteConfirm) {
       deleteUser(auth.currentUser)
         .then(() => {
-          alert("탈퇴가 정상적으로 처리되었습니다.");
+          toast("탈퇴가 정상적으로 처리되었습니다.", { theme: "success", zIndex: 9999 });
         })
         .catch(error => {
           dispatch(postError(error.code));
         });
-    } else return alert("취소 하셨습니다.");
+    } else {
+      toast("취소 하셨습니다.", { theme: "warning", zIndex: 9999 });
+      return;
+    }
     navigate("/");
     navigate(0);
     modalCloseHandler("modifyIsOpen");

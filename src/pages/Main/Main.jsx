@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MainMap } from "components/Map/MainMap";
 import { youtubeApi } from "api/youtube";
 import { closeModal } from "redux/modules";
+import toast from "react-simple-toasts";
 
 const { kakao } = window;
 
@@ -39,7 +40,7 @@ export const Main = () => {
         return setIsLocation(true);
       } else {
         setState({ ...state, position: { center: initialPosition, isPanto: false } });
-        alert("현재 위치를 알 수 없어 기본 위치로 이동합니다.");
+        toast("현재 위치를 알 수 없어 기본 위치로 이동합니다.", { theme: "warning", zIndex: 9999 });
       }
     }
     if (isLocation === true) {
