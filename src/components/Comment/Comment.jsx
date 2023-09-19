@@ -1,4 +1,5 @@
 import { addComment, deleteComment, getComments, modifyComment } from "api/comments";
+import toast from "react-simple-toasts";
 import { throttle } from "lodash";
 import React, { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -16,12 +17,22 @@ export const Comment = ({ paramsId }) => {
   const commentsData = useQuery("comments", getComments)
     .data?.filter(e => e.postId === paramsId)
     .reverse();
+
   const leaveCommentHandler = event => {
     event.preventDefault();
-    if (!currentUser?.email) return alert("본 서비스는 로그인 후 이용이 가능합니다.");
+
+    if (!currentUser?.email) {
+      toast("본 서비스는 로그인 후 이용이 가능합니다.", { theme: "failure", zIndex: 9999 });
+      return;
+    }
+
     const date = new Date();
-    if (comment.length > 300 || comment.length < 1)
-      return alert("내용은 1자 이상 300자 이하로 작성해 주세요.");
+
+    if (comment.length > 300 || comment.length < 1) {
+      toast("내용은 1자 이상 300자 이하로 작성해 주세요.", { theme: "failure", zIndex: 9999 });
+      return;
+    }
+
     const newComment = {
       id: uuid(),
       postId: paramsId,
@@ -43,7 +54,10 @@ export const Comment = ({ paramsId }) => {
   const modifyCommentHandler = id => {
     const changeComment = prompt("수정할 댓글 내용을 입력해 주세요", comment);
     if (changeComment !== null) {
-      if (changeComment === "") return alert("댓글 내용은 1자리 이상 입력하셔야 합니다.");
+      if (changeComment === "") {
+        toast("댓글 내용은 1자리 이상 입력하셔야 합니다.", { theme: "failure", zIndex: 9999 });
+      }
+
       const newComment = { comment: changeComment };
       modifyMutation.mutate({ id, newComment });
     }
@@ -51,7 +65,8 @@ export const Comment = ({ paramsId }) => {
   const modifyMutation = useMutation(modifyComment, {
     onSuccess: () => {
       queryClient.invalidateQueries("comments");
-      return alert("수정이 완료되었습니다.");
+      toast("수정이 완료되었습니다.", { theme: "success", zIndex: 9999 });
+      return;
     }
   });
 

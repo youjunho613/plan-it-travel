@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "server/firebase";
 import { getUserPost } from "api/userPost";
+import toast from "react-simple-toasts";
 
 export const MyPlaceModal = ({ setState, state }) => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ export const MyPlaceModal = ({ setState, state }) => {
       }
     },
     onError: error => {
-      alert(error);
+      toast(error, { theme: "failure", zIndex: 9999 });
     },
     enabled: authData.uid !== "",
     retry: false,

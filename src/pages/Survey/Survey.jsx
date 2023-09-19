@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { getSurveyData } from "redux/modules/detailData";
 import { SURVEY_RESULT, SURVEY_TEXT } from "surveyData/surveyData";
+import toast from "react-simple-toasts";
 
 const initialValue = {
   1: false,
@@ -29,7 +30,10 @@ export const Survey = () => {
 
   const moveStep = event => {
     event.preventDefault();
-    if (!inputValues) return alert("보기를 선택해주세요");
+    if (!inputValues) {
+      toast("보기를 선택해주세요.", { theme: "warning", zIndex: 9999 });
+      return;
+    }
 
     setSelectValues([...selectValues, inputValues]);
     setStep(step + 1);

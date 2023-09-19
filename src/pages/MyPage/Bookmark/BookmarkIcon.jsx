@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { addBookmark, deleteBookmark, getBookmarks } from "api/bookmarks";
 import uuid from "react-uuid";
+import toast from "react-simple-toasts";
 
 export const BookmarkIcon = ({ kakaoId, top, left, height }) => {
   const { currentUser } = useSelector(state => state.userData);
@@ -15,7 +16,10 @@ export const BookmarkIcon = ({ kakaoId, top, left, height }) => {
     item => item.email === email && item.kakaoId === kakaoId
   );
   const bookmarkClickHandler = () => {
-    if (!currentUser?.email) return alert("본 서비스는 로그인 후 이용이 가능합니다.");
+    if (!currentUser?.email) {
+      toast("본 서비스는 로그인 후 이용이 가능합니다.", { theme: "failure", zIndex: 9999 });
+      return;
+    }
     const bookmark = { id: uuid(), kakaoId, email, place_name, address_name, phone };
     bookmarksData
       ? deleteBookmarkMutation.mutate(bookmarksData.id)
