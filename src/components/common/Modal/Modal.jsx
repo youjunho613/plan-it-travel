@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import * as Styled from "./Modal.styled";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
@@ -8,15 +8,17 @@ export const Modal = ({ children, closeTarget, type }) => {
   const modalRef = useRef();
   const dispatch = useDispatch();
 
-  const clickOutside = event => {
-    if (modalRef.current === event.target) dispatch(closeModal(closeTarget));
-  };
+  const clickOutside = useCallback(
+    event => {
+      if (modalRef.current === event.target) dispatch(closeModal(closeTarget));
+    },
+    [closeTarget, dispatch]
+  );
 
   useEffect(() => {
     document.addEventListener("mousedown", clickOutside);
     return () => document.removeEventListener("mousedown", clickOutside);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [clickOutside]);
 
   return createPortal(
     <Styled.Outer type={type} ref={modalRef}>
